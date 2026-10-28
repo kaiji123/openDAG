@@ -1,0 +1,30 @@
+# One DOI / PMCID / PMID per line. Open-access (Creative Commons) papers only.
+# Grouped by exposure so the dataset charts can compare studies.
+
+# Sepsis
+10.1136/bmjopen-2021-051502          # sepsis survivors -> out-of-hospital cardiac arrest
+
+# Proton-pump inhibitors
+10.1371/journal.pmed.1003140         # PPIs -> mortality after kidney transplant
+10.1038/s41598-020-70712-9           # PPIs -> hip fracture in type 2 diabetes
+10.1371/journal.pone.0204231         # PPIs -> chronic kidney disease
+
+# Ultra-processed food
+10.1371/journal.pmed.1003256         # UPF -> overweight/obesity
+10.1186/s12916-019-1312-y            # UPF -> depressive symptoms
+
+# Physical activity
+10.1001/jamanetworkopen.2022.42660   # physical activity -> mortality in breast cancer survivors
+10.1001/jamanetworkopen.2019.12352   # total/fragmented physical activity -> mortality
+
+# Coffee and tea
+10.1371/journal.pmed.1003830         # coffee/tea -> stroke and dementia
+10.1371/journal.pone.0292882         # sugar in coffee/tea -> mortality
+
+# Case-control designs
+10.1371/journal.pone.0163681         # varenicline -> self-harm (nested case-control)
+10.1371/journal.pmed.1002396         # gabapentin + opioids -> opioid-related death
+
+# Other
+10.1136/bmjopen-2020-046040          # particulate air pollution -> mortality
+10.1136/bmjopen-2020-046891          # de Quervain syndrome -> herpes zoster

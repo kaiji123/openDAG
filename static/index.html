@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenDAG: open causal diagrams for epidemiology</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+  <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+<header>
+  <a href="#/" class="brand"><span class="logo">◇→◇</span> OpenDAG</a>
+  <nav>
+    <a href="#/" data-nav="dataset">Dataset</a>
+    <a href="#/network" data-nav="network">Network</a>
+    <a href="#/add" data-nav="home">Add a paper</a>
+    <a href="#/about" data-nav="about">About</a>
+  </nav>
+</header>
+
+<div class="disclaimer">AI-assisted extraction and critique. Not a substitute for expert epidemiological judgement.</div>
+
+<main>
+  <!-- HOME -->
+  <section id="view-home" class="view">
+    <div class="hero">
+      <h1>An open dataset of causal DAGs from epidemiology papers</h1>
+      <p>Paste the DOI or PMCID of an <strong>open-access</strong> observational or clinical study.
+        NVIDIA Nemotron models on Nebius Token Factory extract its causal diagram and flag likely
+        missing confounders; Tavily finds supporting evidence; you review and add it to the dataset.</p>
+      <form id="submit-form" class="submit">
+        <input id="identifier" placeholder="e.g. 10.1136/bmjopen-2021-051502 or PMC8442105" autocomplete="off" required>
+        <button type="submit">Extract DAG</button>
+      </form>
+      <div id="submit-error" class="error" hidden></div>
+      <ol id="progress" class="progress" hidden>
+        <li data-step="fetching">Fetching open-access full text from Europe PMC</li>
+        <li data-step="extracting">Extracting the DAG with <b id="m-fast">Nemotron Nano</b></li>
+        <li data-step="critiquing">Critiquing confounding &amp; bias with <b id="m-reason">Nemotron Super</b></li>
+        <li data-step="evidence">Finding evidence with Tavily</li>
+      </ol>
+    </div>
+    <div class="recent">
+      <h2>Recently added</h2>
+      <div id="recent-list" class="cards"></div>
+    </div>
+  </section>
+
+  <!-- RECORD -->
+  <section id="view-record" class="view" hidden>
+    <a href="#/" class="back">← Back to dataset</a>
+    <div class="record-head">
+      <div>
+        <h1 id="r-title"></h1>
+        <div id="r-headline" class="headline"></div>
+        <div id="r-meta" class="muted"></div>
+      </div>
+      <span id="r-status" class="badge"></span>
+    </div>
+
+    <div id="keyfacts" class="keyfacts"></div>
+
+    <div class="record-grid">
+      <div class="graph-col">
+        <div id="cy"></div>
+        <div class="legend" aria-label="Graph legend">
+          <div class="legend-group">
+            <span class="legend-title">Variables</span>
+            <span><i class="sw exposure"></i>Exposure</span>
+            <span><i class="sw outcome"></i>Outcome</span>
+            <span><i class="sw adjusted"></i>Adjusted for by the authors</span>
+            <span><i class="sw unadjusted"></i>Not adjusted for</span>
+            <span><i class="sw mediator"></i>Mediator</span>
+            <span><i class="sw ai"></i>Suggested by AI (dashed)</span>
+          </div>
+          <div class="legend-group">
+            <span class="legend-title">Arrows</span>
+            <span><i class="ln main"></i>Main effect studied</span>
+            <span><i class="ln"></i>Assumed cause → effect</span>
+            <span><i class="ln ai"></i>Suggested by AI</span>
+            <span class="muted">Click any variable for details.</span>
+          </div>
+        </div>
+
+        <div id="editor" class="panel">
+          <h3>Edit the DAG</h3>
+          <div class="row">
+            <input id="new-label" placeholder="New variable">
+            <select id="new-role">
+              <option value="confounder">confounder</option><option value="mediator">mediator</option>
+              <option value="collider">collider</option><option value="effect_modifier">effect modifier</option>
+              <option value="other">other</option>
+            </select>
+            <label class="check"><input type="checkbox" id="new-adjusted"> adjusted</label>
+            <button id="add-node" class="secondary">Add node</button>
+          </div>
+          <div class="row">
+            <select id="edge-src"></select><span>→</span><select id="edge-tgt"></select>
+            <button id="add-edge" class="secondary">Add edge</button>
+          </div>
+          <div class="row">
+            <button id="toggle-adjusted" class="secondary" disabled>Toggle adjusted</button>
+            <button id="delete-selected" class="secondary danger" disabled>Delete selected</button>
+            <span class="muted small">Click a node or edge to select it.</span>
+          </div>
+          <div class="row actions">
+            <button id="save">Save changes</button>
+            <button id="approve" class="approve">Approve &amp; add to dataset</button>
+          </div>
+          <div id="edit-msg" class="small"></div>
+        </div>
+      </div>
+
+      <!-- Review column: as tall as the graph column, scrolls on its own so neither side is left empty -->
+      <aside class="side-col">
+        <div class="side-scroll">
+          <div id="node-detail" class="panel highlight" hidden></div>
+
+          <div class="panel ai">
+            <h3>Missing confounders <span class="tag">AI-suggested</span></h3>
+            <p class="small muted">Proposed by the reasoning model, not reported by the paper. Accept or reject each before approving.</p>
+            <div id="suggestions"></div>
+          </div>
+
+          <div class="panel ai">
+            <h3>Overall assessment <span class="tag">AI-suggested</span></h3>
+            <p id="assessment"></p>
+            <div id="backdoors" class="small"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Reference panels: two balanced columns across the full width -->
+    <div class="record-lower">
+      <div class="panel">
+        <h3>Study</h3>
+        <dl id="study"></dl>
+      </div>
+
+      <div class="panel ai">
+        <h3>Bias risks <span class="tag">AI-suggested</span></h3>
+        <div id="bias"></div>
+      </div>
+
+      <div class="panel">
+        <h3>DAGitty</h3>
+        <p class="small muted">Paste into <a href="https://dagitty.net/dags.html" target="_blank" rel="noopener">dagitty.net</a>
+          or <code>dagitty::dagitty()</code> in R to find adjustment sets.</p>
+        <pre id="dagitty"></pre>
+        <div class="row">
+          <button id="copy-dagitty" class="secondary">Copy</button>
+          <a id="dl-dagitty" class="button secondary" download>Download .dagitty</a>
+          <a id="dl-json" class="button secondary" download>Download JSON</a>
+        </div>
+      </div>
+
+      <div id="issues" class="panel" hidden></div>
+    </div>
+    <div class="small muted" id="models"></div>
+  </section>
+
+  <!-- DATASET -->
+  <section id="view-dataset" class="view" hidden>
+    <div class="record-head">
+      <div>
+        <h1>OpenDAG dataset</h1>
+        <p class="muted intro">Causal diagrams (DAGs) reconstructed from open-access epidemiology papers by NVIDIA Nemotron,
+          critiqued for missing confounders, and approved by a person. Free to reuse under CC BY 4.0.</p>
+      </div>
+      <div class="row">
+        <a class="button" href="#/add">+ Add a paper</a>
+        <a class="button secondary" href="#/network">Explore the network</a>
+        <a class="button secondary" href="/api/dataset.jsonl" download>Download JSONL</a>
+        <a class="button secondary" href="/api/dataset.dagitty" download>Download DAGitty</a>
+      </div>
+    </div>
+    <div class="panel ask-panel">
+      <h3>Ask the dataset <span class="tag nv">Nemotron</span></h3>
+      <form id="ask-form" class="ask-row">
+        <input id="ask-q" maxlength="300" autocomplete="off" placeholder="e.g. Which papers did not adjust for smoking?">
+        <button type="submit" id="ask-btn">Ask</button>
+      </form>
+      <div class="ask-examples">
+        <button type="button" class="chip">Which papers did not adjust for smoking?</button>
+        <button type="button" class="chip">What confounders are most often suggested as missing?</button>
+        <button type="button" class="chip">Which studies have a high risk of immortal time bias?</button>
+        <button type="button" class="chip">Summarise the PPI studies</button>
+      </div>
+      <div id="ask-out" class="ask-out" hidden></div>
+    </div>
+
+    <div class="insights">
+      <div class="panel chart-panel">
+        <h3>Effect estimates across studies</h3>
+        <p class="small muted">Main reported estimate and 95% CI per paper, log scale. Dashed line = no effect (1).</p>
+        <div id="forest-chart" class="chart-scroll"></div>
+      </div>
+      <div class="panel chart-panel ai">
+        <h3>Most often missed confounders <span class="tag">AI-suggested</span></h3>
+        <p class="small muted">How many papers the reasoning model flagged for each unadjusted confounder (similar names grouped).</p>
+        <div id="missing-chart" class="chart-scroll"></div>
+      </div>
+    </div>
+    <div id="tooltip" class="tooltip" hidden></div>
+    <div class="row filters">
+      <input id="f-search" placeholder="Search title, exposure, outcome…">
+      <select id="f-design"><option value="">All designs</option></select>
+      <label class="check"><input type="checkbox" id="f-drafts"> show drafts</label>
+    </div>
+    <div class="table-wrap">
+      <table id="table">
+        <thead><tr><th>Exposure</th><th>Outcome</th><th>Design</th><th>Paper</th><th>Year</th><th>Nodes</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="empty" class="muted" hidden>No DAGs yet. Add a paper to start the dataset.</p>
+  </section>
+
+  <!-- NETWORK -->
+  <section id="view-network" class="view" hidden>
+    <div class="record-head">
+      <div>
+        <h1>How the studies connect</h1>
+        <p class="muted intro">Every variable in the dataset, merged across papers. Bigger nodes appear in more papers;
+          arrows are the causal links papers assume. Drag to rotate, scroll to zoom, click a variable.</p>
+      </div>
+      <label class="check"><input type="checkbox" id="n-drafts"> show drafts</label>
+    </div>
+    <div class="net-grid">
+      <div class="net-wrap">
+        <div id="net3d"></div>
+        <div id="net-labels" class="net-labels" aria-hidden="true"></div>
+        <div id="net-empty" class="net-empty" hidden></div>
+      </div>
+      <aside class="panel net-side">
+        <div class="legend-group net-legend">
+          <span><i class="dot exposure"></i>Exposure</span>
+          <span><i class="dot outcome"></i>Outcome</span>
+          <span><i class="dot confounder"></i>Adjusted confounder</span>
+          <span><i class="dot ai"></i>AI-suggested only</span>
+          <span><i class="dot other"></i>Other</span>
+        </div>
+        <div id="net-detail"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="view-about" class="view prose" hidden>
+    <h1>About OpenDAG</h1>
+    <p>Causal diagrams (DAGs) make a study's assumptions explicit: what causes what, and which variables were
+      adjusted for. Most papers never publish one. OpenDAG reconstructs them from open-access papers and builds
+      an open, reusable dataset.</p>
+    <h2>How it works</h2>
+    <ol>
+      <li><b>Fetch</b>: Europe PMC; only Creative Commons-licensed papers are accepted.</li>
+      <li><b>Extract</b>: <span class="mf"></span> (NVIDIA Nemotron Nano) reads the methods and returns exposure, outcome, adjusted covariates and edges as JSON.</li>
+      <li><b>Critique</b>: <span class="mr"></span> (larger Nemotron with reasoning) proposes unadjusted confounders and bias risks.</li>
+      <li><b>Evidence</b>: Tavily searches for literature supporting each suggested confounder.</li>
+      <li><b>Validate</b>: the graph is checked to be acyclic and schema-valid.</li>
+      <li><b>Review</b>: a person edits, accepts or rejects suggestions, and approves.</li>
+    </ol>
+    <h2>What we store</h2>
+    <p>Bibliographic metadata, the DAG, AI critique, evidence links and short supporting phrases (≤20 words).
+      Never the paper's full text.</p>
+    <p>Code: MIT. Dataset: CC BY 4.0.</p>
+  </section>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

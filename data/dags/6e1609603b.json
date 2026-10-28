@@ -1,0 +1,421 @@
+{
+  "id": "6e1609603b",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:08:55Z",
+  "approved_at": "2026-10-28T20:23:12Z",
+  "paper": {
+    "title": "Ultra-processed food intake in association with BMI change and risk of overweight and obesity: A\u00a0prospective analysis of the French NutriNet-Sant\u00e9 cohort",
+    "authors": "Beslay M, Srour B, M\u00e9jean C, All\u00e8s B, Fiolet T, Debras C, Chazelas E, Deschasaux M, Wendeu-Foyet MG, Hercberg S, Galan P, Monteiro CA, Deschamps V, Calixto Andrade G, Kesse-Guyot E, Julia C, Touvier M.",
+    "year": "2020",
+    "journal": "PLoS medicine",
+    "doi": "10.1371/journal.pmed.1003256",
+    "pmcid": "PMC7451582",
+    "pmid": "32853224",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Adults aged 18\u201373.3 years from the French NutriNet-Sant\u00e9 cohort, 2009\u20132019",
+    "sample_size": "110,260",
+    "follow_up": "median 4.1 years",
+    "exposure": {
+      "name": "UPF proportion",
+      "definition": "percentage of ultra-processed foods in the diet, measured as weight ratio of UPF to total diet"
+    },
+    "outcome": {
+      "name": "BMI change",
+      "definition": "absolute change in body mass index over time, assessed via repeated anthropometric questionnaires"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.11",
+      "ci": "1.08-1.14",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "UPF proportion",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "proportion of UPF in the diet",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "BMI change",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "absolute change in BMI over time",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for sex",
+        "ai_suggested": false
+      },
+      {
+        "id": "education",
+        "label": "Educational level",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for educational level",
+        "ai_suggested": false
+      },
+      {
+        "id": "marital_status",
+        "label": "Marital status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for smoking status",
+        "ai_suggested": false
+      },
+      {
+        "id": "physical_activity",
+        "label": "Physical activity level",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for physical activity level",
+        "ai_suggested": false
+      },
+      {
+        "id": "energy_intake",
+        "label": "Energy intake",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for energy intake",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_intake",
+        "label": "Alcohol intake",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for alcohol intake",
+        "ai_suggested": false
+      },
+      {
+        "id": "diet_quality",
+        "label": "Dietary quality indicators",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for sugar, fibre, sodium, and SFA intake",
+        "ai_suggested": false
+      },
+      {
+        "id": "dietary_patterns",
+        "label": "Dietary patterns",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for dietary patterns",
+        "ai_suggested": false
+      },
+      {
+        "id": "baseline_bmi",
+        "label": "Baseline BMI",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "household_income",
+        "label": "Household income",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "sleep_duration",
+        "label": "Sleep duration",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "education",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "education",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "marital_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "marital_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "energy_intake",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "energy_intake",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_intake",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_intake",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "diet_quality",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "diet_quality",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "dietary_patterns",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "dietary_patterns",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "baseline_bmi",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "baseline_bmi",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "household_income",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "household_income",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "sleep_duration",
+        "target": "exposure",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\neducation [adjusted]\nmarital_status [adjusted]\nsmoking [adjusted]\nphysical_activity [adjusted]\nenergy_intake [adjusted]\nalcohol_intake [adjusted]\ndiet_quality [adjusted]\ndietary_patterns [adjusted]\nbaseline_bmi\nhousehold_income\nsleep_duration\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\neducation -> exposure\neducation -> outcome\nmarital_status -> exposure\nmarital_status -> outcome\nsmoking -> exposure\nsmoking -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\nenergy_intake -> exposure\nenergy_intake -> outcome\nalcohol_intake -> exposure\nalcohol_intake -> outcome\ndiet_quality -> exposure\ndiet_quality -> outcome\ndietary_patterns -> exposure\ndietary_patterns -> outcome\nbaseline_bmi -> exposure\nbaseline_bmi -> outcome\nhousehold_income -> exposure\nhousehold_income -> outcome\nsleep_duration -> exposure\n}",
+  "open_backdoors": [
+    "Baseline BMI",
+    "Household income"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Baseline BMI",
+        "rationale": "Participants' starting body mass index influences both their dietary choices (e.g., higher BMI may be associated with greater UPF intake) and the subsequent change in BMI over time.",
+        "edges_to_add": [
+          {
+            "source": "Baseline BMI",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Baseline BMI",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Ultraprocessed food intake and body mass index change ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11473438"
+          },
+          {
+            "title": "A Critical Review of the Science on \u201cHighly\u201d Processed Food Intake and Body Weight",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13356632"
+          },
+          {
+            "title": "Factors correlated with ultra-processed food (UPF) intake in preschool-aged children and association with weight",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10999344"
+          }
+        ],
+        "status": "accepted"
+      },
+      {
+        "label": "Household income",
+        "rationale": "Income affects food purchasing power and thus the proportion of ultra\u2011processed foods consumed, while also being related to BMI change through access to healthier lifestyles and healthcare.",
+        "edges_to_add": [
+          {
+            "source": "Household income",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Household income",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Ultra-processed Foods, Weight Gain, and Co-morbidity Risk | Current Obesity Reports | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1007/s13679-021-00460-y"
+          },
+          {
+            "title": "Ultra-Processed Food Consumption and Obesity: A Narrative Review of Their Association and Potential Mechanisms",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11799601"
+          },
+          {
+            "title": "New study reveals stark disparities in ultra-processed food purchases among U.S. households - Global Food Research Program",
+            "url": "https://www.globalfoodresearchprogram.org/new-study-reveals-stark-disparities-in-ultra-processed-food-purchases-among-u-s-households"
+          }
+        ],
+        "status": "accepted"
+      },
+      {
+        "label": "Sleep duration",
+        "rationale": "Short or poor sleep is linked to increased appetite for ultra\u2011processed foods and independently predicts weight gain, making it a common cause of exposure and outcome.",
+        "edges_to_add": [
+          {
+            "source": "Sleep duration",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Sleep duration",
+            "target": "outake",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Sleep Duration and Timing in Relation to BMI and Readiness ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12288046"
+          },
+          {
+            "title": "Frontiers | Association between sleep behaviors and adiposity indices among U.S. adults: a cross-sectional study",
+            "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2025.1526422/full"
+          },
+          {
+            "title": "The association between sleep duration and detailed ...",
+            "url": "https://www.repository.cam.ac.uk/bitstreams/79afda44-6010-436b-be77-bba2d9715ecd/download"
+          }
+        ],
+        "status": "accepted"
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "selection bias",
+        "explanation": "The NutriNet-Sant\u00e9 cohort consists of volunteers interested in nutrition, potentially leading to a healthier\u2011than\u2011average sample and limiting generalizability.",
+        "severity": "medium"
+      },
+      {
+        "type": "measurement error",
+        "explanation": "Ultra\u2011processed food classification relies on self\u2011reported 24\u2011hour dietary records, which may misclassify processing level and introduce non\u2011differential error in the exposure.",
+        "severity": "medium"
+      },
+      {
+        "type": "loss to follow-up",
+        "explanation": "Over the 10\u2011year follow\u2011up, participants who dropped out may differ in both UPF consumption and weight trajectory, biasing the estimated association if not random.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "While the study controlled for a broad set of demographic and lifestyle confounders, important variables such as baseline BMI, socioeconomic status beyond education, and sleep duration were not accounted for, leaving room for residual confounding. Additionally, selection bias from the volunteer cohort and measurement error in dietary assessment could attenuate or exaggerate the observed association. Overall, the evidence for a causal effect of UPF consumption on BMI change is suggestive but should be interpreted cautiously pending further validation.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

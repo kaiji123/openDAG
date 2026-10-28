@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: opendag
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NEBIUS_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: NEBIUS_BASE_URL
+        value: https://api.tokenfactory.nebius.com/v1/
+      - key: MODEL_FAST
+        value: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      - key: MODEL_REASON
+        value: nvidia/nemotron-3-super-120b-a12b
+      - key: RATE_LIMIT_PER_HOUR
+        value: "5"
+      - key: DAILY_CAP
+        value: "50"
+      - key: ASK_PER_HOUR
+        value: "20"
+      - key: ASK_DAILY_CAP
+        value: "400"
+      - key: ADMIN_TOKEN
+        sync: false

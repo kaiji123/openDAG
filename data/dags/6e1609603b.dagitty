@@ -1,0 +1,43 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age [adjusted]
+sex [adjusted]
+education [adjusted]
+marital_status [adjusted]
+smoking [adjusted]
+physical_activity [adjusted]
+energy_intake [adjusted]
+alcohol_intake [adjusted]
+diet_quality [adjusted]
+dietary_patterns [adjusted]
+baseline_bmi
+household_income
+sleep_duration
+exposure -> outcome
+age -> exposure
+age -> outcome
+sex -> exposure
+sex -> outcome
+education -> exposure
+education -> outcome
+marital_status -> exposure
+marital_status -> outcome
+smoking -> exposure
+smoking -> outcome
+physical_activity -> exposure
+physical_activity -> outcome
+energy_intake -> exposure
+energy_intake -> outcome
+alcohol_intake -> exposure
+alcohol_intake -> outcome
+diet_quality -> exposure
+diet_quality -> outcome
+dietary_patterns -> exposure
+dietary_patterns -> outcome
+baseline_bmi -> exposure
+baseline_bmi -> outcome
+household_income -> exposure
+household_income -> outcome
+sleep_duration -> exposure
+}

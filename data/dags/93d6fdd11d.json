@@ -1,0 +1,443 @@
+{
+  "id": "93d6fdd11d",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T19:30:53Z",
+  "approved_at": "2026-10-28T19:40:19Z",
+  "paper": {
+    "title": "Risk of out-of-hospital cardiac arrest among sepsis survivors in Taiwan: analysis of a nationwide population-based cohort",
+    "authors": "Hsu WT, Sherrod CF, Tehrani B, Papaila A, Porta L, Hsu TC, Sheng WH, Lee CC.",
+    "year": "2021",
+    "journal": "BMJ open",
+    "doi": "10.1136/bmjopen-2021-051502",
+    "pmcid": "PMC8442105",
+    "pmid": "34521676",
+    "license": "cc by-nc"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Patients with sepsis discharged from hospitals in Taiwan between 2000 and 2013, followed for up to 1 year post-discharge.",
+    "exposure": {
+      "name": "Sepsis",
+      "definition": "Sepsis identified using ICD-9-CM codes for sepsis combined with acute organ dysfunction according to Martin criteria and Sepsis-3 definition."
+    },
+    "outcome": {
+      "name": "Out-of-hospital cardiac arrest (OHCA)",
+      "definition": "OHCA identified by ICD-9-CM codes 427.5, 798, or procedure code 99.60 within 365 days of discharge."
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.66",
+      "ci": "1.27-2.16",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "sepsis",
+        "label": "Sepsis",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "sepsis patients",
+        "ai_suggested": false
+      },
+      {
+        "id": "ohca",
+        "label": "Out-of-hospital cardiac arrest",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "OHCA events within 30 days",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched according to admission date, 5-year age group",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched according to ... sex",
+        "ai_suggested": false
+      },
+      {
+        "id": "charlson",
+        "label": "Charlson Comorbidity Score",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched according to Charlson Comorbidity Score quartile",
+        "ai_suggested": false
+      },
+      {
+        "id": "cardiovascular_disease",
+        "label": "Cardiovascular disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "presence of cardiovascular disease",
+        "ai_suggested": false
+      },
+      {
+        "id": "diabetes",
+        "label": "Diabetes",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "presence of diabetes",
+        "ai_suggested": false
+      },
+      {
+        "id": "infection_source",
+        "label": "Infection source",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "infection source",
+        "ai_suggested": false
+      },
+      {
+        "id": "septic_shock",
+        "label": "Septic shock",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "patients with septic shock",
+        "ai_suggested": false
+      },
+      {
+        "id": "renal_dysfunction",
+        "label": "Renal dysfunction",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "prior_arrhythmia_heart_failure_severity",
+        "label": "Prior arrhythmia / heart failure severity",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "socioeconomic_status_income_urbanization",
+        "label": "Socioeconomic status (income/urbanization)",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "sepsis",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "charlson",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "charlson",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "cardiovascular_disease",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "cardiovascular_disease",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "infection_source",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "infection_source",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "septic_shock",
+        "target": "sepsis",
+        "ai_suggested": false
+      },
+      {
+        "source": "septic_shock",
+        "target": "ohca",
+        "ai_suggested": false
+      },
+      {
+        "source": "renal_dysfunction",
+        "target": "sepsis",
+        "ai_suggested": true
+      },
+      {
+        "source": "renal_dysfunction",
+        "target": "ohca",
+        "ai_suggested": true
+      },
+      {
+        "source": "prior_arrhythmia_heart_failure_severity",
+        "target": "sepsis",
+        "ai_suggested": true
+      },
+      {
+        "source": "prior_arrhythmia_heart_failure_severity",
+        "target": "ohca",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status_income_urbanization",
+        "target": "sepsis",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status_income_urbanization",
+        "target": "ohca",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nsepsis [exposure]\nohca [outcome]\nage [adjusted]\nsex [adjusted]\ncharlson [adjusted]\ncardiovascular_disease [adjusted]\ndiabetes [adjusted]\ninfection_source [adjusted]\nseptic_shock [adjusted]\nrenal_dysfunction\nprior_arrhythmia_heart_failure_severity\nsocioeconomic_status_income_urbanization\nsepsis -> ohca\nage -> sepsis\nage -> ohca\nsex -> sepsis\nsex -> ohca\ncharlson -> sepsis\ncharlson -> ohca\ncardiovascular_disease -> sepsis\ncardiovascular_disease -> ohca\ndiabetes -> sepsis\ndiabetes -> ohca\ninfection_source -> sepsis\ninfection_source -> ohca\nseptic_shock -> sepsis\nseptic_shock -> ohca\nrenal_dysfunction -> sepsis\nrenal_dysfunction -> ohca\nprior_arrhythmia_heart_failure_severity -> sepsis\nprior_arrhythmia_heart_failure_severity -> ohca\nsocioeconomic_status_income_urbanization -> sepsis\nsocioeconomic_status_income_urbanization -> ohca\n}",
+  "open_backdoors": [
+    "Renal dysfunction",
+    "Prior arrhythmia / heart failure severity",
+    "Socioeconomic status (income/urbanization)"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Renal dysfunction",
+        "rationale": "Chronic kidney disease increases susceptibility to sepsis and independently predisposes to arrhythmic cardiac arrest via electrolyte shifts and uremic cardiomyopathy.",
+        "edges_to_add": [
+          {
+            "source": "Renal dysfunction",
+            "target": "sepsis",
+            "ai_suggested": false
+          },
+          {
+            "source": "Renal dysfunction",
+            "target": "ohca",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Renal dysfunction is common following resuscitation from out-of-hospital cardiac arrest",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0300957213002219"
+          },
+          {
+            "title": "Acute kidney injury after out-of-hospital cardiac arrest | Critical Care | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s13054-024-04936-w"
+          },
+          {
+            "title": "Seeking a Treatable Cause of Out-of-Hospital Cardiac Arrest during and after Resuscitation",
+            "url": "https://www.mdpi.com/2077-0383/13/19/5804"
+          }
+        ],
+        "status": "accepted"
+      },
+      {
+        "label": "QT\u2011prolonging medication use",
+        "rationale": "Patients with sepsis often receive antibiotics (e.g., macrolides, fluoroquinolones) or antipsychotics that prolong QT interval, raising OHCA risk; prescribing patterns also correlate with sepsis severity.",
+        "edges_to_add": [
+          {
+            "source": "QT\u2011prolonging medication use",
+            "target": "sepsis",
+            "ai_suggested": false
+          },
+          {
+            "source": "QT\u2011prolonging medication use",
+            "target": "ohca",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Out-of-hospital cardiac arrest and differential risk of cardiac and non-cardiac QT-prolonging drugs in 37 000 cases - University of Southern Denmark",
+            "url": "https://portal.findresearcher.sdu.dk/en/publications/out-of-hospital-cardiac-arrest-and-differential-risk-of-cardiac-a"
+          },
+          {
+            "title": "Cardiac Arrest in a Woman with UTI: A Case of QT Prolongation | PSNet",
+            "url": "https://psnet.ahrq.gov/web-mm/cardiac-arrest-woman-uti-case-qt-prolongation"
+          },
+          {
+            "title": "Understanding New-Onset QT Prolongation in Sepsis: Characteristics, Outcomes and Predictors | Physicians Weekly",
+            "url": "https://www.physiciansweekly.com/post/understanding-new-onset-qt-prolongation-in-sepsis-characteristics-outcomes-and-predictors"
+          }
+        ],
+        "status": "rejected"
+      },
+      {
+        "label": "Prior arrhythmia / heart failure severity",
+        "rationale": "A history of ventricular arrhythmias or severe heart failure raises both the likelihood of developing sepsis (due to reduced reserve) and the risk of OHCA after discharge.",
+        "edges_to_add": [
+          {
+            "source": "Prior arrhythmia / heart failure severity",
+            "target": "sepsis",
+            "ai_suggested": false
+          },
+          {
+            "source": "Prior arrhythmia / heart failure severity",
+            "target": "ohca",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Severe sepsis and cardiac arrhythmias",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5787725"
+          },
+          {
+            "title": "Risk factors and outcome of extracorporeal cardiopulmonary resuscitation patients with out-of-hospital cardiac arrest and in-hospital cardiac arrest: a nationwide prospective and observational study o",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12335052"
+          },
+          {
+            "title": "OHCA LHC - What is Out of Hospital Cardiac Arrest",
+            "url": "https://ohca.med.umich.edu/about-us/what-is-out-of-hospital-cardiac-arrest"
+          }
+        ],
+        "status": "accepted"
+      },
+      {
+        "label": "Socioeconomic status (income/urbanization)",
+        "rationale": "Lower income or rural residence is linked to higher sepsis incidence (limited access to care) and higher OHCA risk (delayed emergency response, fewer resuscitative resources).",
+        "edges_to_add": [
+          {
+            "source": "Socioeconomic status",
+            "target": "sepsis",
+            "ai_suggested": false
+          },
+          {
+            "source": "Socioeconomic status",
+            "target": "ohca",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Socioeconomic Status and Out-Of-Hospital Cardiac Arrest: A ...",
+            "url": "https://www.heartlungcirc.org/article/S1443-9506(25)01172-2/abstract"
+          },
+          {
+            "title": "Racial and Socioeconomic Disparities in Out-Of-Hospital ...Mediators of the Association Between Socioeconomic Status and ...Association Between Income and Risk of Out-of-Hospital ...",
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8635948"
+          },
+          {
+            "title": "Relationship between socioeconomic status and incidence of ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7577091"
+          }
+        ],
+        "status": "accepted"
+      },
+      {
+        "label": "Sepsis severity biomarkers (e.g., lactate, SOFA score)",
+        "rationale": "Higher lactate or SOFA scores indicate more severe sepsis, which both defines the exposure more strongly and directly increases myocardial injury and arrhythmogenic potential leading to OHCA.",
+        "edges_to_add": [
+          {
+            "source": "Sepsis severity biomarkers",
+            "target": "sepsis",
+            "ai_suggested": false
+          },
+          {
+            "source": "Sepsis severity biomarkers",
+            "target": "ohca",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Sepsis and Septic Shock - Critical Care Medicine - Merck Manual Professional Edition",
+            "url": "https://www.merckmanuals.com/professional/critical-care-medicine/sepsis-and-septic-shock/sepsis-and-septic-shock"
+          },
+          {
+            "title": "The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3)",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4968574"
+          },
+          {
+            "title": "To Determine Blood Lactate Levels in Patients with Sepsis Admitted to a Respiratory Intensive Care Unit and to Correlate with their Hospital Outcomes",
+            "url": "https://clinmedjournals.org/articles/ijccem/international-journal-of-critical-care-and-emergency-medicine-ijccem-4-045.php?jid=ijccem"
+          }
+        ],
+        "status": "rejected"
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "Immortal time bias",
+        "explanation": "The cohort includes only patients who survived sepsis hospitalization to discharge; those who died in-hospital are excluded, potentially inflating the observed post\u2011discharge OHCA risk among survivors.",
+        "severity": "medium"
+      },
+      {
+        "type": "Measurement error",
+        "explanation": "Sepsis and OHCA are identified solely from ICD\u20119\u2011CM codes; misclassification (e.g., coding errors, lack of clinical confirmation) can bias the hazard ratio toward or away from the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "Residual confounding",
+        "explanation": "Important severity markers (lactate, SOFA, ICU admission) and medication exposures were not adjusted for, leaving open the possibility that sicker sepsis patients drive the OHCA association.",
+        "severity": "high"
+      },
+      {
+        "type": "Selection bias (collider stratification)",
+        "explanation": "Propensity\u2011score matching on variables that may be consequences of sepsis (e.g., infection source, septic shock) can induce collider bias, distorting the sepsis\u2013OHCA relationship.",
+        "severity": "medium"
+      },
+      {
+        "type": "Loss to follow\u2011up",
+        "explanation": "Although the NHIRD is near\u2011complete, emigration or death outside the health system could lead to censoring that differs by sepsis status, potentially biasing estimates.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study provides evidence of an association between sepsis hospitalization and increased risk of out\u2011of\u2011hospital cardiac arrest up to one year later, but the causal interpretation is weakened by potential immortal time bias, measurement error, and residual confounding from unmeasured sepsis severity and medication exposures. While adjustment for demographics, comorbidities, and infection characteristics reduces confounding, important prognostic factors remain uncontrolled. Consequently, the observed hazard ratios should be viewed as suggestive rather than definitive proof of a causal effect.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

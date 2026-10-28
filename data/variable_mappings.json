@@ -1,0 +1,1148 @@
+[
+ {
+  "label": "activity bouts <5 minutes",
+  "canonical": "Activity bouts <5 minutes",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "activity fragmentation",
+  "canonical": "Activity fragmentation",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Adjuvant cancer treatments",
+  "canonical": "Adjuvant cancer treatment",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Admission to mental health unit",
+  "canonical": "Admission to mental health unit",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Age",
+  "canonical": "Age",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Age at baseline",
+  "canonical": "Age",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "age, sex, year of index date",
+  "canonical": "Age",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "albumin",
+  "canonical": "Albumin",
+  "mesh": "Serum Albumin",
+  "mesh_id": "D012709"
+ },
+ {
+  "label": "Alcohol abuse",
+  "canonical": "Alcohol abuse",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "alcohol consumption",
+  "canonical": "Alcohol intake",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Alcohol intake",
+  "canonical": "Alcohol intake",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Alcohol status",
+  "canonical": "Alcohol status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Alcohol use",
+  "canonical": "Alcohol use",
+  "mesh": "Alcohol Drinking",
+  "mesh_id": "D000428"
+ },
+ {
+  "label": "alcohol use disorder",
+  "canonical": "Alcohol use disorder",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "All-cause mortality",
+  "canonical": "All-cause mortality",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Antihypertensive drugs",
+  "canonical": "Antihypertensive drugs",
+  "mesh": "Antihypertensive Agents",
+  "mesh_id": "D000959"
+ },
+ {
+  "label": "Antihypertensive treatment",
+  "canonical": "Antihypertensive treatment",
+  "mesh": "Antihypertensive Agents",
+  "mesh_id": "D000959"
+ },
+ {
+  "label": "APOE genotype",
+  "canonical": "APOE genotype",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "area socioeconomic status",
+  "canonical": "Socioeconomic status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Baseline BMI",
+  "canonical": "Body mass index",
+  "mesh": "Body Mass Index",
+  "mesh_id": "D015992"
+ },
+ {
+  "label": "Baseline CES-D score",
+  "canonical": "Baseline CES-D score",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Baseline cognition",
+  "canonical": "Baseline cognition",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Baseline CVD",
+  "canonical": "Cardiovascular disease",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Baseline eGFR",
+  "canonical": "Baseline eGFR",
+  "mesh": "Glomerular Filtration Rate",
+  "mesh_id": "D005919"
+ },
+ {
+  "label": "benzodiazepines",
+  "canonical": "Benzodiazepines",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "BMI",
+  "canonical": "Body mass index",
+  "mesh": "Body Mass Index",
+  "mesh_id": "D015992"
+ },
+ {
+  "label": "BMI change",
+  "canonical": "Body mass index change",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Body mass index",
+  "canonical": "Body mass index",
+  "mesh": "Body Mass Index",
+  "mesh_id": "D015992"
+ },
+ {
+  "label": "Breast cancer stage",
+  "canonical": "Breast cancer stage",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Calcineurin inhibitors",
+  "canonical": "Calcineurin inhibitors",
+  "mesh": "Calcineurin Inhibitors",
+  "mesh_id": "D065095"
+ },
+ {
+  "label": "calendar year",
+  "canonical": "Calendar year",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Cardiovascular disease",
+  "canonical": "Cardiovascular disease",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "cardiovascular medication",
+  "canonical": "Cardiovascular medication",
+  "mesh": "Cardiovascular Agents",
+  "mesh_id": "D002317"
+ },
+ {
+  "label": "charlson",
+  "canonical": "Charlson comorbidity index",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Charlson Comorbidity Index",
+  "canonical": "Charlson comorbidity index",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Charlson comorbidity score",
+  "canonical": "Charlson comorbidity index",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Chronic illness",
+  "canonical": "Chronic illness",
+  "mesh": "Chronic Disease",
+  "mesh_id": "D002908"
+ },
+ {
+  "label": "Chronic kidney disease",
+  "canonical": "Chronic kidney disease",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "chronic lung disease",
+  "canonical": "Chronic lung disease",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Chronic renal failure",
+  "canonical": "Chronic renal failure",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Coffee and tea consumption",
+  "canonical": "Coffee and tea consumption",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Cognitive Difficulties Scale score",
+  "canonical": "Cognitive Difficulties Scale score",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "cognitive function",
+  "canonical": "Cognitive function",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "comorbidities",
+  "canonical": "Comorbidities",
+  "mesh": "Comorbidity",
+  "mesh_id": "D015897"
+ },
+ {
+  "label": "Coronary artery disease",
+  "canonical": "Coronary artery disease",
+  "mesh": "Coronary Artery Disease",
+  "mesh_id": "D003324"
+ },
+ {
+  "label": "Cups of coffee/tea per day",
+  "canonical": "Coffee and tea consumption",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Current smoking",
+  "canonical": "Current smoking",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Daily alcohol intake",
+  "canonical": "Daily alcohol intake",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "de Quervain syndrome (DQS)",
+  "canonical": "De Quervain syndrome",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Deceased donor transplant",
+  "canonical": "Deceased donor transplant",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Depression",
+  "canonical": "Depression",
+  "mesh": "Depression",
+  "mesh_id": "D003863"
+ },
+ {
+  "label": "Depression severity",
+  "canonical": "Depression severity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Depressive symptoms",
+  "canonical": "Depressive symptoms",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "device wear time",
+  "canonical": "Device wear time",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Diabetes",
+  "canonical": "Diabetes",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Diabetes status",
+  "canonical": "Diabetes",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Diet pattern",
+  "canonical": "Dietary patterns",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Dietary intake",
+  "canonical": "Dietary patterns",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Dietary pattern scores",
+  "canonical": "Dietary pattern scores",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Dietary patterns",
+  "canonical": "Dietary patterns",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Dietary quality indicators",
+  "canonical": "Dietary quality",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "disease risk index",
+  "canonical": "Disease risk index",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Donor age",
+  "canonical": "Donor age",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "education level",
+  "canonical": "Education",
+  "mesh": "Education",
+  "mesh_id": "D004493"
+ },
+ {
+  "label": "Educational level",
+  "canonical": "Education",
+  "mesh": "Education",
+  "mesh_id": "D004493"
+ },
+ {
+  "label": "employment status",
+  "canonical": "Employment status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Energy intake",
+  "canonical": "Energy intake",
+  "mesh": "Energy Intake",
+  "mesh_id": "D002149"
+ },
+ {
+  "label": "Energy intake without alcohol",
+  "canonical": "Energy intake without alcohol",
+  "mesh": "Energy Intake",
+  "mesh_id": "D002149"
+ },
+ {
+  "label": "Estimated glomerular filtration rate",
+  "canonical": "Estimated glomerular filtration rate",
+  "mesh": "Glomerular Filtration Rate",
+  "mesh_id": "D005919"
+ },
+ {
+  "label": "Ethnicity",
+  "canonical": "Ethnicity",
+  "mesh": "Ethnicity",
+  "mesh_id": "D005006"
+ },
+ {
+  "label": "Fall history",
+  "canonical": "Fall history",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Family depression",
+  "canonical": "Family depression",
+  "mesh": "Depression",
+  "mesh_id": "D003863"
+ },
+ {
+  "label": "Fatigue severity",
+  "canonical": "Fatigue severity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "frailty",
+  "canonical": "Frailty",
+  "mesh": "Frailty",
+  "mesh_id": "D000073496"
+ },
+ {
+  "label": "frailty index",
+  "canonical": "Frailty index",
+  "mesh": "Frailty",
+  "mesh_id": "D000073496"
+ },
+ {
+  "label": "gabapentin use",
+  "canonical": "Gabapentin use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Gender",
+  "canonical": "Gender",
+  "mesh": "Sex Characteristics",
+  "mesh_id": "D012727"
+ },
+ {
+  "label": "GI indication for PPI",
+  "canonical": "GI indication for PPI",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Glucocorticoid use",
+  "canonical": "Glucocorticoid use",
+  "mesh": "Glucocorticoids",
+  "mesh_id": "D005938"
+ },
+ {
+  "label": "grip strength",
+  "canonical": "Grip strength",
+  "mesh": "Hand Strength",
+  "mesh_id": "D018737"
+ },
+ {
+  "label": "HDL cholesterol",
+  "canonical": "High-density lipoprotein cholesterol",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Herpes zoster (HZ) reactivation",
+  "canonical": "Herpes zoster reactivation",
+  "mesh": "Herpes Zoster",
+  "mesh_id": "D006562"
+ },
+ {
+  "label": "High dose PPI",
+  "canonical": "High dose PPI",
+  "mesh": "Proton Pump Inhibitors",
+  "mesh_id": "D054328"
+ },
+ {
+  "label": "Hip fracture",
+  "canonical": "Hip fracture",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "History of cancer",
+  "canonical": "History of cancer",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "History of cardiovascular arterial disease",
+  "canonical": "Cardiovascular disease",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "history of chronic kidney disease",
+  "canonical": "Chronic kidney disease",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "History of diabetes",
+  "canonical": "Diabetes",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "History of self-harm",
+  "canonical": "History of self-harm",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "HIV infection",
+  "canonical": "HIV infection",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "HLA mismatches",
+  "canonical": "HLA mismatches",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Hormone therapy use",
+  "canonical": "Hormone therapy use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Household income",
+  "canonical": "Household income",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Hypertension",
+  "canonical": "Hypertension",
+  "mesh": "Hypertension",
+  "mesh_id": "D006973"
+ },
+ {
+  "label": "illicit drug use",
+  "canonical": "Illicit drug use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Illicit substance use",
+  "canonical": "Illicit substance use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Incident CKD",
+  "canonical": "Incident CKD",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Incident depressive symptoms",
+  "canonical": "Incident depressive symptoms",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Incident stroke and dementia",
+  "canonical": "Incident stroke and dementia",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Income",
+  "canonical": "Income",
+  "mesh": "Income",
+  "mesh_id": "D007182"
+ },
+ {
+  "label": "Induction therapy",
+  "canonical": "Induction therapy",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Infection source",
+  "canonical": "Infection source",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "LDL cholesterol",
+  "canonical": "Low-density lipoprotein cholesterol",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Lifetime history of depression",
+  "canonical": "Lifetime history of depression",
+  "mesh": "Depression",
+  "mesh_id": "D003863"
+ },
+ {
+  "label": "Lifetime history of insomnia",
+  "canonical": "Lifetime history of insomnia",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Low socioeconomic status",
+  "canonical": "Low socioeconomic status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Marital status",
+  "canonical": "Marital status",
+  "mesh": "Marital Status",
+  "mesh_id": "D017533"
+ },
+ {
+  "label": "Medication use",
+  "canonical": "Medication use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "methadone/buprenorphine",
+  "canonical": "Methadone/buprenorphine",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Monthly household income",
+  "canonical": "Monthly household income",
+  "mesh": "Income",
+  "mesh_id": "D007182"
+ },
+ {
+  "label": "natural mortality",
+  "canonical": "All-cause mortality",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Neuroticism",
+  "canonical": "Neuroticism",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Nicotine dependence",
+  "canonical": "Nicotine dependence",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "nsaid_use",
+  "canonical": "NSAID use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "NSAIDs",
+  "canonical": "NSAIDs",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Number of 24-h dietary records",
+  "canonical": "Number of 24-h dietary records",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Number of ED visits",
+  "canonical": "Number of ED visits",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "number of opioid prescribers",
+  "canonical": "Number of opioid prescribers",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "number of pharmacies",
+  "canonical": "Number of pharmacies",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Number of physician visits",
+  "canonical": "Number of physician visits",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Number of psychiatrist visits",
+  "canonical": "Number of psychiatrist visits",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Obesity",
+  "canonical": "Obesity",
+  "mesh": "Obesity",
+  "mesh_id": "D009765"
+ },
+ {
+  "label": "Occupational category",
+  "canonical": "Occupational category",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Occupational exposure",
+  "canonical": "Occupational manual labor",
+  "mesh": "Occupational Exposure",
+  "mesh_id": "D016273"
+ },
+ {
+  "label": "Occupational manual labor",
+  "canonical": "Occupational manual labor",
+  "mesh": "Occupational Exposure",
+  "mesh_id": "D016273"
+ },
+ {
+  "label": "opioid dose",
+  "canonical": "Opioid dose",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "opioid-related death",
+  "canonical": "Opioid-related death",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Other nephrotoxic drugs",
+  "canonical": "Other nephrotoxic drugs",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "other psychotropic drugs",
+  "canonical": "Other psychotropic drugs",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Out-of-hospital cardiac arrest",
+  "canonical": "Out-of-hospital cardiac arrest",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Past psychotropic use",
+  "canonical": "Past psychotropic use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "peptic ulcer",
+  "canonical": "Peptic ulcer",
+  "mesh": "Peptic Ulcer",
+  "mesh_id": "D010437"
+ },
+ {
+  "label": "Physical activity",
+  "canonical": "Physical activity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Physical activity level",
+  "canonical": "Physical activity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Plasma magnesium",
+  "canonical": "Plasma magnesium",
+  "mesh": "Magnesium",
+  "mesh_id": "D008274"
+ },
+ {
+  "label": "Platelet inhibitors",
+  "canonical": "Platelet inhibitors",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "PM10 exposure",
+  "canonical": "PM10 exposure",
+  "mesh": "Particulate Matter",
+  "mesh_id": "D052638"
+ },
+ {
+  "label": "PPI use",
+  "canonical": "PPI use",
+  "mesh": "Proton Pump Inhibitors",
+  "mesh_id": "D054328"
+ },
+ {
+  "label": "Primary renal disease",
+  "canonical": "Primary renal disease",
+  "mesh": "Kidney Diseases",
+  "mesh_id": "D007674"
+ },
+ {
+  "label": "Prior arrhythmia / heart failure severity",
+  "canonical": "Prior arrhythmia severity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "prior cancer diagnosis",
+  "canonical": "History of cancer",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Prior quit attempts",
+  "canonical": "Prior quit attempts",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Proteinuria",
+  "canonical": "Proteinuria",
+  "mesh": "Proteinuria",
+  "mesh_id": "D011507"
+ },
+ {
+  "label": "Psychiatric comorbidities",
+  "canonical": "Psychiatric comorbidities",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "psychiatric illness severity",
+  "canonical": "Psychiatric illness severity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "QT‑prolonging medication use",
+  "canonical": "QT-prolonging medication use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Qualification",
+  "canonical": "Qualification",
+  "mesh": "Education",
+  "mesh_id": "D004493"
+ },
+ {
+  "label": "Race and ethnicity",
+  "canonical": "Race and ethnicity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "race/ethnicity",
+  "canonical": "Race and ethnicity",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Recent life stressors",
+  "canonical": "Recent life stressors",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "recent medication use",
+  "canonical": "Medication use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Renal dysfunction",
+  "canonical": "Renal dysfunction",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Self-rated health",
+  "canonical": "Self-rated health",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "self-reported health",
+  "canonical": "Self-reported health",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Sepsis",
+  "canonical": "Sepsis",
+  "mesh": "Sepsis",
+  "mesh_id": "D018805"
+ },
+ {
+  "label": "Sepsis severity biomarkers (e.g., lactate, SOFA score)",
+  "canonical": "Sepsis severity biomarkers",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Septic shock",
+  "canonical": "Septic shock",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Serum iron",
+  "canonical": "Serum iron",
+  "mesh": "Iron",
+  "mesh_id": "D007501"
+ },
+ {
+  "label": "Sex",
+  "canonical": "Sex",
+  "mesh": "Sex",
+  "mesh_id": "D012723"
+ },
+ {
+  "label": "Sleep deprivation",
+  "canonical": "Sleep deprivation",
+  "mesh": "Sleep Deprivation",
+  "mesh_id": "D012892"
+ },
+ {
+  "label": "Sleep duration",
+  "canonical": "Sleep duration",
+  "mesh": "Sleep Duration",
+  "mesh_id": "D000094362"
+ },
+ {
+  "label": "Smoking",
+  "canonical": "Smoking",
+  "mesh": "Smoking",
+  "mesh_id": "D012907"
+ },
+ {
+  "label": "smoking history",
+  "canonical": "Smoking status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Smoking status",
+  "canonical": "Smoking status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Social isolation",
+  "canonical": "Social isolation",
+  "mesh": "Social Isolation",
+  "mesh_id": "D012934"
+ },
+ {
+  "label": "socioeconomic index",
+  "canonical": "Socioeconomic status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Socioeconomic status",
+  "canonical": "Socioeconomic status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Socioeconomic status (income/urbanization)",
+  "canonical": "Socioeconomic status",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "SSRI antidepressants",
+  "canonical": "SSRI antidepressants",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Stroke",
+  "canonical": "Stroke",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Sugar addition",
+  "canonical": "Sugar addiction",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Suicide or self-harm",
+  "canonical": "Suicide or self-harm",
+  "mesh": "Suicide",
+  "mesh_id": "D013405"
+ },
+ {
+  "label": "Systemic corticosteroid use",
+  "canonical": "Systemic corticosteroid use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Systolic blood pressure",
+  "canonical": "Systolic blood pressure",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Time since transplantation",
+  "canonical": "Time since transplantation",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "tobacco use",
+  "canonical": "Tobacco use",
+  "mesh": "Tobacco Use",
+  "mesh_id": "D064424"
+ },
+ {
+  "label": "Total dietary sugar",
+  "canonical": "Total dietary sugar",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Total number of drugs dispensed",
+  "canonical": "Total number of drugs dispensed",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Ultra-processed food proportion (%UPF)",
+  "canonical": "Ultra-processed food proportion",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "underlying pain condition",
+  "canonical": "Underlying pain condition",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "UPF proportion",
+  "canonical": "Ultraprocessed food proportion",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Use of anticoagulants",
+  "canonical": "Use of anticoagulants",
+  "mesh": "Anticoagulants",
+  "mesh_id": "D000925"
+ },
+ {
+  "label": "Use of antidepressants",
+  "canonical": "Use of antidepressants",
+  "mesh": "Antidepressive Agents",
+  "mesh_id": "D000928"
+ },
+ {
+  "label": "Use of sedatives",
+  "canonical": "Use of sedatives",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Use of selected psychotropic medications",
+  "canonical": "Use of selected psychotropic medications",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Use of statins",
+  "canonical": "Use of statins",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "usual gait speed",
+  "canonical": "Usual gait speed",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Varenicline use",
+  "canonical": "Varenicline use",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Vitamin D deficiency",
+  "canonical": "Vitamin D deficiency",
+  "mesh": "Vitamin D Deficiency",
+  "mesh_id": "D014808"
+ },
+ {
+  "label": "Vitamin K antagonists",
+  "canonical": "Vitamin K antagonists",
+  "mesh": null,
+  "mesh_id": null
+ },
+ {
+  "label": "Years since cancer diagnosis",
+  "canonical": "Years since cancer diagnosis",
+  "mesh": null,
+  "mesh_id": null
+ }
+]

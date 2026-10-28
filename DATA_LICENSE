@@ -1,0 +1,11 @@
+The OpenDAG dataset (everything under data/) is licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt the data for any purpose, provided you give
+appropriate credit to "OpenDAG contributors" and cite the original papers.
+
+The dataset contains only bibliographic metadata, causal diagrams, and short
+supporting phrases (max ~20 words) from open-access articles. It does not
+contain article full text. Copyright in the original articles remains with
+their authors/publishers under their stated open-access licences.

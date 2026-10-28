@@ -1,0 +1,35 @@
+dag {
+sepsis [exposure]
+ohca [outcome]
+age [adjusted]
+sex [adjusted]
+charlson [adjusted]
+cardiovascular_disease [adjusted]
+diabetes [adjusted]
+infection_source [adjusted]
+septic_shock [adjusted]
+renal_dysfunction
+prior_arrhythmia_heart_failure_severity
+socioeconomic_status_income_urbanization
+sepsis -> ohca
+age -> sepsis
+age -> ohca
+sex -> sepsis
+sex -> ohca
+charlson -> sepsis
+charlson -> ohca
+cardiovascular_disease -> sepsis
+cardiovascular_disease -> ohca
+diabetes -> sepsis
+diabetes -> ohca
+infection_source -> sepsis
+infection_source -> ohca
+septic_shock -> sepsis
+septic_shock -> ohca
+renal_dysfunction -> sepsis
+renal_dysfunction -> ohca
+prior_arrhythmia_heart_failure_severity -> sepsis
+prior_arrhythmia_heart_failure_severity -> ohca
+socioeconomic_status_income_urbanization -> sepsis
+socioeconomic_status_income_urbanization -> ohca
+}
