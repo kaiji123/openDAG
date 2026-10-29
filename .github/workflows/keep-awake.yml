@@ -1,0 +1,16 @@
+# Render's free plan sleeps after 15 minutes without traffic, and waking takes ~1 minute.
+# Pinging the health check every 10 minutes keeps the live demo awake.
+name: Keep live demo awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping health check
+        run: curl -fsS --retry 3 --retry-delay 20 --max-time 120 https://opendag.onrender.com/api/health
