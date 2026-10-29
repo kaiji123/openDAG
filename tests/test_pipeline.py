@@ -46,6 +46,11 @@ def tmp_db(tmp_path, monkeypatch):
     def no_network(*a, **k):
         raise AssertionError("test tried to call the real model API")
     monkeypatch.setattr("app.llm._call", no_network)
+    monkeypatch.setattr("app.config.TAVILY_API_KEY", "")   # no real Tavily usage lookups either
+    monkeypatch.setattr("app.budget.SPENT_BEFORE_LEDGER_USD", 0.0)
+    monkeypatch.setattr("app.budget.BUDGET_USD", 100.0)
+    monkeypatch.setattr("app.budget.REDIS_URL", "")       # tests use the local ledger, never a real one
+    monkeypatch.setattr("app.budget.REQUIRE_DURABLE", False)
     yield
 
 
@@ -100,6 +105,7 @@ def _mock_pipeline(monkeypatch, calls):
     monkeypatch.setattr(pipeline, "critique", lambda ex, a: (calls.append("c") or Critique.model_validate(CRITIQUE), {}))
     monkeypatch.setattr("app.evidence.search", lambda q, max_results=5: [{"title": "t", "url": "https://example.org"}])
     monkeypatch.setattr("app.canonical.resolve_record", lambda rec: 0)  # no real model calls in tests
+    monkeypatch.setattr("app.verify.verify", lambda crit, text: (crit, [], {}))
 
 
 def test_full_pipeline_review_and_approve(monkeypatch):
@@ -264,3 +270,182 @@ def test_ask_endpoint_rate_limit(monkeypatch):
     client = TestClient(main.app)
     assert client.post("/api/ask", json={"question": "hello there"}).status_code == 200
     assert client.post("/api/ask", json={"question": "hello again"}).status_code == 429
+
+
+def test_autoreview_labels_record_and_human_can_rereview(monkeypatch):
+    from fastapi.testclient import TestClient
+    from app import autoreview, main
+    calls = []
+    _mock_pipeline(monkeypatch, calls)
+    rec = pipeline.run("PMC1")
+    monkeypatch.setattr(autoreview, "chat_json", lambda *a, **k: ({"decisions": [
+        {"label": "Frailty", "decision": "accept", "reason": "Common cause."},
+        {"label": "Smoking", "decision": "reject", "reason": "Already a proxy."}]}, {}))
+    rec = autoreview.review_and_approve(rec)
+    assert rec["status"] == "approved" and rec["review"]["by"] == "ai"
+    notes = {m["label"]: m["review_note"] for m in rec["critique"]["missing_confounders"]}
+    assert notes == {"Frailty": "Common cause.", "Smoking": "Already a proxy."}
+    assert "smoking" not in {n["id"] for n in rec["dag"]["nodes"]}
+
+    client = TestClient(main.app)   # a person edits the AI-reviewed record, then approves it
+    body = {"nodes": rec["dag"]["nodes"], "edges": rec["dag"]["edges"], "suggestion_status": {"Frailty": "rejected", "Smoking": "rejected"}}
+    assert client.put(f"/api/records/{rec['id']}", json=body).json()["status"] == "draft"
+    approved = client.post(f"/api/records/{rec['id']}/approve").json()
+    assert approved["review"]["by"] == "human"
+    assert client.put(f"/api/records/{rec['id']}", json=body).status_code == 409   # human-approved: locked
+
+
+def _usage(p, c):
+    from types import SimpleNamespace
+    return SimpleNamespace(prompt_tokens=p, completion_tokens=c)
+
+
+def test_budget_records_real_usage_and_blocks_at_limit(monkeypatch):
+    from app import budget
+    monkeypatch.setattr(budget, "BUDGET_USD", 1.0)
+    model = "nvidia/nemotron-3-super-120b-a12b"          # $0.30 in / $0.90 out per million
+    budget.record_llm(model, _usage(1_000_000, 500_000), 1000, [])
+    assert abs(budget.spent() - 0.75) < 1e-9             # 0.30 + 0.45, from the reported tokens
+    budget.guard_llm(model, [{"content": "x" * 300}], 100)   # tiny call still fits
+    try:
+        budget.guard_llm(model, [{"content": "x"}], 300_000)  # worst case 0.27 would pass $1
+        assert False, "should have refused"
+    except budget.BudgetExceeded as e:
+        assert "budget" in str(e).lower()
+
+
+def test_unknown_model_is_priced_high(monkeypatch):
+    from app import budget
+    assert budget.price("some/typo-model") == budget.UNKNOWN_MODEL_PRICE
+    assert budget.UNKNOWN_MODEL_PRICE[1] > budget.price("nvidia/nemotron-3-super-120b-a12b")[1]
+
+
+def test_budget_fails_closed(monkeypatch):
+    from app import budget
+    monkeypatch.setattr(budget, "REQUIRE_DURABLE", True)   # e.g. on Render without the durable ledger
+    try:
+        budget.check(0.0)
+        assert False
+    except budget.BudgetExceeded:
+        pass
+    monkeypatch.setattr(budget, "REQUIRE_DURABLE", False)
+    monkeypatch.setattr(budget, "REDIS_URL", "https://example.invalid")
+    monkeypatch.setattr(budget, "REDIS_TOKEN", "t")
+    def boom(cmd):
+        raise ConnectionError("down")
+    monkeypatch.setattr(budget, "_redis", boom)             # ledger unreachable: refuse, don't guess
+    try:
+        budget.check(0.0)
+        assert False
+    except budget.BudgetExceeded as e:
+        assert "unavailable" in str(e)
+
+
+def test_durable_ledger_and_real_tavily_spend(monkeypatch):
+    from app import budget, config
+    store = {"v": 0.0}
+    def fake_redis(cmd):
+        if cmd[0] == "INCRBYFLOAT":
+            store["v"] += float(cmd[2]); return str(store["v"])
+        return str(store["v"])
+    monkeypatch.setattr(budget, "REDIS_URL", "https://example.invalid")
+    monkeypatch.setattr(budget, "REDIS_TOKEN", "t")
+    monkeypatch.setattr(budget, "_redis", fake_redis)
+    budget.record_llm("nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", _usage(1_000_000, 1_000_000), 10, [])
+    assert abs(store["v"] - 0.30) < 1e-9                   # 0.06 + 0.24 went to the durable ledger
+    monkeypatch.setattr(config, "TAVILY_API_KEY", "k")
+    class R:
+        status_code = 200
+        def raise_for_status(self): pass
+        def json(self): return {"account": {"paygo_usage": 250}}   # 250 paid searches this cycle
+    monkeypatch.setattr(budget.httpx, "get", lambda *a, **k: R())
+    budget._tavily_cache.update(usd=None, at=0.0)
+    assert abs(budget.spent() - (0.30 + 250 * 0.008)) < 1e-9
+
+
+def test_submit_refused_when_budget_used_up(monkeypatch):
+    from fastapi.testclient import TestClient
+    from app import budget, main, pipeline as pl
+    monkeypatch.setattr(pl, "lookup_cached", lambda i: None)
+    monkeypatch.setattr(budget, "BUDGET_USD", 0.05)
+    r = TestClient(main.app).post("/api/submit", json={"identifier": "PMC1"})
+    assert r.status_code == 503 and "budget" in r.json()["detail"].lower()
+    st = TestClient(main.app).get("/api/budget").json()
+    assert st["budget_usd"] == 0.05 and st["ledger"] == "local"
+
+
+def test_verify_moves_confirmed_suggestions_into_dag(monkeypatch):
+    from app import verify
+    from app.schemas import Critique, Node
+    text = "Model 2 was adjusted for age, sex, ethnicity, education, household income and smoking status."
+    crit = Critique.model_validate({"missing_confounders": [{"label": "Education level"}, {"label": "NSAID use"},
+                                                            {"label": "Frailty"}]})
+    monkeypatch.setattr(verify, "chat_json", lambda *a, **k: ({"checks": [
+        {"label": "Education level", "adjusted": True, "quote": "adjusted for age, sex, ethnicity, education, household income"},
+        {"label": "NSAID use", "adjusted": False, "quote": ""},
+        {"label": "Frailty", "adjusted": True, "quote": "adjusted for frailty using the electronic index"},  # invented quote
+    ]}, {}))
+    kept, found, _ = verify.verify(crit, text)
+    assert [m.label for m in kept.missing_confounders] == ["NSAID use", "Frailty"]   # invented quote is ignored
+    assert found == [{"label": "Education level", "quote": "adjusted for age, sex, ethnicity, education, household income"}]
+    nodes = [Node(id="e", label="E", role="exposure"), Node(id="o", label="O", role="outcome")]
+    nodes, edges = verify.add_confirmed(nodes, [], found)
+    ed = next(n for n in nodes if n.id == "education_level")
+    assert ed.adjusted and not ed.ai_suggested and "education" in ed.snippet
+    assert {(e.source, e.target) for e in edges} == {("education_level", "e"), ("education_level", "o")}
+
+
+def test_llm_retries_when_upstream_is_overloaded(monkeypatch):
+    import httpx as _httpx
+    from openai import InternalServerError
+    from app import llm
+    calls = []
+    class Resp:
+        usage = None
+        class _M: content = '{"ok": true}'
+        choices = [type("C", (), {"message": _M})()]
+    def create(**kw):
+        calls.append(1)
+        if len(calls) < 3:
+            req = _httpx.Request("POST", "https://x"); raise InternalServerError("overloaded", response=_httpx.Response(529, request=req), body=None)
+        return Resp()
+    fake = type("Cl", (), {"chat": type("Ch", (), {"completions": type("Co", (), {"create": staticmethod(create)})})})
+    monkeypatch.setattr(llm, "client", lambda: fake)
+    monkeypatch.setattr(llm, "RETRY_WAITS", (0, 0))
+    assert llm._create(model="m", messages=[{"content": "hi"}], max_tokens=5) is not None and len(calls) == 3
+
+
+def test_verify_needs_an_adjustment_sentence():
+    from app import verify
+    text = "Participants reported regular physical activity at baseline. " + "x " * 200 + \
+           "Model 2 was adjusted for ethnicity, education and household income."
+    assert not verify.shows_adjustment("reported regular physical activity at baseline", text)   # passing mention
+    assert verify.shows_adjustment("Model 2 was adjusted for ethnicity, education", text)
+
+
+def test_settings_ignore_inline_comments(monkeypatch):
+    from app import config
+    monkeypatch.setenv("ADMIN_TOKEN", "                  # optional: bypasses rate limits")
+    assert config._str("ADMIN_TOKEN") == ""      # a comment must never become the admin token
+    monkeypatch.setenv("X_SETTING", "abc   # note")
+    assert config._str("X_SETTING") == "abc"
+    monkeypatch.setenv("X_URL", "https://h.example/a#frag")   # a '#' without a space before it is kept
+    assert config._str("X_URL") == "https://h.example/a#frag"
+
+
+def test_verify_falls_back_to_the_papers_own_sentence(monkeypatch):
+    from app import verify
+    from app.schemas import Critique
+    text = ("We recruited adults. Model 2 was adjusted for ethnicity, education, household income and regular use of "
+            "non-aspirin non-steroidal anti-inflammatory drugs [NSAIDs]. Renal function was measured at baseline.")
+    crit = Critique.model_validate({"missing_confounders": [{"label": "Education level"}, {"label": "NSAID use"},
+                                                            {"label": "Renal function"}]})
+    monkeypatch.setattr(verify, "chat_json", lambda *a, **k: ({"checks": [
+        {"label": "Education level", "adjusted": True, "quote": "education"},          # too short to check
+        {"label": "NSAID use", "adjusted": True, "quote": "use of NSAID medicines"},     # paraphrased
+        {"label": "Renal function", "adjusted": True, "quote": "renal function"},        # measured, not adjusted
+    ]}, {}))
+    kept, found, _ = verify.verify(crit, text)
+    assert {f["label"] for f in found} == {"Education level", "NSAID use"}
+    assert all(f["quote"].startswith("Model 2 was adjusted") for f in found)
+    assert [m.label for m in kept.missing_confounders] == ["Renal function"]

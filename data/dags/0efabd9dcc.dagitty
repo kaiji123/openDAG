@@ -1,0 +1,41 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age [adjusted]
+sex [adjusted]
+ckd [adjusted]
+diabetes [adjusted]
+cad [adjusted]
+depression [adjusted]
+obesity
+occupational_manual_labor
+systemic_corticosteroid_use
+current_smoking
+low_socioeconomic_status
+hiv_infection
+exposure -> outcome
+age -> exposure
+age -> outcome
+sex -> exposure
+sex -> outcome
+ckd -> exposure
+ckd -> outcome
+diabetes -> exposure
+diabetes -> outcome
+cad -> exposure
+cad -> outcome
+depression -> exposure
+depression -> outcome
+obesity -> exposure
+obesity -> outcome
+occupational_manual_labor -> exposure
+occupational_manual_labor -> outcome
+systemic_corticosteroid_use -> exposure
+systemic_corticosteroid_use -> outcome
+current_smoking -> exposure
+current_smoking -> outcome
+low_socioeconomic_status -> exposure
+low_socioeconomic_status -> outcome
+hiv_infection -> exposure
+hiv_infection -> outcome
+}

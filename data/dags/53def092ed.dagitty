@@ -1,0 +1,46 @@
+dag {
+ppi_use [exposure]
+incident_ckd [outcome]
+age [adjusted]
+sex [adjusted]
+hypertension [adjusted]
+diabetes [adjusted]
+obesity [adjusted]
+smoking [adjusted]
+antihypertensive_treatment [adjusted]
+nsaiids [adjusted]
+high_dose_ppi [adjusted]
+baseline_egfr
+socioeconomic_status
+gi_indication_for_ppi
+alcohol_consumption
+other_nephrotoxic_drugs
+ppi_use -> incident_ckd
+age -> ppi_use
+age -> incident_ckd
+sex -> ppi_use
+sex -> incident_ckd
+hypertension -> ppi_use
+hypertension -> incident_ckd
+diabetes -> ppi_use
+diabetes -> incident_ckd
+obesity -> ppi_use
+obesity -> incident_ckd
+smoking -> ppi_use
+smoking -> incident_ckd
+antihypertensive_treatment -> ppi_use
+antihypertensive_treatment -> incident_ckd
+nsaiids -> ppi_use
+nsaiids -> incident_ckd
+high_dose_ppi -> incident_ckd
+baseline_egfr -> ppi_use
+baseline_egfr -> incident_ckd
+socioeconomic_status -> ppi_use
+socioeconomic_status -> incident_ckd
+gi_indication_for_ppi -> ppi_use
+gi_indication_for_ppi -> incident_ckd
+alcohol_consumption -> ppi_use
+alcohol_consumption -> incident_ckd
+other_nephrotoxic_drugs -> ppi_use
+other_nephrotoxic_drugs -> incident_ckd
+}

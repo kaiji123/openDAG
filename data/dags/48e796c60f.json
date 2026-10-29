@@ -1,0 +1,452 @@
+{
+  "id": "48e796c60f",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:16:48Z",
+  "approved_at": "2026-10-28T21:24:52Z",
+  "paper": {
+    "title": "Long-term exposure to particulate air pollution and black carbon in relation to natural and cause-specific mortality: a multicohort study in Sweden",
+    "authors": "Nilsson Sommar J, Andersson EM, Andersson N, Sallsten G, Stockfelt L, Ljungman PL, Segersson D, Eneroth K, Gidhagen L, Molnar P, Wennberg P, Rosengren A, Rizzuto D, Leander K, Lager A, Magnusson PK, Johansson C, Barregard L, Bellander T, Pershagen G, Forsberg B.",
+    "year": "2021",
+    "journal": "BMJ open",
+    "doi": "10.1136/bmjopen-2020-046040",
+    "pmcid": "PMC8438896",
+    "pmid": "34497075",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Swedish adults from three cities (Gothenburg, Stockholm, Ume\u00e5) followed from 1990 to 2011",
+    "sample_size": "68,679",
+    "follow_up": "up to 1 year",
+    "exposure": {
+      "name": "PM10",
+      "definition": "annual mean PM10 concentration at participant's address estimated using dispersion models"
+    },
+    "outcome": {
+      "name": "natural mortality",
+      "definition": "all-cause mortality determined from the national cause of death register"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.17",
+      "ci": "1.06-1.31",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "PM10 exposure",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "annual mean concentrations of PM with aerodynamic diameter \u226410 \u00b5m (PM10)",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "natural mortality",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "cause-specific mortality data were obtained from the national cause of death registry",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "cohort-specific models were adjusted for sex",
+        "ai_suggested": false
+      },
+      {
+        "id": "calendar_year",
+        "label": "calendar year",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for calendar year",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking_status",
+        "label": "smoking status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for smoking status (current, former, never)",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_consumption",
+        "label": "alcohol consumption",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for alcohol consumption",
+        "ai_suggested": false
+      },
+      {
+        "id": "physical_activity",
+        "label": "physical activity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for physical activity",
+        "ai_suggested": false
+      },
+      {
+        "id": "marital_status",
+        "label": "marital status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status",
+        "ai_suggested": false
+      },
+      {
+        "id": "socioeconomic_index",
+        "label": "socioeconomic index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for socioeconomic index by occupation",
+        "ai_suggested": false
+      },
+      {
+        "id": "education_level",
+        "label": "education level",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for education level",
+        "ai_suggested": false
+      },
+      {
+        "id": "area_socioeconomic_status",
+        "label": "area socioeconomic status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for area-level socioeconomic status",
+        "ai_suggested": false
+      },
+      {
+        "id": "bmi",
+        "label": "BMI",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "calendar_year",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "calendar_year",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_consumption",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_consumption",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "marital_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "marital_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "socioeconomic_index",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "socioeconomic_index",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "education_level",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "education_level",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "area_socioeconomic_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "area_socioeconomic_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "bmi",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nsex [adjusted]\ncalendar_year [adjusted]\nsmoking_status [adjusted]\nalcohol_consumption [adjusted]\nphysical_activity [adjusted]\nmarital_status [adjusted]\nsocioeconomic_index [adjusted]\neducation_level [adjusted]\narea_socioeconomic_status [adjusted]\nbmi\nexposure -> outcome\nsex -> exposure\nsex -> outcome\ncalendar_year -> exposure\ncalendar_year -> outcome\nsmoking_status -> exposure\nsmoking_status -> outcome\nalcohol_consumption -> exposure\nalcohol_consumption -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\nmarital_status -> exposure\nmarital_status -> outcome\nsocioeconomic_index -> exposure\nsocioeconomic_index -> outcome\neducation_level -> exposure\neducation_level -> outcome\narea_socioeconomic_status -> exposure\narea_socioeconomic_status -> outcome\nbmi -> exposure\nbmi -> outcome\n}",
+  "open_backdoors": [
+    "BMI"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "BMI",
+        "rationale": "Higher body mass index increases mortality risk and is associated with living in more deprived areas that tend to have higher PM10 levels.",
+        "edges_to_add": [
+          {
+            "source": "BMI",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "BMI",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Confounding by ill health in the observed association between BMI and mortality: evidence from the HUNT Study using offspring BMI as an instrument",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6005033"
+          },
+          {
+            "title": "expert reaction to study looking at BMI and all-cause mortality | Science Media Centre",
+            "url": "https://www.sciencemediacentre.org/expert-reaction-to-study-looking-at-bmi-and-all-cause-mortality"
+          },
+          {
+            "title": "Estimating Causal Effects of Particulate Matter Regulation on ...",
+            "url": "https://njsanders.human.cornell.edu/Particulates_and_Mortality_Epidemiology.pdf"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "BMI influences residential area choice (higher BMI linked to deprived areas with higher PM10) and independently predicts mortality, and it is not adjusted for nor caused by PM10."
+      },
+      {
+        "label": "Diabetes status",
+        "rationale": "Diabetes elevates mortality risk and individuals with diabetes may reside in neighborhoods with greater traffic-related pollution.",
+        "edges_to_add": [
+          {
+            "source": "Diabetes status",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Diabetes status",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Exposure to particulate matters and risk of diabetes-related ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12981974"
+          },
+          {
+            "title": "Diabetes status and susceptibility to the effects of PM>2.5> ...",
+            "url": "https://profiles.wustl.edu/en/publications/diabetes-status-and-susceptibility-to-the-effects-of-pmsub25sub-e"
+          },
+          {
+            "title": "Long-term particulate matter exposure and type 2 diabetes ...",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0147651324002884"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "PM10 exposure can increase diabetes risk, so diabetes may lie on the causal pathway from exposure to mortality rather than being a pure confounder."
+      },
+      {
+        "label": "Baseline CVD",
+        "rationale": "Prevalent cardiovascular disease raises mortality and may influence residential choice (e.g., moving to less polluted areas after diagnosis).",
+        "edges_to_add": [
+          {
+            "source": "Baseline CVD",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Baseline CVD",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Particulate Matter Pollution and Cardiovascular Disease | Cardiology Grand Rounds",
+            "url": "https://www.youtube.com/watch?v=GDfB-KdYc7g"
+          },
+          {
+            "title": "Long-term exposure to PM2.5 and cardiovascular disease ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8555193"
+          },
+          {
+            "title": "Hourly peak PM2.5 concentration associated with ...",
+            "url": "https://meadowscenter.org/wp-content/uploads/2022/04/16871261.pdf"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Prior PM10 exposure contributes to cardiovascular disease, making baseline CVD likely a mediator/consequence of exposure rather than a pure confounder."
+      },
+      {
+        "label": "Occupational exposure",
+        "rationale": "Job\u2011related airborne pollutant exposure adds to personal PM10 exposure and occupation is linked to mortality risk via socioeconomic and lifestyle factors.",
+        "edges_to_add": [
+          {
+            "source": "Occupational exposure",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Occupational exposure",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Long-Term Ambient Multipollutant Exposures and Mortality",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3040395"
+          },
+          {
+            "title": "Short-term exposure to particulate matter (PM10 and PM2.5), nitrogen dioxide (NO2), and ozone (O3) and all-cause and cause-specific mortality: Systematic review and meta-analysis",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0160412020318316"
+          },
+          {
+            "title": "Long-term exposure to NO2 and PM10 and all-cause...",
+            "url": "https://www.ovid.com/00022707-201303000-00006"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Occupational exposure adds to personal PM10 dose and is not a cause of ambient PM10 concentration, thus it does not satisfy the common\u2011cause criterion."
+      },
+      {
+        "label": "Dietary intake",
+        "rationale": "Poor diet increases mortality and correlates with socioeconomic status and area\u2011level pollution, potentially confounding the PM10\u2013mortality association.",
+        "edges_to_add": [
+          {
+            "source": "Dietary intake",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Dietary intake",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "The potential role of dietary patterns in modifying the association between ambient PM2.5 exposure and mortality in elderly Hong Kong Chinese",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13224638"
+          },
+          {
+            "title": "Ambient Particulate Matter Air Pollution Exposure and ...",
+            "url": "https://escholarship.org/content/qt3t30d5h7/qt3t30d5h7.pdf"
+          },
+          {
+            "title": "Estimating Causal Effects of Particulate Matter Regulation on ...",
+            "url": "https://njsanders.human.cornell.edu/Particulates_and_Mortality_Epidemiology.pdf"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Diet does not cause ambient PM10 levels; any association with PM10 is mediated through socioeconomic status, which is already adjusted for."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "measurement error",
+        "explanation": "PM10 estimates from dispersion models may not capture indoor infiltration or personal activity patterns, leading to nondifferential misclassification of exposure and bias toward the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "healthy user effect",
+        "explanation": "Residents of lower\u2011pollution areas may also engage in healthier behaviors (e.g., better diet, preventive care) not fully captured by the adjusted lifestyle covariates, potentially inflating the observed association.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "Loss to follow\u2011up due to migration out of the three cities or emigration may be related to both socioeconomic status (and thus exposure) and mortality risk, threatening internal validity.",
+        "severity": "low"
+      },
+      {
+        "type": "confounding by unmeasured comorbidities",
+        "explanation": "Baseline diseases such as diabetes, cardiovascular disease, or obesity were not included as covariates and could confound the PM10\u2013mortality relation despite adjustment for smoking, alcohol, physical activity, and SES.",
+        "severity": "medium"
+      },
+      {
+        "type": "lack of adjustment for green space",
+        "explanation": "Access to parks or vegetation can reduce mortality and may be inversely correlated with traffic\u2011related PM10, leaving a potential source of residual confounding.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study adjusted for a broad set of demographic, socioeconomic, and behavioral confounders, making the observed HR of 1.17 per 10 \u00b5g/m\u00b3 PM10 plausible. However, residual confounding by unmeasured health conditions (e.g., BMI, diabetes) and measurement error in exposure estimates could bias the effect toward or away from the null. Overall, the evidence supports a causal interpretation but should be interpreted with moderate caution.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

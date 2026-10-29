@@ -1,0 +1,80 @@
+dag {
+ppi [exposure]
+mortality [outcome]
+age [adjusted]
+sex [adjusted]
+bmi [adjusted]
+egfr [adjusted]
+proteinuria [adjusted]
+time_since_transplant [adjusted]
+deceased_donor [adjusted]
+primary_renal_disease [adjusted]
+donor_age [adjusted]
+hla_mismatches [adjusted]
+induction_therapy [adjusted]
+alcohol_use [adjusted]
+smoking [adjusted]
+antihypertensive [adjusted]
+platelet_inhibitors [adjusted]
+vitamin_k_antagonists [adjusted]
+cnis [adjusted]
+diabetes [adjusted]
+cardiovascular_disease [adjusted]
+plasma_magnesium [adjusted]
+serum_iron [adjusted]
+peptic_ulcer
+frailty
+nsaid_use
+albumin
+ppi -> mortality
+age -> ppi
+age -> mortality
+sex -> ppi
+sex -> mortality
+bmi -> ppi
+bmi -> mortality
+egfr -> ppi
+egfr -> mortality
+proteinuria -> ppi
+proteinuria -> mortality
+time_since_transplant -> ppi
+time_since_transplant -> mortality
+deceased_donor -> ppi
+deceased_donor -> mortality
+primary_renal_disease -> ppi
+primary_renal_disease -> mortality
+donor_age -> ppi
+donor_age -> mortality
+hla_mismatches -> ppi
+hla_mismatches -> mortality
+induction_therapy -> ppi
+induction_therapy -> mortality
+alcohol_use -> ppi
+alcohol_use -> mortality
+smoking -> ppi
+smoking -> mortality
+antihypertensive -> ppi
+antihypertensive -> mortality
+platelet_inhibitors -> ppi
+platelet_inhibitors -> mortality
+vitamin_k_antagonists -> ppi
+vitamin_k_antagonists -> mortality
+cnis -> ppi
+cnis -> mortality
+diabetes -> ppi
+diabetes -> mortality
+cardiovascular_disease -> ppi
+cardiovascular_disease -> mortality
+plasma_magnesium -> ppi
+plasma_magnesium -> mortality
+serum_iron -> ppi
+serum_iron -> mortality
+peptic_ulcer -> ppi
+peptic_ulcer -> mortality
+frailty -> ppi
+frailty -> mortality
+nsaid_use -> ppi
+nsaid_use -> mortality
+albumin -> ppi
+albumin -> mortality
+}

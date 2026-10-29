@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse, PlainTextResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import ask, canonical, config, db, export, pipeline
+from . import ask, budget, canonical, config, db, export, pipeline
 from .fetch import FetchError
 
 @asynccontextmanager
@@ -74,7 +74,7 @@ def _worker(job_id: str, identifier: str) -> None:
         try:
             rec = pipeline.run(identifier, progress=lambda s: job.update(step=s))
             job.update(status="done", step="done", record_id=rec["id"])
-        except FetchError as e:
+        except (FetchError, budget.BudgetExceeded) as e:
             job.update(status="error", error=str(e))
         except Exception as e:  # surface a readable message, keep the server alive
             job.update(status="error", error=f"Pipeline failed: {e}")
@@ -98,6 +98,10 @@ def submit(body: Submit, request: Request):
     if cached:
         return {"record_id": cached["id"], "cached": True}
     check_limits(request)
+    try:
+        budget.check(0.10)  # a paper's worst case is a few cents; stop well before the budget runs out
+    except budget.BudgetExceeded as e:
+        raise HTTPException(503, str(e))
     db.log_run(client_ip(request))
     job_id = uuid.uuid4().hex[:12]
     JOBS[job_id] = {"status": "running", "step": "queued", "record_id": None, "error": None}
@@ -129,7 +133,9 @@ def get_record(rec_id: str):
 def review(rec_id: str, body: Review):
     rec = _record(rec_id)
     if rec["status"] == "approved":
-        raise HTTPException(409, "Approved records are locked.")
+        if (rec.get("review") or {}).get("by") != "ai":
+            raise HTTPException(409, "Approved records are locked.")
+        rec["status"] = "draft"  # a person is re-reviewing an AI-reviewed record
     bad = {v for v in body.suggestion_status.values()} - {"accepted", "rejected", "suggested"}
     if bad:
         raise HTTPException(400, f"Invalid status: {bad}")
@@ -142,10 +148,10 @@ def review(rec_id: str, body: Review):
 @app.post("/api/records/{rec_id}/approve")
 def approve(rec_id: str):
     rec = _record(rec_id)
-    if rec["status"] == "approved":
+    if rec["status"] == "approved" and (rec.get("review") or {}).get("by") != "ai":
         return rec
     try:
-        return pipeline.approve(rec)
+        return pipeline.approve(rec, reviewed_by="human")
     except ValueError as e:
         raise HTTPException(400, str(e))
 
@@ -191,6 +197,8 @@ def ask_dataset(body: Question, request: Request):
             raise HTTPException(429, f"Limit reached: {config.ASK_PER_HOUR} questions per hour.")
     try:
         result, cached = ask.answer(q, records)
+    except budget.BudgetExceeded as e:
+        raise HTTPException(503, str(e))
     except Exception as e:
         raise HTTPException(502, f"The model couldn't answer right now ({e}). Please try again.")
     if not cached:
@@ -213,6 +221,12 @@ def dataset_dagitty():
         parts.append(f"// {r['id']}: {r['paper'].get('title','')} (doi:{r['paper'].get('doi')})\n{r['dagitty']}")
     return PlainTextResponse("\n\n".join(parts) + "\n",
                              headers={"Content-Disposition": "attachment; filename=opendag.dagitty.txt"})
+
+
+@app.get("/api/budget")
+def budget_status():
+    """How much of the AI budget is used (Nemotron from the ledger, Tavily from Tavily's own usage API)."""
+    return budget.status()
 
 
 @app.get("/api/health")

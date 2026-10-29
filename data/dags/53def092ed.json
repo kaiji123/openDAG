@@ -1,0 +1,523 @@
+{
+  "id": "53def092ed",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:08:24Z",
+  "approved_at": "2026-10-28T21:26:21Z",
+  "paper": {
+    "title": "Duration and dosing of Proton Pump Inhibitors associated with high incidence of chronic kidney disease in population-based cohort",
+    "authors": "Rodr\u00edguez-Poncelas A, Barcel\u00f3 MA, Saez M, Coll-de-Tuero G.",
+    "year": "2018",
+    "journal": "PloS one",
+    "doi": "10.1371/journal.pone.0204231",
+    "pmcid": "PMC6192564",
+    "pmid": "30332411",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "people aged 15 years or over in the Catalan public healthcare system (La Selva Interior region, Spain) between 2005 and 2012",
+    "sample_size": "46,541",
+    "follow_up": "up to 7 years (2005\u20132012)",
+    "exposure": {
+      "name": "PPI use",
+      "definition": "prescription of proton pump inhibitors recorded in medical records, categorized by dose and duration"
+    },
+    "outcome": {
+      "name": "incident CKD",
+      "definition": "eGFR < 60 ml/min/1.73 m\u00b2 and/or UACR \u2265 30 mg/g in two or more determinations at least 3 months apart"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.18",
+      "ci": "1.04-1.51",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "ppi_use",
+        "label": "PPI use",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "PPI use was measured during the follow-up by recording the prescription",
+        "ai_suggested": false
+      },
+      {
+        "id": "incident_ckd",
+        "label": "Incident CKD",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "Incident CKD was defined as an estimated glomerular filtration rate < 60 ml/min/1.73 m\u00b2 and/or urinary albumin level to creatinine \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "We categorized the age variable (0 being under 70 years\u2014reference category)",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex (0 male\u2014reference category -, 1 female)",
+        "ai_suggested": false
+      },
+      {
+        "id": "hypertension",
+        "label": "Hypertension",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "diagnosed hypertension or those receiving treatment with anti-hypertensive medication",
+        "ai_suggested": false
+      },
+      {
+        "id": "diabetes",
+        "label": "Diabetes",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "type II diabetes diagnosed by ADA criteria or treated with antidiabetic medication",
+        "ai_suggested": false
+      },
+      {
+        "id": "obesity",
+        "label": "Obesity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "body mass index > 30 kg/m\u00b2",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "smoking status (0 non-smoker\u2014reference category, 1 smoker, 2 former smoker)",
+        "ai_suggested": false
+      },
+      {
+        "id": "antihypertensive_treatment",
+        "label": "Antihypertensive treatment",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "use of antihypertensive medication",
+        "ai_suggested": false
+      },
+      {
+        "id": "nsaiids",
+        "label": "NSAIDs",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "use of NSAIDs",
+        "ai_suggested": false
+      },
+      {
+        "id": "high_dose_ppi",
+        "label": "High dose PPI",
+        "role": "effect_modifier",
+        "adjusted": true,
+        "snippet": "High doses of PPI increased the risk of incident CKD",
+        "ai_suggested": false
+      },
+      {
+        "id": "baseline_egfr",
+        "label": "Baseline eGFR",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "socioeconomic_status",
+        "label": "Socioeconomic status",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "gi_indication_for_ppi",
+        "label": "GI indication for PPI",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "alcohol_consumption",
+        "label": "Alcohol consumption",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "other_nephrotoxic_drugs",
+        "label": "Other nephrotoxic drugs",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "ppi_use",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "hypertension",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "hypertension",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "obesity",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "obesity",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "antihypertensive_treatment",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "antihypertensive_treatment",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "nsaiids",
+        "target": "ppi_use",
+        "ai_suggested": false
+      },
+      {
+        "source": "nsaiids",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "high_dose_ppi",
+        "target": "incident_ckd",
+        "ai_suggested": false
+      },
+      {
+        "source": "baseline_egfr",
+        "target": "ppi_use",
+        "ai_suggested": true
+      },
+      {
+        "source": "baseline_egfr",
+        "target": "incident_ckd",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "ppi_use",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "incident_ckd",
+        "ai_suggested": true
+      },
+      {
+        "source": "gi_indication_for_ppi",
+        "target": "ppi_use",
+        "ai_suggested": true
+      },
+      {
+        "source": "gi_indication_for_ppi",
+        "target": "incident_ckd",
+        "ai_suggested": true
+      },
+      {
+        "source": "alcohol_consumption",
+        "target": "ppi_use",
+        "ai_suggested": true
+      },
+      {
+        "source": "alcohol_consumption",
+        "target": "incident_ckd",
+        "ai_suggested": true
+      },
+      {
+        "source": "other_nephrotoxic_drugs",
+        "target": "ppi_use",
+        "ai_suggested": true
+      },
+      {
+        "source": "other_nephrotoxic_drugs",
+        "target": "incident_ckd",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nppi_use [exposure]\nincident_ckd [outcome]\nage [adjusted]\nsex [adjusted]\nhypertension [adjusted]\ndiabetes [adjusted]\nobesity [adjusted]\nsmoking [adjusted]\nantihypertensive_treatment [adjusted]\nnsaiids [adjusted]\nhigh_dose_ppi [adjusted]\nbaseline_egfr\nsocioeconomic_status\ngi_indication_for_ppi\nalcohol_consumption\nother_nephrotoxic_drugs\nppi_use -> incident_ckd\nage -> ppi_use\nage -> incident_ckd\nsex -> ppi_use\nsex -> incident_ckd\nhypertension -> ppi_use\nhypertension -> incident_ckd\ndiabetes -> ppi_use\ndiabetes -> incident_ckd\nobesity -> ppi_use\nobesity -> incident_ckd\nsmoking -> ppi_use\nsmoking -> incident_ckd\nantihypertensive_treatment -> ppi_use\nantihypertensive_treatment -> incident_ckd\nnsaiids -> ppi_use\nnsaiids -> incident_ckd\nhigh_dose_ppi -> incident_ckd\nbaseline_egfr -> ppi_use\nbaseline_egfr -> incident_ckd\nsocioeconomic_status -> ppi_use\nsocioeconomic_status -> incident_ckd\ngi_indication_for_ppi -> ppi_use\ngi_indication_for_ppi -> incident_ckd\nalcohol_consumption -> ppi_use\nalcohol_consumption -> incident_ckd\nother_nephrotoxic_drugs -> ppi_use\nother_nephrotoxic_drugs -> incident_ckd\n}",
+  "open_backdoors": [
+    "Baseline eGFR",
+    "Socioeconomic status",
+    "GI indication for PPI",
+    "Alcohol consumption",
+    "Other nephrotoxic drugs"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Baseline eGFR",
+        "rationale": "Lower baseline kidney function increases the likelihood of receiving a PPI (due to dose adjustments or comorbid illness) and strongly predicts incident CKD.",
+        "edges_to_add": [
+          {
+            "source": "Baseline eGFR",
+            "target": "ppi_use",
+            "ai_suggested": false
+          },
+          {
+            "source": "Baseline eGFR",
+            "target": "incident_ckd",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Kidney function decline associated with proton pump inhibitors: results from the ELSA-Brasil cohort | BMC Nephrology | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12882-023-03300-4"
+          },
+          {
+            "title": "The Assessment of the Association of Proton Pump Inhibitor Usage with Chronic Kidney Disease Progression through a Process Mining Approach",
+            "url": "https://www.mdpi.com/2227-9059/12/6/1362"
+          },
+          {
+            "title": "Proton pump inhibitors and chronic kidney disease risk: a comparative study with histamine-2 receptor antagonists",
+            "url": "https://www.nature.com/articles/s41598-023-48430-9"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Baseline eGFR influences clinicians' decisions to prescribe PPIs (e.g., dose adjustments) and independently predicts future CKD incidence, satisfying the confounding criteria."
+      },
+      {
+        "label": "Socioeconomic status",
+        "rationale": "Lower SES is associated with higher prevalence of conditions prompting PPI use and with greater risk of CKD through limited healthcare access and higher burden of risk factors.",
+        "edges_to_add": [
+          {
+            "source": "Socioeconomic status",
+            "target": "ppi_use",
+            "ai_suggested": false
+          },
+          {
+            "source": "Socioeconomic status",
+            "target": "incident_ckd",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton Pump Inhibitor Use and Risk of Chronic Kidney Disease",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4772730"
+          },
+          {
+            "title": "Proton Pump Inhibitors May Increase Risk for Kidney Disease",
+            "url": "https://www.medscape.com/viewarticle/857060"
+          },
+          {
+            "title": "Proton Pump Inhibitor Use and the Risk of Chronic Kidney Disease",
+            "url": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2481157"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Lower socioeconomic status increases likelihood of conditions prompting PPI use and independently raises CKD risk through limited healthcare access and higher burden of risk factors, making it a plausible common cause."
+      },
+      {
+        "label": "GI indication for PPI",
+        "rationale": "Conditions such as GERD or peptic ulcer disease lead to PPI prescribing and may independently increase CKD risk via inflammation or NSAID use.",
+        "edges_to_add": [
+          {
+            "source": "GI indication for PPI",
+            "target": "ppi_use",
+            "ai_suggested": false
+          },
+          {
+            "source": "GI indication for PPI",
+            "target": "incident_ckd",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton Pump Inhibitors and Kidney Disease\u2014GI Upset for the Nephrologist?",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2468024917300050"
+          },
+          {
+            "title": "Frontiers | Effect of proton pump inhibitors on the risk of chronic kidney disease: A propensity score-based overlap weight analysis using the United Kingdom Biobank",
+            "url": "https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2022.949699/full"
+          },
+          {
+            "title": "do proton pump inhibitors cause chronic kidney disease? - PMC",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5837711"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "GI indications such as GERD or peptic ulcer disease drive PPI prescribing and may independently elevate CKD risk via associated NSAID use or inflammation, fulfilling the confounder criteria."
+      },
+      {
+        "label": "Alcohol consumption",
+        "rationale": "Heavy alcohol use can cause gastritis leading to PPI use and is also a direct risk factor for kidney injury.",
+        "edges_to_add": [
+          {
+            "source": "Alcohol consumption",
+            "target": "ppi_use",
+            "ai_suggested": false
+          },
+          {
+            "source": "Alcohol consumption",
+            "target": "incident_ckd",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton pump inhibitors and chronic kidney disease risk: a comparative study with histamine-2 receptor antagonists",
+            "url": "https://www.nature.com/articles/s41598-023-48430-9"
+          },
+          {
+            "title": "Proton pump inhibitors use and the risk of chronic kidney disease",
+            "url": "https://www.authorea.com/doi/10.22541/au.170668890.07689514"
+          },
+          {
+            "title": "Kidney function decline associated with proton pump inhibitors: results from the ELSA-Brasil cohort | BMC Nephrology | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12882-023-03300-4"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Heavy alcohol use can provoke gastritis leading to PPI prescription and directly contributes to kidney injury, acting as a common cause of exposure and outcome."
+      },
+      {
+        "label": "Other nephrotoxic drugs",
+        "rationale": "Use of drugs like loop diuretics, NSAIDs beyond those captured, or certain antibiotics can increase both PPI prescribing (for GI protection) and CKD risk.",
+        "edges_to_add": [
+          {
+            "source": "Other nephrotoxic drugs",
+            "target": "ppi_use",
+            "ai_suggested": false
+          },
+          {
+            "source": "Other nephrotoxic drugs",
+            "target": "incident_ckd",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton Pump Inhibitor Use and Risk of Chronic Kidney Disease",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4772730"
+          },
+          {
+            "title": "Proton Pump Inhibitor Use and the Risk of Chronic Kidney ...",
+            "url": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2481157"
+          },
+          {
+            "title": "Proton Pump Inhibitors and Kidney Disease\u2014GI Upset for the Nephrologist?",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2468024917300050"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Use of additional nephrotoxic drugs (e.g., loop diuretics, certain antibiotics) prompts PPI co\u2011prescribing for GI protection and independently raises CKD risk, meeting the confounder definition."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "Confounding by indication",
+        "explanation": "PPIs are prescribed for gastrointestinal disorders that may themselves be linked to CKD through NSAID use or chronic inflammation, yet the DAG does not include GI indication as a confounder.",
+        "severity": "high"
+      },
+      {
+        "type": "Measurement error",
+        "explanation": "PPI exposure was ascertained from prescription records only, missing over\u2011the\u2011counter use and non\u2011adherence, which could dilute or bias the estimated association.",
+        "severity": "medium"
+      },
+      {
+        "type": "Immortal time bias",
+        "explanation": "The analysis classified PPI use at baseline and during follow\u2011up without properly accounting for time\u2011varying exposure, potentially creating a period where participants must survive to be classified as exposed.",
+        "severity": "medium"
+      },
+      {
+        "type": "Selection bias",
+        "explanation": "Incident CKD required two abnormal measurements spaced \u22653 months apart; individuals with early rapid decline or who died before the second measurement were excluded, potentially biasing the sample toward healthier survivors.",
+        "severity": "low"
+      },
+      {
+        "type": "Loss to follow\u2011up",
+        "explanation": "Participants who moved out of the Catalan health system or had incomplete records were censored; if loss is related to both PPI use and kidney function, the HR could be biased.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "While the study adjusted for many conventional confounders, important variables such as baseline kidney function, socioeconomic status, and gastrointestinal indications for PPI use were not accounted for, leaving room for substantial residual confounding. Additionally, measurement of PPI exposure relied solely on prescriptions, potentially misclassifying true use, and the analytic approach may be susceptible to immortal time and selection biases. Consequently, the observed association should be interpreted cautiously; it suggests a possible link but does not firmly establish a causal effect of PPIs on incident CKD.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

@@ -1,0 +1,38 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age_baseline [adjusted]
+cancer_stage [adjusted]
+fatigue [adjusted]
+charlson_index [adjusted]
+years_since_diagnosis [adjusted]
+race_ethnicity [adjusted]
+insomnia [adjusted]
+depression [adjusted]
+adjuvant_treatments [adjusted]
+socioeconomic_status
+smoking_status
+exposure -> outcome
+age_baseline -> exposure
+age_baseline -> outcome
+cancer_stage -> exposure
+cancer_stage -> outcome
+fatigue -> exposure
+fatigue -> outcome
+charlson_index -> exposure
+charlson_index -> outcome
+years_since_diagnosis -> exposure
+years_since_diagnosis -> outcome
+race_ethnicity -> exposure
+race_ethnicity -> outcome
+insomnia -> exposure
+insomnia -> outcome
+depression -> exposure
+depression -> outcome
+adjuvant_treatments -> exposure
+adjuvant_treatments -> outcome
+socioeconomic_status -> exposure
+socioeconomic_status -> outcome
+smoking_status -> exposure
+smoking_status -> outcome
+}

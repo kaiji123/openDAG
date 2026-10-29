@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Inter", sans-serif; }
+    #ec-flood { position: absolute; inset: 0; background: #1d2327; opacity: 0; }
+    #ec-claim { position: absolute; left: 150px; top: 400px; width: 1620px; font-size: 104px; font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.06; color: rgba(255, 255, 255, 0.3); }
+    #ec-lock { position: absolute; left: 0; top: 360px; width: 1920px; display: flex; justify-content: center; align-items: center; gap: 44px; }
+    #ec-mark { width: 300px; height: 120px; }
+    #ec-word { font-size: 156px; font-weight: 900; letter-spacing: -0.04em; color: #ffffff; clip-path: inset(0 100% 0 0); }
+    #ec-cta { position: absolute; left: 0; top: 640px; width: 1920px; text-align: center; font-size: 52px; font-weight: 700; color: #ffffff; opacity: 0; }
+    #ec-sub { position: absolute; left: 0; top: 720px; width: 1920px; text-align: center; font-size: 34px; font-weight: 400; color: rgba(255, 255, 255, 0.78); opacity: 0; }
+  </style>
+  <div data-hf-id="hf-32ii" id="root" data-composition-id="endcard" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-ma3q" id="ec-flood"></div>
+    <h1 data-hf-id="hf-kbkk" id="ec-claim"><span data-hf-id="hf-uhsw">Every</span> <span data-hf-id="hf-rtla">study’s</span> <span data-hf-id="hf-x5oh">assumptions,</span><br data-hf-id="hf-x5px" /><span data-hf-id="hf-qb9o">made</span> <span data-hf-id="hf-vx3h">visible</span></h1>
+    <div data-hf-id="hf-punv" id="ec-lock">
+      <!-- the app header's mark ◇→◇, drawn as two diamonds and an arrow so the arrow can draw itself -->
+      <svg data-hf-id="hf-iem1" id="ec-mark" viewBox="0 0 100 40" aria-hidden="true">
+        <path data-hf-id="hf-yigj" id="ec-d1" d="M4 20 L14 10 L24 20 L14 30 Z" fill="none" stroke="#7fd4b8" stroke-width="3.2" stroke-linejoin="round" />
+        <path data-hf-id="hf-bvob" id="ec-arrow" d="M30 20 L66 20 M58 13 L66 20 L58 27" fill="none" stroke="#d08a00" stroke-width="3.2"
+          stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+        <path data-hf-id="hf-69gq" id="ec-d2" d="M74 20 L84 10 L94 20 L84 30 Z" fill="none" stroke="#7fd4b8" stroke-width="3.2" stroke-linejoin="round" />
+      </svg>
+      <div data-hf-id="hf-vvw6" id="ec-word">OpenDAG</div>
+    </div>
+    <div data-hf-id="hf-42wb" id="ec-cta" data-var-text="cta">github.com/kaiji123/openDAG</div>
+    <div data-hf-id="hf-db3w" id="ec-sub">Open causal diagrams from epidemiology papers · NVIDIA Nemotron on Nebius</div>
+  </div>
+  <script>
+    (function () {
+      const F = (f) => f / 30;
+      const tl = gsap.timeline({ paused: true });
+      // colour flood: the app's warm ground turns to its header ink
+      tl.fromTo("#ec-flood", { opacity: 0 }, { opacity: 1, duration: F(12), ease: "power2.inOut" }, 0);
+      // the claim: word by word from faint to full, still
+      document.querySelectorAll("#ec-claim span").forEach((w, i) =>
+        tl.fromTo(w, { color: "rgba(255,255,255,0.3)" }, { color: "rgba(255,255,255,1)", duration: F(4), ease: "none" }, F(10 + 4 * i)));
+      tl.to("#ec-claim", { opacity: 0, filter: "blur(10px)", duration: F(5), ease: "power3.in" }, F(68));
+      // end card: the diamonds pop in, the arrow draws between them, the wordmark wipes in
+      tl.fromTo(["#ec-d1", "#ec-d2"], { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" },
+        { opacity: 1, scale: 1, duration: F(10), ease: "back.out(1.6)", stagger: F(3) }, F(76));
+      tl.fromTo("#ec-arrow", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: F(16), ease: "power2.inOut" }, F(82));
+      tl.fromTo("#ec-word", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: F(16), ease: "power3.out" }, F(94));
+      tl.fromTo("#ec-cta", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: F(6), ease: "power4.out" }, F(116));
+      tl.fromTo("#ec-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: F(6), ease: "power4.out" }, F(124));
+      window.__timelines["endcard"] = tl;
+    })();
+  </script>
+</template>

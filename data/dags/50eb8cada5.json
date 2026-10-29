@@ -1,0 +1,584 @@
+{
+  "id": "50eb8cada5",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:13:19Z",
+  "approved_at": "2026-10-28T21:24:23Z",
+  "paper": {
+    "title": "Consumption of coffee and tea and risk of developing stroke, dementia, and poststroke dementia: A cohort study in the UK Biobank",
+    "authors": "Zhang Y, Yang H, Li S, Li WD, Wang Y.",
+    "year": "2021",
+    "journal": "PLoS medicine",
+    "doi": "10.1371/journal.pmed.1003830",
+    "pmcid": "PMC8594796",
+    "pmid": "34784347",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Adults aged 50 to 74 years from the UK Biobank",
+    "sample_size": "365,682",
+    "follow_up": "median 11.4 years",
+    "exposure": {
+      "name": "Coffee and tea consumption",
+      "definition": "Daily cups of coffee and tea intake assessed at baseline via touchscreen questionnaire"
+    },
+    "outcome": {
+      "name": "Incident stroke and dementia",
+      "definition": "First hospital-recorded diagnosis of stroke or dementia during follow-up"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "0.68",
+      "ci": "0.59-0.79",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "Coffee and tea consumption",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "Coffee and tea consumption was assessed at baseline using a touchscreen questionnaire",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "Incident stroke and dementia",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "Incident stroke and dementia were ascertained using hospital inpatient records",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "ethnicity",
+        "label": "Ethnicity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "qualification",
+        "label": "Qualification",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "income",
+        "label": "Income",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "bmi",
+        "label": "BMI",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "physical_activity",
+        "label": "Physical activity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_status",
+        "label": "Alcohol status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking_status",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "diet_pattern",
+        "label": "Diet pattern",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "sex, age, ethnicity, qualification, income, BMI, physical activity, alcohol status, smoking status, history of cancer, history of diabetes, history of \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "cad",
+        "label": "History of cardiovascular arterial disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "history of cardiovascular arterial disease (CAD), history of diabetes, history of cancer",
+        "ai_suggested": false
+      },
+      {
+        "id": "diabetes",
+        "label": "History of diabetes",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "history of diabetes, history of cardiovascular arterial disease (CAD)",
+        "ai_suggested": false
+      },
+      {
+        "id": "cancer",
+        "label": "History of cancer",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "history of cancer, history of diabetes, history of cardiovascular arterial disease (CAD)",
+        "ai_suggested": false
+      },
+      {
+        "id": "hdl",
+        "label": "HDL cholesterol",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "HDL, LDL, history of cancer, history of diabetes, history of cardiovascular arterial disease (CAD)",
+        "ai_suggested": false
+      },
+      {
+        "id": "ldl",
+        "label": "LDL cholesterol",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "HDL, LDL, history of cancer, history of diabetes, history of cardiovascular arterial disease (CAD)",
+        "ai_suggested": false
+      },
+      {
+        "id": "hypertension",
+        "label": "Hypertension",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "hypertension, history of cancer, history of diabetes, history of cardiovascular arterial disease (CAD)",
+        "ai_suggested": false
+      },
+      {
+        "id": "baseline_cognition",
+        "label": "Baseline cognition",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "depressive_symptoms",
+        "label": "Depressive symptoms",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "sleep_duration",
+        "label": "Sleep duration",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "ethnicity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "ethnicity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "qualification",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "qualification",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "income",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "income",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "diet_pattern",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "diet_pattern",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "cad",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "cad",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "cancer",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "cancer",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "hdl",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "hdl",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "ldl",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "ldl",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "hypertension",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "hypertension",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "baseline_cognition",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "baseline_cognition",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "depressive_symptoms",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "depressive_symptoms",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "sleep_duration",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "sleep_duration",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nsex [adjusted]\nage [adjusted]\nethnicity [adjusted]\nqualification [adjusted]\nincome [adjusted]\nbmi [adjusted]\nphysical_activity [adjusted]\nalcohol_status [adjusted]\nsmoking_status [adjusted]\ndiet_pattern [adjusted]\ncad [adjusted]\ndiabetes [adjusted]\ncancer [adjusted]\nhdl [adjusted]\nldl [adjusted]\nhypertension [adjusted]\nbaseline_cognition\ndepressive_symptoms\nsleep_duration\nexposure -> outcome\nsex -> exposure\nsex -> outcome\nage -> exposure\nage -> outcome\nethnicity -> exposure\nethnicity -> outcome\nqualification -> exposure\nqualification -> outcome\nincome -> exposure\nincome -> outcome\nbmi -> exposure\nbmi -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\nalcohol_status -> exposure\nalcohol_status -> outcome\nsmoking_status -> exposure\nsmoking_status -> outcome\ndiet_pattern -> exposure\ndiet_pattern -> outcome\ncad -> exposure\ncad -> outcome\ndiabetes -> exposure\ndiabetes -> outcome\ncancer -> exposure\ncancer -> outcome\nhdl -> exposure\nhdl -> outcome\nldl -> exposure\nldl -> outcome\nhypertension -> exposure\nhypertension -> outcome\nbaseline_cognition -> exposure\nbaseline_cognition -> outcome\ndepressive_symptoms -> exposure\ndepressive_symptoms -> outcome\nsleep_duration -> exposure\nsleep_duration -> outcome\n}",
+  "open_backdoors": [
+    "Baseline cognition",
+    "Depressive symptoms",
+    "Sleep duration"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "APOE genotype",
+        "rationale": "The APOE \u03b54 allele increases risk of dementia and may influence coffee/tea metabolism or preference.",
+        "edges_to_add": [
+          {
+            "source": "APOE genotype",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "APOE genotype",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Frontiers | Moderate tea consumption and dementia-related neuroimaging markers",
+            "url": "https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1634621/full"
+          },
+          {
+            "title": "The Association between Coffee and Tea Consumption at Midlife and Risk of Dementia Later in Life: The HUNT Study",
+            "url": "https://www.mdpi.com/2072-6643/15/11/2469"
+          },
+          {
+            "title": "Association between coffee and tea consumption and the risk of dementia in individuals with hypertension: a prospective cohort study | Scientific Reports",
+            "url": "https://www.nature.com/articles/s41598-024-71426-y"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Although APOE \u03b54 strongly predicts dementia, there is insufficient evidence that it influences coffee/tea consumption in UK Biobank adults, so it is not a plausible common cause."
+      },
+      {
+        "label": "Baseline cognition",
+        "rationale": "Lower baseline cognitive function can affect beverage choices and predicts future dementia.",
+        "edges_to_add": [
+          {
+            "source": "Baseline cognition",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Baseline cognition",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Is Drinking Coffee and Tea Associated with Reduced Rates of Stroke and Dementia?",
+            "url": "https://www.medscape.com/viewarticle/drinking-coffee-and-tea-associated-reduced-rates-stroke-and-2021a1002cgn"
+          },
+          {
+            "title": "Research Suggests Caffeinated Coffee or Tea Could Reduce Dementia Risk | Pharmacy Times",
+            "url": "https://www.pharmacytimes.com/view/research-suggests-caffeinated-coffee-or-tea-could-reduce-dementia-risk"
+          },
+          {
+            "title": "Association between coffee and tea consumption and the risk of dementia in individuals with hypertension: a prospective cohort study | Scientific Reports",
+            "url": "https://www.nature.com/articles/s41598-024-71426-y"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Lower baseline cognition can shape beverage preferences and independently increase risk of later stroke/dementia, meeting confounder criteria and not already adjusted for."
+      },
+      {
+        "label": "Depressive symptoms",
+        "rationale": "Depression is linked to altered coffee/tea intake and independently raises risk of stroke and dementia.",
+        "edges_to_add": [
+          {
+            "source": "Depressive symptoms",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Depressive symptoms",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Coffee and Dementia: What the Research Says",
+            "url": "https://creyos.com/blog/coffee-and-dementia"
+          },
+          {
+            "title": "Coffee and Tea Drinking May Be Associated With Reduced Rates of Stroke and Dementia - Neuroscience News",
+            "url": "https://neurosciencenews.com/caffeine-stroke-dementia-19662"
+          },
+          {
+            "title": "Drinking Coffee and Tea May Lower Stroke and Dementia Risk - Psychiatry Advisor",
+            "url": "https://www.psychiatryadvisor.com/news/drinking-coffee-and-tea-may-lower-stroke-and-dementia"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Depressive symptoms affect coffee/tea choices and are established risk factors for stroke and dementia, making them a plausible confounder not captured in the adjustment set."
+      },
+      {
+        "label": "Sleep duration",
+        "rationale": "Both short and long sleep duration influence beverage consumption and are risk factors for stroke and dementia.",
+        "edges_to_add": [
+          {
+            "source": "Sleep duration",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Sleep duration",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Tea consumption and risk of incident dementia: A prospective cohort study of 377 592 UK Biobank participants | Translational Psychiatry",
+            "url": "https://www.nature.com/articles/s41398-022-01923-z"
+          },
+          {
+            "title": "Drinking Coffee and Tea May Lower Stroke and Dementia Risk - Psychiatry Advisor",
+            "url": "https://www.psychiatryadvisor.com/news/drinking-coffee-and-tea-may-lower-stroke-and-dementia"
+          },
+          {
+            "title": "Drinking both coffee and tea linked to lower risks for stroke and dementia - Harvard Health",
+            "url": "https://www.health.harvard.edu/mind-and-mood/drinking-both-coffee-and-tea-linked-to-lower-risks-for-stroke-and-dementia"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Sleep duration influences both coffee/tea intake (e.g., via fatigue) and stroke/dementia risk, satisfying the confounder conditions and absent from the adjusted list."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "measurement error",
+        "explanation": "Coffee and tea intake was self\u2011reported once at baseline via touchscreen questionnaire, which may not capture long\u2011term or changing consumption patterns, leading to nondifferential misclassification and bias toward the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "UK Biobank volunteers are healthier, more educated, and have lower prevalence of smoking and obesity than the general UK population, potentially inducing a healthy volunteer bias that distorts the exposure\u2013outcome relationship.",
+        "severity": "medium"
+      },
+      {
+        "type": "residual confounding",
+        "explanation": "Despite adjustment for many covariates, unmeasured factors such as genetic predisposition (APOE), baseline cognitive function, depressive symptoms, and sleep habits may still confound the observed association.",
+        "severity": "medium"
+      },
+      {
+        "type": "information bias (outcome ascertainment)",
+        "explanation": "Stroke and dementia were identified from hospital records; milder or outpatient\u2011managed events may be missed, causing differential under\u2011ascertainment if related to beverage consumption.",
+        "severity": "low"
+      },
+      {
+        "type": "loss to follow-up",
+        "explanation": "Although follow\u2011up was high, some participants may have withdrawn or died from unrelated causes, and if dropout is related to both exposure and outcome, it could bias results.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study controlled for a wide range of demographic, lifestyle, and clinical covariates, making major confounding unlikely. However, residual confounding from unmeasured genetic, cognitive, mental health, and sleep factors remains possible, and the exposure measurement is limited to a single baseline self\u2011report. Combined with the healthy volunteer selection of UK Biobank, these issues suggest that the observed inverse association should be interpreted cautiously rather than as definitive proof of a causal protective effect.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

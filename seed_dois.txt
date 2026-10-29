@@ -28,3 +28,23 @@
 # Other
 10.1136/bmjopen-2020-046040          # particulate air pollution -> mortality
 10.1136/bmjopen-2020-046891          # de Quervain syndrome -> herpes zoster
+
+# --- Batch 2: dementia as a shared outcome, and repeated questions for the forest plot ---
+# PPIs and dementia: three cohorts asking the same question
+10.1186/s12916-022-02478-y           # regular PPI use -> incident dementia (UK)
+10.1371/journal.pone.0171006         # PPI use -> dementia (Taiwan)
+10.1371/journal.pone.0237676         # PPI use -> dementia (linked routine records)
+10.1371/journal.pone.0216750         # PPIs -> post-stroke pneumonia
+
+# Other exposures -> dementia
+10.1038/s41598-022-22100-8           # particulate matter -> dementia
+10.1136/bmjopen-2018-022404          # noise and air pollution -> dementia (London)
+10.1001/jamanetworkopen.2023.39723   # metformin cessation -> dementia
+10.1136/bmjopen-2021-053936          # social isolation / loneliness -> dementia (UK Biobank)
+10.1371/journal.pone.0175187         # antidepressant classes -> dementia
+
+# More shared exposures and outcomes
+10.1136/bmj.k3359                    # statins -> cardiovascular events and mortality in older adults
+10.1001/jamanetworkopen.2021.22837   # sleep duration -> mortality (Asian cohorts)
+10.1186/s12916-020-01554-5           # sweetened beverages and juices -> mortality
+10.1001/jamanetworkopen.2021.46461   # social isolation / loneliness -> cardiovascular disease (women)

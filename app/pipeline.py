@@ -5,7 +5,7 @@ import time
 import uuid
 from typing import Callable, List, Optional
 
-from . import canonical, config, db, fetch, graph
+from . import budget, canonical, config, db, fetch, graph, verify
 from .critique import critique
 from .evidence import attach_evidence
 from .extract import extract
@@ -53,6 +53,20 @@ def run(identifier: str, progress: Progress = lambda step: None) -> dict:
         crit, usage_cr = Critique(overall_assessment=f"Critique unavailable: {e}"), {}
         issues.append("Critique step failed; you can still review the extracted DAG.")
 
+    # Check each suggestion against the paper itself: extraction can drop items from long covariate lists.
+    usage_vf = {}
+    try:
+        crit, found, usage_vf = verify.verify(crit, paper_text)
+        if found:
+            nodes, edges = verify.add_confirmed(nodes, edges, found)
+            crit.overall_assessment = verify.fix_assessment(crit.overall_assessment, found)
+            issues.append("Verified against the paper text, already adjusted for: "
+                          + ", ".join(f["label"] for f in found) + " (added to the DAG, removed from AI suggestions).")
+    except budget.BudgetExceeded:
+        raise
+    except Exception as e:  # verification is a safety net; never lose the paper over it
+        issues.append(f"Suggestion check against the paper text was skipped ({e}).")
+
     progress("evidence")
     crit = attach_evidence(crit, ex.exposure.name, ex.outcome.name, meta.model_dump())
 
@@ -88,7 +102,7 @@ def run(identifier: str, progress: Progress = lambda step: None) -> dict:
             "evidence_search": "tavily",
             "provider": "Nebius Token Factory",
         },
-        "usage": {"extraction": usage_ex, "critique": usage_cr},
+        "usage": {"extraction": usage_ex, "critique": usage_cr, "verification": usage_vf},
     }
     _refresh_derived(rec)
     progress("done")
@@ -123,13 +137,15 @@ def update(rec: dict, nodes: List[dict], edges: List[dict], suggestion_status: d
     return rec
 
 
-def approve(rec: dict) -> dict:
+def approve(rec: dict, reviewed_by: str = "human") -> dict:
+    """reviewed_by is "human" (approved in the UI) or "ai" (scripts/autoreview.py, Nemotron Super)."""
     crit = Critique(**rec["critique"])
     pending = [mc.label for mc in crit.missing_confounders if mc.status == "suggested"]
     if pending:
         raise ValueError("Accept or reject every AI-suggested confounder before approving: " + ", ".join(pending))
     rec["status"] = "approved"
     rec["approved_at"] = _now()
+    rec["review"] = {"by": reviewed_by, "model": config.MODEL_REASON if reviewed_by == "ai" else None}
     _refresh_derived(rec)
     db.save_record(rec)
     # Link the new paper into the dataset network: Nemotron Nano maps its variable names to shared names.

@@ -1,0 +1,580 @@
+{
+  "id": "03d4b0d3bf",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:15:12Z",
+  "approved_at": "2026-10-28T21:25:24Z",
+  "paper": {
+    "title": "Varenicline and Risk of Self-Harm: A Nested Case-Control Study",
+    "authors": "Tadrous M, Martins D, Yao Z, Mamdani MM, Juurlink DN, Gomes T, Antoniou T.",
+    "year": "2016",
+    "journal": "PloS one",
+    "doi": "10.1371/journal.pone.0163681",
+    "pmcid": "PMC5035025",
+    "pmid": "27662654",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "case-control",
+    "population": "Ontario adults aged 18 years and older with publicly funded drug coverage receiving bupropion or varenicline between April 1, 2011 and March 31, 2015",
+    "sample_size": "331 cases and 5,346 matched-controls",
+    "follow_up": "90 days after treatment",
+    "exposure": {
+      "name": "varenicline",
+      "definition": "prescription of varenicline for smoking cessation identified in the Ontario Drug Benefit database"
+    },
+    "outcome": {
+      "name": "suicide or self-harm",
+      "definition": "hospitalization or emergency department visit for suicide or non-fatal self-harm within 90 days of treatment"
+    },
+    "reported_effect": {
+      "measure": "OR",
+      "value": "1.15",
+      "ci": "0.71-1.87",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "Varenicline use",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "prescription of varenicline for smoking cessation",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "Suicide or self-harm",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "hospitalization or emergency department visit for suicide or non-fatal self-harm within 90 days",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on age (within 1 year)",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on sex",
+        "ai_suggested": false
+      },
+      {
+        "id": "history_self_harm",
+        "label": "History of self-harm",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on history of self-harm",
+        "ai_suggested": false
+      },
+      {
+        "id": "psychotropic_meds",
+        "label": "Use of selected psychotropic medications",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on use of selected psychotropic medications",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_abuse",
+        "label": "Alcohol abuse",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on alcohol abuse",
+        "ai_suggested": false
+      },
+      {
+        "id": "mental_health_admission",
+        "label": "Admission to mental health unit",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on admission to a mental health unit",
+        "ai_suggested": false
+      },
+      {
+        "id": "ses",
+        "label": "Socioeconomic status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for socioeconomic status",
+        "ai_suggested": false
+      },
+      {
+        "id": "charlson_comorbidity",
+        "label": "Charlson comorbidity score",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for Charlson comorbidity score",
+        "ai_suggested": false
+      },
+      {
+        "id": "physician_visits",
+        "label": "Number of physician visits",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for number of physician visits in the past year",
+        "ai_suggested": false
+      },
+      {
+        "id": "ed_visits",
+        "label": "Number of ED visits",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for number of ED visits in the past year",
+        "ai_suggested": false
+      },
+      {
+        "id": "psychiatrist_visits",
+        "label": "Number of psychiatrist visits",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for number of psychiatrist visits in the past year",
+        "ai_suggested": false
+      },
+      {
+        "id": "past_psychotropic_use",
+        "label": "Past psychotropic use",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for past psychotropic use in previous 6 months",
+        "ai_suggested": false
+      },
+      {
+        "id": "psychiatric_comorbidities",
+        "label": "Psychiatric comorbidities",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for psychiatric comorbidities",
+        "ai_suggested": false
+      },
+      {
+        "id": "total_drugs_dispensed",
+        "label": "Total number of drugs dispensed",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for total number of drugs dispensed in the past 180 days",
+        "ai_suggested": false
+      },
+      {
+        "id": "prior_quit_attempts",
+        "label": "Prior quit attempts",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "recent_life_stressors",
+        "label": "Recent life stressors",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "illicit_substance_use",
+        "label": "Illicit substance use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "history_self_harm",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "history_self_harm",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychotropic_meds",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychotropic_meds",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_abuse",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_abuse",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "mental_health_admission",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "mental_health_admission",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "ses",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "ses",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "charlson_comorbidity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "charlson_comorbidity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "physician_visits",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "physician_visits",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "ed_visits",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "ed_visits",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychiatrist_visits",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychiatrist_visits",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "past_psychotropic_use",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "past_psychotropic_use",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychiatric_comorbidities",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychiatric_comorbidities",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "total_drugs_dispensed",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "total_drugs_dispensed",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "prior_quit_attempts",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "prior_quit_attempts",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "recent_life_stressors",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "recent_life_stressors",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "illicit_substance_use",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "illicit_substance_use",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\nhistory_self_harm [adjusted]\npsychotropic_meds [adjusted]\nalcohol_abuse [adjusted]\nmental_health_admission [adjusted]\nses [adjusted]\ncharlson_comorbidity [adjusted]\nphysician_visits [adjusted]\ned_visits [adjusted]\npsychiatrist_visits [adjusted]\npast_psychotropic_use [adjusted]\npsychiatric_comorbidities [adjusted]\ntotal_drugs_dispensed [adjusted]\nprior_quit_attempts\nrecent_life_stressors\nillicit_substance_use\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\nhistory_self_harm -> exposure\nhistory_self_harm -> outcome\npsychotropic_meds -> exposure\npsychotropic_meds -> outcome\nalcohol_abuse -> exposure\nalcohol_abuse -> outcome\nmental_health_admission -> exposure\nmental_health_admission -> outcome\nses -> exposure\nses -> outcome\ncharlson_comorbidity -> exposure\ncharlson_comorbidity -> outcome\nphysician_visits -> exposure\nphysician_visits -> outcome\ned_visits -> exposure\ned_visits -> outcome\npsychiatrist_visits -> exposure\npsychiatrist_visits -> outcome\npast_psychotropic_use -> exposure\npast_psychotropic_use -> outcome\npsychiatric_comorbidities -> exposure\npsychiatric_comorbidities -> outcome\ntotal_drugs_dispensed -> exposure\ntotal_drugs_dispensed -> outcome\nprior_quit_attempts -> exposure\nprior_quit_attempts -> outcome\nrecent_life_stressors -> exposure\nrecent_life_stressors -> outcome\nillicit_substance_use -> exposure\nillicit_substance_use -> outcome\n}",
+  "open_backdoors": [
+    "Prior quit attempts",
+    "Recent life stressors",
+    "Illicit substance use"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Depression severity",
+        "rationale": "More severe depression increases the likelihood of being prescribed varenicline (due to higher addiction burden) and independently raises the risk of suicide or self\u2011harm.",
+        "edges_to_add": [
+          {
+            "source": "Depression severity",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Depression severity",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Suicidal Behavior and Depression in Smoking Cessation Treatments | PLOS One",
+            "url": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0027016"
+          },
+          {
+            "title": "Two Smoking Cessation Drugs Not Linked to Increased Risk of Depression or Suicide | RT",
+            "url": "https://respiratory-therapy.com/products-treatment/pharmaceuticals/us-pharmaceuticals/two-smoking-cessation-drugs-not-linked-to-increased-risk-of-depression-or-suicide"
+          },
+          {
+            "title": "Risk of neuropsychiatric and cardiovascular adverse events following treatment with varenicline and nicotine replacement therapy in the UK Clinical Practice Research Datalink: a case\u2013cross\u2010over study ",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1111/add.15338"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Depression severity may be altered by varenicline (neuropsychiatric side effects), making it a potential mediator/collider, and is only partially captured by psychiatric comorbidities."
+      },
+      {
+        "label": "Nicotine dependence",
+        "rationale": "Higher daily cigarette consumption predicts both receipt of varenicline (clinicians may favor it for heavy smokers) and elevated suicidality via withdrawal\u2011related mood dysregulation.",
+        "edges_to_add": [
+          {
+            "source": "Nicotine dependence",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Nicotine dependence",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Varenicline and suicidal behaviour: a cohort study based on data from the General Practice Research Database",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2755726"
+          },
+          {
+            "title": "Varenicline Use and Risk for Self-Harm and Suicide | NEJM Clinician",
+            "url": "https://clinician.nejm.org/varenicline-use-risk-self-harm-suicide-JW200910270000001"
+          },
+          {
+            "title": "Risk of neuropsychiatric and cardiovascular adverse events following treatment with varenicline and nicotine replacement therapy in the UK Clinical Practice Research Datalink: a case\u2013cross\u2010over study",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8246946"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Nicotine dependence is affected by varenicline exposure (the drug reduces dependence), so adjusting would block a mediating pathway."
+      },
+      {
+        "label": "Prior quit attempts",
+        "rationale": "A greater number of previous quit attempts signals stronger addiction and motivation, influencing prescribing decisions and is associated with higher baseline risk of self\u2011harm.",
+        "edges_to_add": [
+          {
+            "source": "Prior quit attempts",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Prior quit attempts",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Varenicline and suicidal behaviour: a cohort study based on data from the General Practice Research Database",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2755726"
+          },
+          {
+            "title": "Smoking Cessation Drug Not Linked To An Increased Risk Of Self Harm Or Depression | ScienceDaily",
+            "url": "https://www.sciencedaily.com/releases/2009/10/091001191701.htm"
+          },
+          {
+            "title": "Are Smoking Cessation Treatments Associated with Suicidality Risk? An Overview",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4830638"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Prior quit attempts precede varenicline prescribing, influence both exposure and outcome, and are not captured by the adjusted covariates."
+      },
+      {
+        "label": "Recent life stressors",
+        "rationale": "Events such as job loss, bereavement, or relationship breakup increase both the likelihood of seeking smoking\u2011cessation pharmacotherapy and the risk of suicidal behaviour.",
+        "edges_to_add": [
+          {
+            "source": "Recent life stressors",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Recent life stressors",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Varenicline and suicidal behaviour: a cohort study based on data from the General Practice Research Database",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2755726"
+          },
+          {
+            "title": "Smoking cessation drug not linked to an increased risk of self harm or depression",
+            "url": "https://medicalxpress.com/news/2009-10-cessation-drug-linked-depression.html"
+          },
+          {
+            "title": "Risk of neuropsychiatric and cardiovascular adverse events following treatment with varenicline and nicotine replacement therapy in the UK Clinical Practice Research Datalink: a case\u2013cross\u2010over study",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8246946"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Recent life stressors occur before exposure, affect both likelihood of receiving varenicline and suicide risk, and are not adjusted for."
+      },
+      {
+        "label": "Illicit substance use",
+        "rationale": "Use of illicit drugs is linked to higher depression and impulsivity, may affect clinician choice of cessation medication, and independently raises suicide/self\u2011harm risk.",
+        "edges_to_add": [
+          {
+            "source": "Illicit substance use",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Illicit substance use",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Risk of neuropsychiatric and cardiovascular adverse events following treatment with varenicline and nicotine replacement therapy in the UK Clinical Practice Research Datalink: a case\u2013cross\u2010over study",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8246946"
+          },
+          {
+            "title": "Two Smoking Cessation Drugs Not Linked to Increased Risk of Depression or Suicide | RT",
+            "url": "https://respiratory-therapy.com/products-treatment/pharmaceuticals/us-pharmaceuticals/two-smoking-cessation-drugs-not-linked-to-increased-risk-of-depression-or-suicide"
+          },
+          {
+            "title": "Chantix Unsuitable for First-Line Smoking Cessation Use | Atrium Health Wake Forest Baptist",
+            "url": "https://newsroom.wakehealth.edu/news-releases/2011/11/chantix-unsuitable-for-first-line-smoking-cessation-use"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Illicit substance use precedes exposure, influences prescribing and self\u2011harm risk, and is not represented in the adjusted list."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "confounding by indication",
+        "explanation": "Varenicline may be preferentially prescribed to patients with heavier smoking histories, prior failed quit attempts, or untreated depression, which themselves increase suicide risk, creating channeling bias not fully captured by the matched variables.",
+        "severity": "high"
+      },
+      {
+        "type": "measurement error",
+        "explanation": "Outcome ascertainment relied on hospital or ED visits for suicide/self\u2011harm; events managed outpatient or not presenting for care are missed, leading to differential under\u2011ascertainment if drug users differ in healthcare utilization.",
+        "severity": "medium"
+      },
+      {
+        "type": "immortal time bias",
+        "explanation": "Exposure was defined as having a prescription record; individuals must survive and remain drug\u2011covered until the first prescription, creating a period during which the outcome cannot occur, potentially biasing the OR toward null.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "Matching on numerous variables (including psychotropic medication use and mental\u2011health admissions) may induce overmatching, removing part of the true exposure effect and distorting the exposure\u2013outcome association.",
+        "severity": "low"
+      },
+      {
+        "type": "healthy user effect",
+        "explanation": "Patients who successfully initiate and adhere to smoking\u2011cessation therapy may be healthier and more motivated, which could lower their baseline suicide risk independent of the drug, biasing the estimate downward.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study\u2019s adjusted odds ratio of 1.15 with a wide confidence interval crossing unity suggests no clear evidence of increased suicide/self\u2011harm risk with varenicline versus bupropion. However, important confounders such as depression severity, nicotine dependence, and recent life stressors were not measured, and biases like confounding by indication and potential immortal time bias remain plausible. Consequently, the causal claim that varenicline does not increase suicide risk should be interpreted cautiously.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

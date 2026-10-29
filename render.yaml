@@ -25,3 +25,13 @@ services:
         value: "400"
       - key: ADMIN_TOKEN
         sync: false
+      - key: BUDGET_USD
+        value: "100"
+      - key: SPENT_BEFORE_LEDGER_USD
+        value: "1"
+      - key: REQUIRE_DURABLE_BUDGET   # paid features stay off until the Upstash ledger below is set
+        value: "1"
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false

@@ -1,0 +1,62 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+sex [adjusted]
+age [adjusted]
+ethnicity [adjusted]
+qualification [adjusted]
+income [adjusted]
+bmi [adjusted]
+physical_activity [adjusted]
+alcohol_status [adjusted]
+smoking_status [adjusted]
+diet_pattern [adjusted]
+cad [adjusted]
+diabetes [adjusted]
+cancer [adjusted]
+hdl [adjusted]
+ldl [adjusted]
+hypertension [adjusted]
+baseline_cognition
+depressive_symptoms
+sleep_duration
+exposure -> outcome
+sex -> exposure
+sex -> outcome
+age -> exposure
+age -> outcome
+ethnicity -> exposure
+ethnicity -> outcome
+qualification -> exposure
+qualification -> outcome
+income -> exposure
+income -> outcome
+bmi -> exposure
+bmi -> outcome
+physical_activity -> exposure
+physical_activity -> outcome
+alcohol_status -> exposure
+alcohol_status -> outcome
+smoking_status -> exposure
+smoking_status -> outcome
+diet_pattern -> exposure
+diet_pattern -> outcome
+cad -> exposure
+cad -> outcome
+diabetes -> exposure
+diabetes -> outcome
+cancer -> exposure
+cancer -> outcome
+hdl -> exposure
+hdl -> outcome
+ldl -> exposure
+ldl -> outcome
+hypertension -> exposure
+hypertension -> outcome
+baseline_cognition -> exposure
+baseline_cognition -> outcome
+depressive_symptoms -> exposure
+depressive_symptoms -> outcome
+sleep_duration -> exposure
+sleep_duration -> outcome
+}

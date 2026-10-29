@@ -11,9 +11,9 @@ energy_intake [adjusted]
 alcohol_intake [adjusted]
 diet_quality [adjusted]
 dietary_patterns [adjusted]
-baseline_bmi
 household_income
 sleep_duration
+baseline_bmi [adjusted]
 exposure -> outcome
 age -> exposure
 age -> outcome
@@ -35,9 +35,9 @@ diet_quality -> exposure
 diet_quality -> outcome
 dietary_patterns -> exposure
 dietary_patterns -> outcome
-baseline_bmi -> exposure
-baseline_bmi -> outcome
 household_income -> exposure
 household_income -> outcome
 sleep_duration -> exposure
+baseline_bmi -> exposure
+baseline_bmi -> outcome
 }

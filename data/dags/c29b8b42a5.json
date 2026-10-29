@@ -1,0 +1,563 @@
+{
+  "id": "c29b8b42a5",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:12:00Z",
+  "approved_at": "2026-10-28T21:42:01Z",
+  "paper": {
+    "title": "Association of Total Daily Physical Activity and Fragmented Physical Activity With Mortality in Older Adults",
+    "authors": "Wanigatunga AA, Di J, Zipunnikov V, Urbanek JK, Kuo PL, Simonsick EM, Ferrucci L, Schrack JA.",
+    "year": "2019",
+    "journal": "JAMA network open",
+    "doi": "10.1001/jamanetworkopen.2019.12352",
+    "pmcid": "PMC6777397",
+    "pmid": "31577355",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "older adults aged 65 years and older from the Baltimore Longitudinal Study of Aging",
+    "sample_size": "548 (11.1% died)",
+    "follow_up": "mean 4.4 years",
+    "exposure": {
+      "name": "activity fragmentation",
+      "definition": "active-to-sedentary transition probability derived from accelerometer data"
+    },
+    "outcome": {
+      "name": "all-cause mortality",
+      "definition": "death from any cause identified via National Death Index and physician adjudication"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.49",
+      "ci": "1.02-2.19",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "activity fragmentation",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "more fragmented physical activity patterns were associated with greater mortality risk",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "all-cause mortality",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "61 participants (11.1%) died",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "race_ethnicity",
+        "label": "race/ethnicity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "bmi",
+        "label": "body mass index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking",
+        "label": "smoking history",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "employment",
+        "label": "employment status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "self_reported_health",
+        "label": "self-reported health",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "grip_strength",
+        "label": "grip strength",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "gait_speed",
+        "label": "usual gait speed",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "comorbidities",
+        "label": "comorbidities",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "device_wear_time",
+        "label": "device wear time",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, race/ethnicity, body mass index, smoking history, employment, self-reported health, grip strength, usual gait speed, comorbidities, and \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "short_bouts",
+        "label": "activity bouts <5 minutes",
+        "role": "mediator",
+        "adjusted": false,
+        "snippet": "more frequently engaging in activity bouts lasting less than 5 minutes was associated with greater mortality risk",
+        "ai_suggested": false
+      },
+      {
+        "id": "frailty_index",
+        "label": "frailty index",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "cognitive_function",
+        "label": "cognitive function",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "depressive_symptoms",
+        "label": "depressive symptoms",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "education_level",
+        "label": "education level",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "race_ethnicity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "race_ethnicity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "employment",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "employment",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "self_reported_health",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "self_reported_health",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "grip_strength",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "grip_strength",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "gait_speed",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "gait_speed",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "comorbidities",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "comorbidities",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "device_wear_time",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "device_wear_time",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "exposure",
+        "target": "short_bouts",
+        "ai_suggested": false
+      },
+      {
+        "source": "short_bouts",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "frailty_index",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "frailty_index",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "cognitive_function",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "cognitive_function",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "depressive_symptoms",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "depressive_symptoms",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "education_level",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "education_level",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\nrace_ethnicity [adjusted]\nbmi [adjusted]\nsmoking [adjusted]\nemployment [adjusted]\nself_reported_health [adjusted]\ngrip_strength [adjusted]\ngait_speed [adjusted]\ncomorbidities [adjusted]\ndevice_wear_time [adjusted]\nshort_bouts\nfrailty_index\ncognitive_function\ndepressive_symptoms\neducation_level\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\nrace_ethnicity -> exposure\nrace_ethnicity -> outcome\nbmi -> exposure\nbmi -> outcome\nsmoking -> exposure\nsmoking -> outcome\nemployment -> exposure\nemployment -> outcome\nself_reported_health -> exposure\nself_reported_health -> outcome\ngrip_strength -> exposure\ngrip_strength -> outcome\ngait_speed -> exposure\ngait_speed -> outcome\ncomorbidities -> exposure\ncomorbidities -> outcome\ndevice_wear_time -> exposure\ndevice_wear_time -> outcome\nexposure -> short_bouts\nshort_bouts -> outcome\nfrailty_index -> exposure\nfrailty_index -> outcome\ncognitive_function -> exposure\ncognitive_function -> outcome\ndepressive_symptoms -> exposure\ndepressive_symptoms -> outcome\neducation_level -> exposure\neducation_level -> outcome\n}",
+  "open_backdoors": [
+    "frailty index",
+    "cognitive function",
+    "depressive symptoms",
+    "education level"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "frailty index",
+        "rationale": "Frailty reflects decreased physiological reserve and predicts both higher activity fragmentation and mortality risk.",
+        "edges_to_add": [
+          {
+            "source": "frailty index",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "frailty index",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "High Fragmented Physical Activity as an Early Risk ...",
+            "url": "https://karger.com/ger/article/69/3/370/835249/High-Fragmented-Physical-Activity-as-an-Early-Risk"
+          },
+          {
+            "title": "Frailty and physical activity: are all physical activity variables ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12351540"
+          },
+          {
+            "title": "Physical Activity Fragmentation and All-Cause Mortality in ...",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2590059526000658"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Frailty index is a plausible common cause of activity fragmentation and mortality and is not fully captured by the adjusted covariates such as comorbidities, grip strength, or gait speed."
+      },
+      {
+        "label": "cognitive function",
+        "rationale": "Cognitive impairment can lead to more fragmented activity patterns and is independently associated with increased mortality.",
+        "edges_to_add": [
+          {
+            "source": "cognitive function",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "cognitive function",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Association between cognitive function and all-cause mortality among US older adults with cardiovascular-kidney-metabolic syndrome | BMC Geriatrics | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12877-026-07055-z"
+          },
+          {
+            "title": "\"The association of physical activity fragmentation with all-cause mort\" by Mauro F F Mediano, Yejin Mok et al.",
+            "url": "https://scholarlyexchange.childrensmercy.org/papers/6407"
+          },
+          {
+            "title": "Activity Intensity and All-Cause Mortality Following Fall Injury Among Older Adults: Results from a 12-Year National Survey",
+            "url": "https://www.mdpi.com/2227-9032/13/19/2530"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Cognitive function can influence both activity fragmentation patterns and mortality risk and is not accounted for by any of the adjusted variables."
+      },
+      {
+        "label": "depressive symptoms",
+        "rationale": "Depression is linked to altered physical activity patterns and higher mortality, potentially confounding the observed association.",
+        "edges_to_add": [
+          {
+            "source": "depressive symptoms",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "depressive symptoms",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Frontiers | Depressive symptoms and all-cause mortality among middle-aged and older people in China and associations with chronic diseases",
+            "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2024.1381273/full"
+          },
+          {
+            "title": "Association Between Depression and All-Cause Mortality : A Cohort Study Based on NHANES Data",
+            "url": "https://www.medrxiv.org/content/10.1101/2025.04.29.25326650v1.full"
+          },
+          {
+            "title": "Association between physical activity and all-cause mortality in patients with depression: a prospective cohort study based on NHANES data",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12040813"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Depressive symptoms may lead to more fragmented activity and higher mortality and are not directly adjusted for in the model."
+      },
+      {
+        "label": "education level",
+        "rationale": "Lower education correlates with less structured daily activity and higher mortality risk, acting as a socioeconomic confounder.",
+        "edges_to_add": [
+          {
+            "source": "education level",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "education level",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "The association of physical activity fragmentation with all-cause ...",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2667193X25000067"
+          },
+          {
+            "title": "Activity Intensity and All-Cause Mortality Following Fall Injury Among Older Adults: Results from a 12-Year National Survey",
+            "url": "https://www.mdpi.com/2227-9032/13/19/2530"
+          },
+          {
+            "title": "Low educational attainment is associated with higher all-cause and cardiovascular mortality in the United States adult population | BMC Public Health | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12889-023-15621-y"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Education level affects both activity fragmentation and mortality and is not included among the adjusted covariates (employment status does not serve as a close proxy)."
+      },
+      {
+        "label": "cardiovascular medication",
+        "rationale": "Use of cardiovascular drugs indicates underlying heart disease, which may increase activity fragmentation and mortality.",
+        "edges_to_add": [
+          {
+            "source": "cardiovascular medication",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "cardiovascular medication",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "The association of physical activity fragmentation with all-cause ...",
+            "url": "https://scholarlyexchange.childrensmercy.org/cgi/viewcontent.cgi?article=7369&context=papers"
+          },
+          {
+            "title": "Physical Activity Fragmentation and All-Cause Mortality in ...",
+            "url": "https://www.kidneymedicinejournal.org/article/S2590-0595(26)00065-8/fulltext"
+          },
+          {
+            "title": "Activity Fragmentation and All-Cause Mortality in United States Adults",
+            "url": "https://www.sciencedirect.com/science/article/pii/S1047279726002917"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Cardiovascular medication use is likely a proxy for comorbidities, which is already adjusted for, so adjusting for it would not add new confounding control."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "measurement error",
+        "explanation": "Activity fragmentation derived from accelerometer data may be misclassified due to non\u2011wear periods or algorithm thresholds, biasing the exposure\u2013outcome estimate.",
+        "severity": "medium"
+      },
+      {
+        "type": "confounding by indication",
+        "explanation": "Residual confounding by unmeasured frailty or subclinical disease may remain despite adjustment for comorbidities and health status.",
+        "severity": "high"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "The sample consists of well\u2011functioning volunteers from the Baltimore Longitudinal Study of Aging, limiting generalizability and potentially inducing a healthy\u2011user effect.",
+        "severity": "medium"
+      },
+      {
+        "type": "reverse causation",
+        "explanation": "Early degenerative processes could increase fragmentation before death, and baseline health measures may not fully capture this temporal direction.",
+        "severity": "medium"
+      },
+      {
+        "type": "loss to follow-up",
+        "explanation": "Although mortality ascertainment is complete, occasional missing accelerometer data could lead to differential exclusion of frailer participants.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "While the study adjusted for a broad set of demographic, behavioral, and clinical covariates, important confounders such as frailty, cognitive function, and depressive symptoms were not measured, leaving room for residual confounding. Additionally, measurement error in the exposure and selection of a highly functioning cohort further weaken the causal interpretation. Consequently, the observed association between activity fragmentation and mortality should be viewed as suggestive rather than definitive evidence of a causal effect.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "human",
+    "model": null
+  },
+  "dataset_license": "CC-BY-4.0"
+}

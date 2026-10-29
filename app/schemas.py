@@ -102,6 +102,7 @@ class MissingConfounder(BaseModel):
     edges_to_add: List[Edge] = Field(default_factory=list)
     evidence: List[dict] = Field(default_factory=list)  # [{title, url}] from Tavily
     status: Literal["suggested", "accepted", "rejected"] = "suggested"
+    review_note: str = ""  # reason given by the AI reviewer, when the record was AI-reviewed
 
 
 class BiasRisk(BaseModel):

@@ -1,0 +1,96 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #f7f7f4; font-family: "Inter", sans-serif; }
+    #scr-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    #scr-video { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+    #scr-cursor { position: absolute; left: 0; top: 0; width: 34px; height: 46px; transform-origin: 3px 3px; }
+    .scr-cap { position: absolute; left: 72px; bottom: 64px; padding: 22px 34px 24px; border-radius: 18px; background: #1d2327;
+      color: #ffffff; font-size: 44px; font-weight: 800; letter-spacing: -0.015em; white-space: nowrap; opacity: 0;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); }
+    .scr-cap span { color: #f0b23c; }
+  </style>
+  <div data-hf-id="hf-ynkj" id="root" data-composition-id="screen" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-mc59" id="scr-cam">
+      <!-- the real session; data-media-start skips the first 0.294 s before the first mark -->
+      <video data-hf-id="hf-ene7" id="scr-video" class="clip" src="assets/rec/session.mp4" muted playsinline
+        data-start="0" data-duration="52.8" data-media-start="0.294" data-track-index="0"></video>
+      <svg data-hf-id="hf-47h0" id="scr-cursor" viewBox="0 0 17 23" aria-hidden="true"><path data-hf-id="hf-qe1c" d="M1.5 1.5 L1.5 18.5 L5.6 14.6 L8.4 21.2 L11.4 19.9 L8.7 13.4 L14.4 13.4 Z" fill="#1d2327" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" /></svg>
+    </div>
+    <div data-hf-id="hf-uxwe" id="scr-c1" class="scr-cap">Which confounders did they <span data-hf-id="hf-7606">adjust for?</span></div>
+    <div data-hf-id="hf-kem9" id="scr-c2" class="scr-cap">Paste the DOI into OpenDAG</div>
+    <div data-hf-id="hf-5k3c" id="scr-c3" class="scr-cap">Nemotron maps the causal diagram</div>
+    <div data-hf-id="hf-zivg" id="scr-c4" class="scr-cap">Every covariate the paper adjusted for</div>
+    <div data-hf-id="hf-etxy" id="scr-c5" class="scr-cap">Nemotron Super flags <span data-hf-id="hf-itnp">the gaps</span></div>
+    <div data-hf-id="hf-nvcd" id="scr-c6" class="scr-cap">Each gap, with Tavily sources</div>
+    <div data-hf-id="hf-r15c" id="scr-c7" class="scr-cap">Its estimate joins 15 other studies</div>
+    <div data-hf-id="hf-f48k" id="scr-c8" class="scr-cap">Missed in <span data-hf-id="hf-6oi8">10 of 16</span> papers</div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TRACK, K = 1920 / T.w;        // recording px -> frame px
+      const S0 = 0.294;                               // source time at this scene's 0 (data-media-start)
+      const at = (src) => src - S0;                   // write every time as the recording's own clock
+      const moves = T.events.filter((e) => e.x !== undefined);
+      const clicks = T.events.filter((e) => e.click).map((e) => e.t);
+      const cursor = document.getElementById("scr-cursor");
+      const S = { t: 0 };
+      function render() {
+        const t = S.t + S0;
+        if (!moves.length || t < moves[0].t) { cursor.style.opacity = 0; return; }
+        let i = 0;
+        while (i < moves.length - 1 && moves[i + 1].t <= t) i++;
+        const a = moves[i], b = moves[Math.min(i + 1, moves.length - 1)];
+        const u = b.t > a.t ? Math.min(1, Math.max(0, (t - a.t) / (b.t - a.t))) : 0;
+        const x = (a.x + (b.x - a.x) * u) * K, y = (a.y + (b.y - a.y) * u) * K;
+        let press = 1;
+        for (const c of clicks) { const d = t - c; if (d >= 0 && d < 0.22) press = Math.min(press, 0.82 + 0.18 * Math.abs(d - 0.07) / 0.15); }
+        cursor.style.opacity = 1;
+        cursor.style.transform = `translate(${x - 3}px, ${y - 3}px) scale(${press})`;
+      }
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(S, { t: 0 }, { t: 52.8, duration: 52.8, ease: "none", onUpdate: render }, 0);
+      // arrive from the hook: the recording fades up on the same ground (no blur on footage)
+      tl.fromTo("#scr-cam", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, 0);
+
+      // camera: focus point (recording px) and zoom; clamped so the frame never shows past the recording's edges
+      const cam = (fx, fy, s) => {
+        const x = Math.min(0, Math.max(1920 - 1920 * s, 960 - fx * K * s));
+        const y = Math.min(0, Math.max(1080 - 1080 * s, 540 - fy * K * s));
+        return { x, y, scale: s };
+      };
+      gsap.set("#scr-cam", cam(560, 455, 1.4));                       // open on the paper's title (a match to the hook)
+      const move = (src, dur, fx, fy, s, ease = "power2.inOut") => tl.to("#scr-cam", { ...cam(fx, fy, s), duration: dur, ease }, at(src));
+      move(1.0, 0.7, 720, 405, 1);          // pull back: the paper's page, scrolling to its adjustment list
+      move(3.35, 0.7, 536, 392, 1.6);       // the "Model 2 ... adjusted for" footnote: a wall of covariates
+      move(7.2, 0.6, 690, 230, 1.2);        // OpenDAG's add box
+      move(11.45, 0.5, 900, 300, 1.25);     // the Extract button
+      move(12.75, 0.6, 470, 370, 1.65);     // the pipeline steps (this stretch is sped up)
+      move(17.65, 0.6, 600, 330, 1.35);     // the paper in OpenDAG: title and key figures
+      move(18.9, 0.5, 300, 380, 2.0);       // HR 1.20 and its CI
+      move(20.4, 0.6, 720, 405, 1);         // pull out while the page scrolls to the DAG
+      move(21.9, 0.6, 480, 290, 1.45);      // the DAG: adjusted rows above, the AI's gaps below
+      move(25.1, 0.6, 1000, 300, 1.45);     // frailty index: rationale and Tavily evidence
+      move(29.9, 0.6, 1060, 400, 1.55);     // Accept
+      move(33.0, 0.6, 720, 405, 1);         // back to the dataset
+      move(41.6, 0.6, 456, 320, 1.45);      // the forest plot: the new estimate among the others
+      move(48.8, 0.6, 1010, 270, 1.6);      // the most-often-missed chart and its tooltip
+
+      // captions: whole line blurs in, holds still, blurs out (all in source time)
+      const cap = (sel, a, b) => {
+        tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, at(a));
+        tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, at(b));
+      };
+      cap("#scr-c1", 3.6, 6.9);
+      cap("#scr-c2", 7.5, 12.2);
+      cap("#scr-c3", 12.7, 17.4);
+      cap("#scr-c4", 17.8, 20.3);
+      cap("#scr-c5", 21.5, 24.7);
+      cap("#scr-c6", 25.3, 31.0);
+      cap("#scr-c7", 41.9, 46.8);
+      cap("#scr-c8", 49.4, 53.0);
+      render();
+      window.__timelines["screen"] = tl;
+    })();
+  </script>
+</template>

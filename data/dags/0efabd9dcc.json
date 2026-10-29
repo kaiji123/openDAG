@@ -1,0 +1,485 @@
+{
+  "id": "0efabd9dcc",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:17:32Z",
+  "approved_at": "2026-10-28T21:24:38Z",
+  "paper": {
+    "title": "Association between de Quervain syndrome and herpes zoster: a population-based cohort study",
+    "authors": "Hsu CY, Ke DS, Lin CL, Kao CH.",
+    "year": "2021",
+    "journal": "BMJ open",
+    "doi": "10.1136/bmjopen-2020-046891",
+    "pmcid": "PMC8704966",
+    "pmid": "34949602",
+    "license": "cc by-nc"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Patients newly diagnosed with de Quervain syndrome (DQS) and matched controls without DQS from Taiwan's National Health Insurance Research Database, aged \u226520 years, followed from 2000 to 2013.",
+    "sample_size": "8390 (4195 exposed, 4195 unexposed)",
+    "follow_up": "median 6.68 years",
+    "exposure": {
+      "name": "de Quervain syndrome (DQS)",
+      "definition": "Newly diagnosed DQS (ICD-9-CM code 727.04) identified from claims data"
+    },
+    "outcome": {
+      "name": "Herpes zoster (HZ) reactivation",
+      "definition": "HZ occurrence (ICD-9-CM code 053) diagnosed during follow-up"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.30",
+      "ci": "1.16-1.47",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "de Quervain syndrome (DQS)",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "newly diagnosed with DQS between 2000 and 2012",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "Herpes zoster (HZ) reactivation",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "HZ occurrence (ICD-9-CM code 053)",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched by age, sex and index year",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched by age, sex and index year",
+        "ai_suggested": false
+      },
+      {
+        "id": "ckd",
+        "label": "Chronic kidney disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "comorbidities of CKD, diabetes, CAD and depression",
+        "ai_suggested": false
+      },
+      {
+        "id": "diabetes",
+        "label": "Diabetes",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "comorbidities of CKD, diabetes, CAD and depression",
+        "ai_suggested": false
+      },
+      {
+        "id": "cad",
+        "label": "Coronary artery disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "comorbidities of CKD, diabetes, CAD and depression",
+        "ai_suggested": false
+      },
+      {
+        "id": "depression",
+        "label": "Depression",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "comorbidities of CKD, diabetes, CAD and depression",
+        "ai_suggested": false
+      },
+      {
+        "id": "obesity",
+        "label": "Obesity",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "percentages of patients with obesity, CAD and depression were higher in the DQS cohort",
+        "ai_suggested": false
+      },
+      {
+        "id": "occupational_manual_labor",
+        "label": "Occupational manual labor",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "systemic_corticosteroid_use",
+        "label": "Systemic corticosteroid use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "current_smoking",
+        "label": "Current smoking",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "low_socioeconomic_status",
+        "label": "Low socioeconomic status",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "hiv_infection",
+        "label": "HIV infection",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "ckd",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "ckd",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "cad",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "cad",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "depression",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "depression",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "obesity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "obesity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "occupational_manual_labor",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "occupational_manual_labor",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "systemic_corticosteroid_use",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "systemic_corticosteroid_use",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "current_smoking",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "current_smoking",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "low_socioeconomic_status",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "low_socioeconomic_status",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "hiv_infection",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "hiv_infection",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\nckd [adjusted]\ndiabetes [adjusted]\ncad [adjusted]\ndepression [adjusted]\nobesity\noccupational_manual_labor\nsystemic_corticosteroid_use\ncurrent_smoking\nlow_socioeconomic_status\nhiv_infection\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\nckd -> exposure\nckd -> outcome\ndiabetes -> exposure\ndiabetes -> outcome\ncad -> exposure\ncad -> outcome\ndepression -> exposure\ndepression -> outcome\nobesity -> exposure\nobesity -> outcome\noccupational_manual_labor -> exposure\noccupational_manual_labor -> outcome\nsystemic_corticosteroid_use -> exposure\nsystemic_corticosteroid_use -> outcome\ncurrent_smoking -> exposure\ncurrent_smoking -> outcome\nlow_socioeconomic_status -> exposure\nlow_socioeconomic_status -> outcome\nhiv_infection -> exposure\nhiv_infection -> outcome\n}",
+  "open_backdoors": [
+    "Obesity",
+    "Occupational manual labor",
+    "Systemic corticosteroid use",
+    "Current smoking",
+    "Low socioeconomic status",
+    "HIV infection"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Occupational manual labor",
+        "rationale": "Jobs that require repetitive wrist motions increase the likelihood of developing de Quervain syndrome. Such occupations also involve physical stress and often poorer ergonomic conditions, which can weaken immune defenses and raise susceptibility to herpes zoster reactivation.",
+        "edges_to_add": [
+          {
+            "source": "Occupational manual labor",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Occupational manual labor",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Time to Reconsider Occupation Induced De Quervain\u2019s Tenosynovitis: An Updated Review of Risk Factors | Published in Orthopedic Reviews",
+            "url": "https://orthopedicreviews.openmedicalpublishing.org/article/36911-time-to-reconsider-occupation-induced-de-quervain-s-tenosynovitis-an-updated-review-of-risk-factors"
+          },
+          {
+            "title": "De Quervain Syndrome - Rheumatology and Orthopedics - Merck Manual Professional Edition",
+            "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/hand-disorders/de-quervain-syndrome"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Occupational manual labor plausibly increases risk of DQS via repetitive wrist strain and of HZ via physical stress/immune effects, and it is not adjusted for."
+      },
+      {
+        "label": "Systemic corticosteroid use",
+        "rationale": "Corticosteroid therapy can weaken tendons and predispose to de Quervain syndrome while simultaneously suppressing cell\u2011mediated immunity, thereby increasing the risk of herpes zoster reactivation.",
+        "edges_to_add": [
+          {
+            "source": "Systemic corticosteroid use",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Systemic corticosteroid use",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Open access Original research Association between de Quervain ...",
+            "url": "https://bmjopen.bmj.com/content/bmjopen/11/12/e046891.full.pdf"
+          },
+          {
+            "title": "(PDF) Association between de Quervain syndrome and herpes ...",
+            "url": "https://www.researchgate.net/publication/357288255_Association_between_de_Quervain_syndrome_and_herpes_zoster_a_population-based_cohort_study"
+          },
+          {
+            "title": "Corticosteroid Use and Risk of Herpes Zoster in a Population ...",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0025619621004766"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Systemic corticosteroid use may predispose to DQS by weakening tendons and increase HZ risk via immunosuppression, and it is not adjusted for."
+      },
+      {
+        "label": "Current smoking",
+        "rationale": "Smoking impairs tendon healing and has been linked to higher rates of de Quervain syndrome; it also suppresses immune function, making herpes zoster reactivation more likely.",
+        "edges_to_add": [
+          {
+            "source": "Current smoking",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Current smoking",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Herpes Zoster: Risk Factors for Occurrence, Complications, and Recurrence with a Focus on Immunocompromised Patients",
+            "url": "https://www.mdpi.com/2079-9721/13/3/71"
+          },
+          {
+            "title": "De Quervain Syndrome - Rheumatology and Orthopedics - Merck Manual Professional Edition",
+            "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/hand-disorders/de-quervain-syndrome"
+          },
+          {
+            "title": "Time to Reconsider Occupation Induced De Quervain\u2019s Tenosynovitis: An Updated Review of Risk Factors | Published in Orthopedic Reviews",
+            "url": "https://orthopedicreviews.openmedicalpublishing.org/article/36911-time-to-reconsider-occupation-induced-de-quervain-s-tenosynovitis-an-updated-review-of-risk-factors"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Current smoking plausibly raises DQS risk through impaired tendon healing and HZ risk via immune suppression, and it is not adjusted for."
+      },
+      {
+        "label": "Low socioeconomic status",
+        "rationale": "Lower socioeconomic status is associated with higher prevalence of manual labor jobs that predispose to de Quervain syndrome and with limited access to preventive care and greater psychosocial stress, both of which increase herpes zoster risk.",
+        "edges_to_add": [
+          {
+            "source": "Low socioeconomic status",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Low socioeconomic status",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Herpes zoster oticus | PPTX",
+            "url": "https://www.slideshare.net/slideshow/herpes-zoster-oticus-44976734/44976734"
+          },
+          {
+            "title": "Ogilvie\u2019s Syndrome Following Herpes Zoster Infection: A Comprehensive Review of the Literature",
+            "url": "https://www.cureus.com/articles/318161-ogilvies-syndrome-following-herpes-zoster-infection-a-comprehensive-review-of-the-literature"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Low socioeconomic status influences DQS risk (through manual labor occupations) and HZ risk (via limited healthcare access and stress), and it is not adjusted for."
+      },
+      {
+        "label": "HIV infection",
+        "rationale": "HIV causes profound immunosuppression, markedly raising the chance of herpes zoster reactivation, and HIV\u2011associated musculoskeletal manifestations can include tenosynovitis resembling de Quervain syndrome.",
+        "edges_to_add": [
+          {
+            "source": "HIV infection",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "HIV infection",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Herpes zoster oticus | PPTX",
+            "url": "https://www.slideshare.net/slideshow/herpes-zoster-oticus-44976734/44976734"
+          },
+          {
+            "title": "What causes the reactivation of herpes zoster (shingles)?",
+            "url": "https://www.droracle.ai/articles/653329/what-causes-the-reactivation-of-herpes-zoster-shingles"
+          },
+          {
+            "title": "Ogilvie\u2019s Syndrome Following Herpes Zoster Infection: A Comprehensive Review of the Literature",
+            "url": "https://www.cureus.com/articles/318161-ogilvies-syndrome-following-herpes-zoster-infection-a-comprehensive-review-of-the-literature"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "HIV infection can increase HZ risk through immunosuppression and may raise DQS likelihood via HIV\u2011associated tenosynovitis, and it is not adjusted for."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "measurement error",
+        "explanation": "Exposure (de Quervain syndrome) was identified solely from ICD\u20119\u2011CM code 727.04 in claims data; coding errors or lack of clinical confirmation could lead to non\u2011differential misclassification, biasing the hazard ratio toward the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "measurement error",
+        "explanation": "Outcome (herpes zoster) relied on ICD\u20119\u2011CM code 053; miscoding or missed diagnoses (especially atypical presentations) may similarly dilute the true association.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "Controls were matched 1:1 to cases on age, sex, and index year. Matching on index year\u2014a proxy for healthcare utilization\u2014may induce overmatching if utilization is related to both DQS risk and HZ susceptibility, potentially attenuating the estimated effect.",
+        "severity": "low"
+      },
+      {
+        "type": "immortal time bias",
+        "explanation": "To be classified as exposed, subjects needed a DQS diagnosis and continuous enrollment prior to that date; this creates a period during which the outcome could not occur, artificially lowering event rates in the exposed group if not properly accounted for.",
+        "severity": "low"
+      },
+      {
+        "type": "loss to follow-up",
+        "explanation": "The analysis assumes complete follow\u2011up via the NHIR database, but deaths, emigration, or loss of insurance coverage that are not captured could censor subjects differentially by exposure status, introducing bias.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study adjusted for key demographic and comorbid factors, but important lifestyle and occupational confounders (e.g., manual labor, corticosteroid use, smoking) were not measured, leaving room for residual confounding. Additionally, reliance on claims data introduces measurement error, and the matching design may have induced subtle selection biases. Consequently, while the observed association is suggestive, the evidence for a causal effect of de Quervain syndrome on herpes zoster reactivation remains moderate at best.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

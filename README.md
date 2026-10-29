@@ -32,6 +32,7 @@ flowchart LR
 | Extract | **Nemotron Nano** returns study design, population, exposure, outcome, nodes (role, adjusted, ≤20-word supporting snippet), edges and the reported effect. JSON mode, with one retry on invalid JSON. | `app/extract.py`, `app/llm.py` |
 | Validate | Normalises messy output, merges duplicate nodes, drops edges to unknown nodes and edges that would create cycles, adds missing confounder→exposure/outcome edges. Every fix is recorded. | `app/graph.py`, `app/schemas.py` |
 | Critique | **Nemotron Super** (reasoning enabled) proposes up to 5 unadjusted confounders with rationale and edges, up to 5 bias risks with severity, and a plain-English assessment. All marked *AI-suggested*. | `app/critique.py` |
+| Verify | **Nemotron Super** checks each suggested confounder against the paper's own text and must quote the sentence that shows an adjustment; code confirms the quote is in the paper, in a sentence with an adjustment word. Confirmed ones move into the DAG as adjusted (extraction can drop items from long footnote lists), and Nano rewrites the assessment to match. | `app/verify.py` |
 | Evidence | **Tavily** searches `"<confounder> <exposure> <outcome> confounding"` and attaches the top 3 sources. Cached. | `app/evidence.py` |
 | Screen | Flags unadjusted common causes of exposure and outcome (open backdoor paths). | `app/graph.py` |
 | Review | Edit nodes/edges, toggle adjustment, accept/reject each suggestion, approve. Approved records are locked. | `static/app.js`, `app/pipeline.py` |
@@ -84,6 +85,21 @@ AI-suggested confounder, Tavily searches for literature linking it to the exposu
 app shows the top sources next to the suggestion. Results are cached, deduplicated, and the paper under
 review is filtered out so it can't be cited as evidence against itself.
 Token usage for each step is saved with every record (`usage`).
+
+## Who reviewed each DAG
+
+Every record says who made the accept/reject decisions on its AI-suggested confounders (`review.by`):
+
+- **`human`**: a person reviewed it in the app and approved it. These records are locked.
+- **`ai`**: Nemotron Super reviewed it (`python -m scripts.autoreview`), accepting a suggestion only if it is a
+  plausible common cause of exposure and outcome, not already adjusted for under another name, and not
+  caused by the exposure (a mediator or collider). Each decision carries a one-line reason
+  (`critique.missing_confounders[].review_note`). These records are labelled "AI-reviewed" in the app and stay
+  editable: when a person changes and approves one, it becomes human-reviewed.
+
+The AI reviewer is a stopgap for when there isn't time to review every paper by hand, not a replacement.
+Its decisions are not always consistent between runs (in our testing, the same suggestion was rejected
+in one run and accepted in another), which matches the findings of Huntington-Klein & Murray (2024).
 
 ## Related work
 
@@ -163,6 +179,29 @@ redeploys on hosts with ephemeral disks.
 - Per-IP limit (`RATE_LIMIT_PER_HOUR`, default 5 new papers/hour) and a global `DAILY_CAP` (default 50).
   Send `X-Admin-Token: $ADMIN_TOKEN` to bypass them.
 - At most 2 papers are processed at once.
+
+## Spending cap
+
+Every paid call (Nemotron on Token Factory, Tavily) passes through `app/budget.py`:
+
+- **Before the call**, its worst-case cost (all allowed output tokens used) is added to what has been spent;
+  if that could pass `BUDGET_USD` (default $100), the call is refused. Users see a clear message, and browsing,
+  charts and the network keep working.
+- **After the call**, the real cost is recorded from the token counts Token Factory returns with every
+  response, priced at the models' list prices. An unknown model ID is priced high, so a typo only makes the cap
+  stricter.
+- **Tavily spend is read from Tavily itself** (`GET /usage`, pay-as-you-go credits × $0.008, cached 5 min).
+  Searches inside the free plan cost nothing; on the free plan Tavily stops at its monthly limit anyway.
+- **It fails closed**: if the ledger can't be read, paid calls are refused rather than allowed.
+- **Restarts can't reset it**: on hosts whose disk is wiped on restart (Render's free plan), the Nemotron total is
+  kept in a free [Upstash](https://upstash.com) Redis database (`UPSTASH_REDIS_REST_URL`,
+  `UPSTASH_REDIS_REST_TOKEN`). With `REQUIRE_DURABLE_BUDGET=1` (set in `render.yaml`), the public server keeps
+  paid features off until that ledger is configured. Put the same two values in your local `.env` so local
+  scripts count towards the same total.
+- `GET /api/budget` shows the current spend; `SPENT_BEFORE_LEDGER_USD` counts spend from before the ledger existed.
+
+Token Factory has no spend API we could find, and Nebius budgets only send e-mail alerts (hours late) without
+stopping usage, so set one in the Nebius console as a second layer, not instead of this cap.
 
 ## Deployment
 

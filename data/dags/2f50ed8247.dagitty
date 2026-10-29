@@ -1,0 +1,62 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age [adjusted]
+sex [adjusted]
+bmi [adjusted]
+marital_status [adjusted]
+education [adjusted]
+occupation [adjusted]
+income [adjusted]
+smoking [adjusted]
+physical_activity [adjusted]
+dietary_patterns [adjusted]
+energy_intake [adjusted]
+alcohol_consumption [adjusted]
+number_of_records [adjusted]
+baseline_cesd_score [adjusted]
+use_of_antidepressants [adjusted]
+cds_score [adjusted]
+social_isolation
+family_depression
+neuroticism
+exposure -> outcome
+age -> exposure
+age -> outcome
+sex -> exposure
+sex -> outcome
+bmi -> exposure
+bmi -> outcome
+marital_status -> exposure
+marital_status -> outcome
+education -> exposure
+education -> outcome
+occupation -> exposure
+occupation -> outcome
+income -> exposure
+income -> outcome
+smoking -> exposure
+smoking -> outcome
+physical_activity -> exposure
+physical_activity -> outcome
+dietary_patterns -> exposure
+dietary_patterns -> outcome
+energy_intake -> exposure
+energy_intake -> outcome
+alcohol_consumption -> exposure
+alcohol_consumption -> outcome
+number_of_records -> exposure
+number_of_records -> outcome
+baseline_cesd_score -> exposure
+baseline_cesd_score -> outcome
+use_of_antidepressants -> exposure
+use_of_antidepressants -> outcome
+cds_score -> exposure
+cds_score -> outcome
+social_isolation -> exposure
+social_isolation -> outcome
+family_depression -> exposure
+family_depression -> outcome
+neuroticism -> exposure
+neuroticism -> outcome
+}

@@ -34,11 +34,13 @@ Return JSON with exactly these keys:
 Rules:
 - Exactly one node with role "exposure" and one with role "outcome"; include an edge exposure -> outcome.
 - Every covariate the authors adjusted for, matched on or stratified by is a node with "adjusted": true. Use role "confounder" unless the paper says otherwise.
+- Use the FULLY adjusted model. Covariate lists are often long and sit in table footnotes ("Model 2 adjusted for ...") or a "Covariates" paragraph: include every item in that list, one node each.
 - For each confounder add edges confounder -> exposure and confounder -> outcome.
 - Mediators: exposure -> mediator -> outcome. Mark adjusted only if the paper adjusted for them.
 - Group long lists sensibly (e.g. "Comorbidities (diabetes, hypertension, ...)") if there are more than 15 covariates.
 - reported_effect is the main adjusted estimate for exposure -> outcome, if reported.
-- Snippets must be short (max 20 words). Never copy long passages.
+- Snippets must be short (max 12 words). Never copy long passages. For a covariate from a long list, the snippet
+  can be just the few words of the list around it.
 - Only report numbers that appear in the study text. Never invent or estimate them.
 - The graph must be acyclic.
 

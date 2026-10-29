@@ -137,7 +137,7 @@ dd { margin: 0; }
 .bias { margin-bottom: .7rem; }
 .bias b { margin-right: .4rem; }
 
-.filters input { flex: 1; min-width: 200px; }
+.filters > input { flex: 1; min-width: 200px; }  /* the search box only, not the checkbox */
 .table-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
 table { width: 100%; border-collapse: collapse; font-size: .9rem; }
 th, td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -253,3 +253,22 @@ svg.chart .bar { fill: #c27f00; }
 .ask-sources { font-size: .85rem; padding-left: 1.4rem; margin: .4rem 0 .6rem; }
 .ask-sources li { margin-bottom: .2rem; }
 .ask-method { margin: .4rem 0 0; }
+
+.badge.ai-rev { background: #fff1cc; color: #6b4c00; }
+.review-note { margin-top: .3rem; padding: .3rem .5rem; background: #f7f4ea; border-radius: 6px; }
+.ai-review-note { background: #fff4d6; color: #6b4c00; padding: .5rem .7rem; border-radius: 8px; margin: 0 0 .7rem; }
+
+/* forest plot: about 13 rows visible, the rest scroll; axis stays pinned below */
+.forest-rows { max-height: 400px; overflow-y: auto; overscroll-behavior: contain; border-bottom: 1px solid var(--line); scrollbar-gutter: stable; }
+.forest-axis-wrap { overflow-y: hidden; scrollbar-gutter: stable; }  /* same gutter as the rows, so the axis lines up */
+#forest-chart { overflow-x: auto; }
+#forest-chart svg.chart { min-width: 520px; }
+svg.chart.forest-axis { margin-top: 2px; }
+
+/* dataset table */
+.badge { white-space: nowrap; }
+#table td:last-child { white-space: nowrap; }
+.clamp2 { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pager { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; margin: .7rem 0 1.5rem; }
+.pages { display: flex; align-items: center; gap: .3rem; flex-wrap: wrap; }
+.pages button[aria-current] { cursor: default; }

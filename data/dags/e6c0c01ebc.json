@@ -1,0 +1,654 @@
+{
+  "id": "e6c0c01ebc",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:15:59Z",
+  "approved_at": "2026-10-28T21:25:11Z",
+  "paper": {
+    "title": "Gabapentin, opioids, and the risk of opioid-related death: A population-based nested case-control study",
+    "authors": "Gomes T, Juurlink DN, Antoniou T, Mamdani MM, Paterson JM, van den Brink W.",
+    "year": "2017",
+    "journal": "PLoS medicine",
+    "doi": "10.1371/journal.pmed.1002396",
+    "pmcid": "PMC5626029",
+    "pmid": "28972983",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "case-control",
+    "population": "Adults aged 15 to 105 years receiving prescription opioids in Ontario, Canada, between August 1, 1997 and December 31, 2013, who were eligible for public drug coverage.",
+    "sample_size": "1,256 cases and 4,619 controls",
+    "follow_up": null,
+    "exposure": {
+      "name": "gabapentin use",
+      "definition": "Concomitant gabapentin use in the 120 days preceding the index date"
+    },
+    "outcome": {
+      "name": "opioid-related death",
+      "definition": "Death from an opioid-related cause identified via coroner investigation and postmortem toxicology"
+    },
+    "reported_effect": {
+      "measure": "OR",
+      "value": "1.49",
+      "ci": "1.18-1.88",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exp_gab",
+        "label": "gabapentin use",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "concomitant gabapentin use in the 120 days preceding the index date",
+        "ai_suggested": false
+      },
+      {
+        "id": "outc_death",
+        "label": "opioid-related death",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "death from an opioid-related cause",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_age_sex",
+        "label": "age, sex, year of index date",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on age, sex, year of index date",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_ckd",
+        "label": "history of chronic kidney disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "history of chronic kidney disease",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_opioid_dose",
+        "label": "opioid dose",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for opioid dose",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_meds",
+        "label": "recent medication use",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for medication use in the prior 120 days",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_cancer",
+        "label": "prior cancer diagnosis",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "excluded individuals with prior cancer",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_alcohol",
+        "label": "alcohol use disorder",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "history of alcohol use disorder",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_cci",
+        "label": "Charlson Comorbidity Index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Charlson Comorbidity Index",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_lung",
+        "label": "chronic lung disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "diagnosis of chronic lung disease",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_diabetes",
+        "label": "diabetes",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "diabetes",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_pharmacy",
+        "label": "number of pharmacies",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "number of pharmacies from which each person was dispensed opioids",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_prescriber",
+        "label": "number of opioid prescribers",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "number of opioid prescribers in the past 6 months",
+        "ai_suggested": false
+      },
+      {
+        "id": "conf_risk_index",
+        "label": "disease risk index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "matched on disease risk index",
+        "ai_suggested": false
+      },
+      {
+        "id": "med_methadone",
+        "label": "methadone/buprenorphine",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "methadone/buprenorphine",
+        "ai_suggested": false
+      },
+      {
+        "id": "med_ssri",
+        "label": "SSRI antidepressants",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "SSRI antidepressants",
+        "ai_suggested": false
+      },
+      {
+        "id": "med_benzodiazepines",
+        "label": "benzodiazepines",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "benzodiazepines",
+        "ai_suggested": false
+      },
+      {
+        "id": "med_other_psychotropic",
+        "label": "other psychotropic drugs",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "other psychotropic drugs/CNS depressants",
+        "ai_suggested": false
+      },
+      {
+        "id": "psychiatric_illness_severity",
+        "label": "psychiatric illness severity",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "socioeconomic_status",
+        "label": "socioeconomic status",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "underlying_pain_condition",
+        "label": "underlying pain condition",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "illicit_drug_use",
+        "label": "illicit drug use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "tobacco_use",
+        "label": "tobacco use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exp_gab",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_age_sex",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_age_sex",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_ckd",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_ckd",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_opioid_dose",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_opioid_dose",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_meds",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_meds",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_cancer",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_cancer",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_alcohol",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_alcohol",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_cci",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_cci",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_lung",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_lung",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_diabetes",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_diabetes",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_pharmacy",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_pharmacy",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_prescriber",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_prescriber",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_risk_index",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "conf_risk_index",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_methadone",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_methadone",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_ssri",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_ssri",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_benzodiazepines",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_benzodiazepines",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_other_psychotropic",
+        "target": "exp_gab",
+        "ai_suggested": false
+      },
+      {
+        "source": "med_other_psychotropic",
+        "target": "outc_death",
+        "ai_suggested": false
+      },
+      {
+        "source": "psychiatric_illness_severity",
+        "target": "exp_gab",
+        "ai_suggested": true
+      },
+      {
+        "source": "psychiatric_illness_severity",
+        "target": "outc_death",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "exp_gab",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "outc_death",
+        "ai_suggested": true
+      },
+      {
+        "source": "underlying_pain_condition",
+        "target": "exp_gab",
+        "ai_suggested": true
+      },
+      {
+        "source": "underlying_pain_condition",
+        "target": "outc_death",
+        "ai_suggested": true
+      },
+      {
+        "source": "illicit_drug_use",
+        "target": "exp_gab",
+        "ai_suggested": true
+      },
+      {
+        "source": "illicit_drug_use",
+        "target": "outc_death",
+        "ai_suggested": true
+      },
+      {
+        "source": "tobacco_use",
+        "target": "exp_gab",
+        "ai_suggested": true
+      },
+      {
+        "source": "tobacco_use",
+        "target": "outc_death",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexp_gab [exposure]\noutc_death [outcome]\nconf_age_sex [adjusted]\nconf_ckd [adjusted]\nconf_opioid_dose [adjusted]\nconf_meds [adjusted]\nconf_cancer [adjusted]\nconf_alcohol [adjusted]\nconf_cci [adjusted]\nconf_lung [adjusted]\nconf_diabetes [adjusted]\nconf_pharmacy [adjusted]\nconf_prescriber [adjusted]\nconf_risk_index [adjusted]\nmed_methadone [adjusted]\nmed_ssri [adjusted]\nmed_benzodiazepines [adjusted]\nmed_other_psychotropic [adjusted]\npsychiatric_illness_severity\nsocioeconomic_status\nunderlying_pain_condition\nillicit_drug_use\ntobacco_use\nexp_gab -> outc_death\nconf_age_sex -> exp_gab\nconf_age_sex -> outc_death\nconf_ckd -> exp_gab\nconf_ckd -> outc_death\nconf_opioid_dose -> exp_gab\nconf_opioid_dose -> outc_death\nconf_meds -> exp_gab\nconf_meds -> outc_death\nconf_cancer -> exp_gab\nconf_cancer -> outc_death\nconf_alcohol -> exp_gab\nconf_alcohol -> outc_death\nconf_cci -> exp_gab\nconf_cci -> outc_death\nconf_lung -> exp_gab\nconf_lung -> outc_death\nconf_diabetes -> exp_gab\nconf_diabetes -> outc_death\nconf_pharmacy -> exp_gab\nconf_pharmacy -> outc_death\nconf_prescriber -> exp_gab\nconf_prescriber -> outc_death\nconf_risk_index -> exp_gab\nconf_risk_index -> outc_death\nmed_methadone -> exp_gab\nmed_methadone -> outc_death\nmed_ssri -> exp_gab\nmed_ssri -> outc_death\nmed_benzodiazepines -> exp_gab\nmed_benzodiazepines -> outc_death\nmed_other_psychotropic -> exp_gab\nmed_other_psychotropic -> outc_death\npsychiatric_illness_severity -> exp_gab\npsychiatric_illness_severity -> outc_death\nsocioeconomic_status -> exp_gab\nsocioeconomic_status -> outc_death\nunderlying_pain_condition -> exp_gab\nunderlying_pain_condition -> outc_death\nillicit_drug_use -> exp_gab\nillicit_drug_use -> outc_death\ntobacco_use -> exp_gab\ntobacco_use -> outc_death\n}",
+  "open_backdoors": [
+    "psychiatric illness severity",
+    "socioeconomic status",
+    "underlying pain condition",
+    "illicit drug use",
+    "tobacco use"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "psychiatric illness severity",
+        "rationale": "Patients with severe depression or anxiety are more likely to receive gabapentin for off\u2011label use and also have a heightened risk of opioid\u2011related death due to suicidal intent or polysubstance use.",
+        "edges_to_add": [
+          {
+            "source": "psychiatric illness severity",
+            "target": "exp_gab",
+            "ai_suggested": false
+          },
+          {
+            "source": "psychiatric illness severity",
+            "target": "outc_death",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Study: Gabapentin-Related Overdose Deaths Increasing, Associated with Opioid Use | Pharmacy Times",
+            "url": "https://www.pharmacytimes.com/view/study-gabapentin-related-overdose-deaths-increasing-associated-with-opioid-use"
+          },
+          {
+            "title": "Patients co-prescribed gabapentin and opioids were 49% ...",
+            "url": "https://www.facebook.com/medscape/posts/patients-co-prescribed-gabapentin-and-opioids-were-49-more-likely-to-suffer-an-o/10155961446424189"
+          },
+          {
+            "title": "Gabapentin, Opioids & Risk of Opioid-Related Death",
+            "url": "https://addiction-medicine.org/2017/10/05/gabapentin-opioids-and-risk-of-opioid-related-death"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Psychiatric illness severity is a plausible common cause of gabapentin prescribing and opioid-related death and is not captured by the adjusted medication proxies."
+      },
+      {
+        "label": "socioeconomic status",
+        "rationale": "Lower income or education correlates with both higher gabapentin prescribing (reflecting limited access to alternative pain therapies) and increased risk of opioid\u2011related death via unstable housing, reduced healthcare access, and higher substance\u2011use risk.",
+        "edges_to_add": [
+          {
+            "source": "socioeconomic status",
+            "target": "exp_gab",
+            "ai_suggested": false
+          },
+          {
+            "source": "socioeconomic status",
+            "target": "outc_death",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Study: Gabapentin-Related Overdose Deaths Increasing, Associated with Opioid Use | Pharmacy Times",
+            "url": "https://www.pharmacytimes.com/view/study-gabapentin-related-overdose-deaths-increasing-associated-with-opioid-use"
+          },
+          {
+            "title": "Notes from the Field: Trends in Gabapentin Detection and Involvement in Drug Overdose Deaths \u2014 23 States and the District of Columbia, 2019\u20132020  | MMWR",
+            "url": "https://www.cdc.gov/mmwr/volumes/71/wr/mm7119a3.htm"
+          },
+          {
+            "title": "Tales and Trends of Gabapentin - RADARS System",
+            "url": "https://www.radars.org/system/publications/Gabapentin%20symposium%20rmpds%202022%20-%20JCB.pdf"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Socioeconomic status influences both gabapentin prescribing (via limited alternatives) and opioid-related death risk and is not adjusted for in the study."
+      },
+      {
+        "label": "underlying pain condition",
+        "rationale": "Severe neuropathic or musculoskeletal pain drives clinicians to prescribe both gabapentin and opioids and is itself associated with higher opioid dosing and greater overdose risk.",
+        "edges_to_add": [
+          {
+            "source": "underlying pain condition",
+            "target": "exp_gab",
+            "ai_suggested": false
+          },
+          {
+            "source": "underlying pain condition",
+            "target": "outc_death",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Mortality after concurrent treatment with gabapentin and opioids in older adults with spine diagnoses",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11919562"
+          },
+          {
+            "title": "Frontiers | Risk of major adverse events associated with gabapentinoid and opioid combination therapy: A systematic review and meta-analysis",
+            "url": "https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2022.1009950/full"
+          },
+          {
+            "title": "Notes from the Field: Trends in Gabapentin Detection and Involvement in Drug Overdose Deaths \u2014 23 States and the District of Columbia, 2019\u20132020  | MMWR",
+            "url": "https://www.cdc.gov/mmwr/volumes/71/wr/mm7119a3.htm"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Underlying pain condition drives both gabapentin and opioid prescribing and increases overdose risk, and it is not accounted for among the covariates."
+      },
+      {
+        "label": "illicit drug use",
+        "rationale": "Use of illegal opioids or stimulants increases the likelihood of gabapentin misuse to potentiate euphoric effects and independently raises the probability of fatal overdose.",
+        "edges_to_add": [
+          {
+            "source": "illicit drug use",
+            "target": "exp_gab",
+            "ai_suggested": false
+          },
+          {
+            "source": "illicit drug use",
+            "target": "outc_death",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Notes from the Field: Trends in Gabapentin Detection and Involvement in Drug Overdose Deaths \u2014 23 States and the District of Columbia, 2019\u20132020  | MMWR",
+            "url": "https://www.cdc.gov/mmwr/volumes/71/wr/mm7119a3.htm"
+          },
+          {
+            "title": "Gabapentin - HPSJ/MVHP",
+            "url": "https://www.hpsj.com/improving-the-quality-of-care-risks-associated-with-use-of-gabapentin"
+          },
+          {
+            "title": "Patients co-prescribed gabapentin and opioids were 49% ...",
+            "url": "https://www.facebook.com/medscape/posts/patients-co-prescribed-gabapentin-and-opioids-were-49-more-likely-to-suffer-an-o/10155961446424189"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Illicit drug use precedes and increases both gabapentin misuse and opioid-related death risk, and it is not included in the adjusted set."
+      },
+      {
+        "label": "tobacco use",
+        "rationale": "Smoking is common among patients with chronic pain leading to gabapentin prescribing and independently exacerbates respiratory depression when combined with opioids, raising death risk.",
+        "edges_to_add": [
+          {
+            "source": "tobacco use",
+            "target": "exp_gab",
+            "ai_suggested": false
+          },
+          {
+            "source": "tobacco use",
+            "target": "outc_death",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Notes from the Field: Trends in Gabapentin Detection and Involvement in Drug Overdose Deaths \u2014 23 States and the District of Columbia, 2019\u20132020  | MMWR",
+            "url": "https://www.cdc.gov/mmwr/volumes/71/wr/mm7119a3.htm"
+          },
+          {
+            "title": "Patients co-prescribed gabapentin and opioids were 49% ...",
+            "url": "https://www.facebook.com/medscape/posts/patients-co-prescribed-gabapentin-and-opioids-were-49-more-likely-to-suffer-an-o/10155961446424189"
+          },
+          {
+            "title": "Mortality with concurrent treatment with gabapentin and ...",
+            "url": "https://www.medrxiv.org/content/10.1101/2024.04.26.24306460v1.full-text"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Tobacco use is associated with chronic pain leading to gabapentin use and independently raises opioid overdose risk, and it is not adjusted for (chronic lung disease is an incomplete proxy)."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "confounding by indication",
+        "explanation": "Gabapentin is often prescribed for neuropathic pain or anxiety, which also indicates higher opioid dosing and greater vulnerability to overdose; residual confounding may persist despite adjustment for opioid dose and comorbidity indices.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias (prevalence-incidence bias)",
+        "explanation": "Controls were selected from opioid users alive at the index date; if gabapentin influences short\u2011term mortality, those who die early are excluded as controls, potentially inflating the observed association.",
+        "severity": "medium"
+      },
+      {
+        "type": "measurement error (exposure misclassification)",
+        "explanation": "Gabapentin exposure was ascertained from pharmacy dispensary records, which may not reflect actual ingestion; non\u2011adherence or over\u2011the\u2011counter use could dilute or exaggerate the true effect.",
+        "severity": "low"
+      },
+      {
+        "type": "residual confounding (unmeasured pain severity)",
+        "explanation": "Although the model adjusted for opioid dose and comorbidity scores, granular data on pain intensity or specific pain diagnoses were unavailable, leaving room for confounding by the underlying pain condition.",
+        "severity": "medium"
+      },
+      {
+        "type": "immortal time bias",
+        "explanation": "The 120\u2011day exposure window requires survival to receive gabapentin; cases who died before accumulating sufficient exposure time are automatically classified as unexposed, biasing the odds ratio away from the null.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study adjusted for a broad set of demographic, clinical, and medication covariates, but important confounders such as psychiatric illness severity, socioeconomic status, pain severity, illicit drug use, and tobacco use were not measured. Additionally, selection biases related to the requirement of surviving the exposure window and potential exposure misclassification may further distort the estimate. Consequently, while the observed association is suggestive, confidence in a causal interpretation is limited.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

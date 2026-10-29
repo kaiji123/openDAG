@@ -7,7 +7,7 @@ from typing import List, Optional
 
 import httpx
 
-from . import config, db
+from . import budget, config, db
 from .schemas import Critique
 
 TAVILY_URL = "https://api.tavily.com/search"
@@ -21,12 +21,14 @@ def search(query: str, max_results: int = 5) -> List[dict]:
         return json.loads(cached)
     if not config.TAVILY_API_KEY:
         return []
+    budget.guard_tavily()
     r = httpx.post(
         TAVILY_URL,
         headers={"Authorization": f"Bearer {config.TAVILY_API_KEY}"},
         json={"query": query, "max_results": max_results, "search_depth": "basic", "topic": "general"},
         timeout=30,
     )
+    budget.record_tavily()
     r.raise_for_status()
     results = [
         {"title": x.get("title", "")[:200], "url": x.get("url", "")}
@@ -64,7 +66,7 @@ def evidence_for(label: str, exposure: str, outcome: str, paper: Optional[dict] 
     try:
         # ask for a couple of extra results so filtering still leaves up to 3
         return clean(search(f"{label} {exposure} {outcome} confounding", max_results=5), paper)[:3]
-    except httpx.HTTPError:
+    except (httpx.HTTPError, budget.BudgetExceeded):
         return []  # evidence is a bonus; never fail the pipeline on it
 
 

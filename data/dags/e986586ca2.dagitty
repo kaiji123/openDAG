@@ -1,0 +1,38 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age [adjusted]
+smoking_status [adjusted]
+alcohol_intake [adjusted]
+bmi [adjusted]
+systolic_bp [adjusted]
+socioeconomic_status [adjusted]
+cups_per_day [adjusted]
+physical_activity
+self_rated_health
+medication_use
+depressive_symptoms
+exposure -> outcome
+age -> exposure
+age -> outcome
+smoking_status -> exposure
+smoking_status -> outcome
+alcohol_intake -> exposure
+alcohol_intake -> outcome
+bmi -> exposure
+bmi -> outcome
+systolic_bp -> exposure
+systolic_bp -> outcome
+socioeconomic_status -> exposure
+socioeconomic_status -> outcome
+cups_per_day -> exposure
+cups_per_day -> outcome
+physical_activity -> exposure
+physical_activity -> outcome
+self_rated_health -> exposure
+self_rated_health -> outcome
+medication_use -> exposure
+medication_use -> outcome
+depressive_symptoms -> exposure
+depressive_symptoms -> outcome
+}

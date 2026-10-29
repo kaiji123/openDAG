@@ -8,3 +8,6 @@ __pycache__/
 .DS_Store
 *.db-wal
 *.db-shm
+node_modules/
+*.log
+.hyperframes/

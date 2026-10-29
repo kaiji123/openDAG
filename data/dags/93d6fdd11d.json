@@ -439,5 +439,9 @@
     "evidence_search": "tavily",
     "provider": "Nebius Token Factory"
   },
+  "review": {
+    "by": "human",
+    "model": null
+  },
   "dataset_license": "CC-BY-4.0"
 }

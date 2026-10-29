@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape"
+  data-composition-variables='[
+    {"id":"color-ground","type":"color","label":"Background","default":"#f7f7f4"},
+    {"id":"color-ink","type":"color","label":"Text","default":"#1d2327"},
+    {"id":"color-accent","type":"color","label":"Accent (AI amber)","default":"#d08a00"},
+    {"id":"cta","type":"string","label":"End card link","default":"github.com/kaiji123/openDAG"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="assets/rec/track.js"></script>
+    <script src="assets/rec/track-network.js"></script>
+    <style>
+      :root { --color-ground: #f7f7f4; --color-ink: #1d2327; --color-accent: #d08a00; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--color-ground); }
+      #root { width: 100%; height: 100%; position: relative; font-family: "Inter", sans-serif; }
+      #bg { position: absolute; inset: 0; background: var(--color-ground); }
+    </style>
+  </head>
+  <body>
+    <!-- 0-3.6 s the paper's title and the question; 3.6-56.4 s the real app, recorded; 56.4-71 s the network; 71-78 s claim and end card -->
+    <div data-hf-id="hf-6uxl" id="root" data-composition-id="main" data-start="0" data-duration="78" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-0o86" id="bg" class="clip" data-start="0" data-duration="78" data-track-index="0"></div>
+      <div data-hf-id="hf-ayc5" id="hook" data-composition-id="hook" data-composition-src="compositions/hook.html"
+        data-start="0" data-duration="3.6" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-nzyj" id="screen" data-composition-id="screen" data-composition-src="compositions/screen.html"
+        data-start="3.6" data-duration="52.8" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="network" data-composition-id="network" data-composition-src="compositions/network.html"
+        data-start="56.4" data-duration="14.6" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-ix2s" id="endcard" data-composition-id="endcard" data-composition-src="compositions/endcard.html"
+        data-start="71" data-duration="7" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <audio data-hf-id="hf-jez1" id="soundtrack" class="clip" src="assets/audio/master.wav" data-start="0" data-duration="78" data-track-index="2" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

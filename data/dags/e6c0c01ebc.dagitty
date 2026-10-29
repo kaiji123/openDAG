@@ -1,0 +1,68 @@
+dag {
+exp_gab [exposure]
+outc_death [outcome]
+conf_age_sex [adjusted]
+conf_ckd [adjusted]
+conf_opioid_dose [adjusted]
+conf_meds [adjusted]
+conf_cancer [adjusted]
+conf_alcohol [adjusted]
+conf_cci [adjusted]
+conf_lung [adjusted]
+conf_diabetes [adjusted]
+conf_pharmacy [adjusted]
+conf_prescriber [adjusted]
+conf_risk_index [adjusted]
+med_methadone [adjusted]
+med_ssri [adjusted]
+med_benzodiazepines [adjusted]
+med_other_psychotropic [adjusted]
+psychiatric_illness_severity
+socioeconomic_status
+underlying_pain_condition
+illicit_drug_use
+tobacco_use
+exp_gab -> outc_death
+conf_age_sex -> exp_gab
+conf_age_sex -> outc_death
+conf_ckd -> exp_gab
+conf_ckd -> outc_death
+conf_opioid_dose -> exp_gab
+conf_opioid_dose -> outc_death
+conf_meds -> exp_gab
+conf_meds -> outc_death
+conf_cancer -> exp_gab
+conf_cancer -> outc_death
+conf_alcohol -> exp_gab
+conf_alcohol -> outc_death
+conf_cci -> exp_gab
+conf_cci -> outc_death
+conf_lung -> exp_gab
+conf_lung -> outc_death
+conf_diabetes -> exp_gab
+conf_diabetes -> outc_death
+conf_pharmacy -> exp_gab
+conf_pharmacy -> outc_death
+conf_prescriber -> exp_gab
+conf_prescriber -> outc_death
+conf_risk_index -> exp_gab
+conf_risk_index -> outc_death
+med_methadone -> exp_gab
+med_methadone -> outc_death
+med_ssri -> exp_gab
+med_ssri -> outc_death
+med_benzodiazepines -> exp_gab
+med_benzodiazepines -> outc_death
+med_other_psychotropic -> exp_gab
+med_other_psychotropic -> outc_death
+psychiatric_illness_severity -> exp_gab
+psychiatric_illness_severity -> outc_death
+socioeconomic_status -> exp_gab
+socioeconomic_status -> outc_death
+underlying_pain_condition -> exp_gab
+underlying_pain_condition -> outc_death
+illicit_drug_use -> exp_gab
+illicit_drug_use -> outc_death
+tobacco_use -> exp_gab
+tobacco_use -> outc_death
+}

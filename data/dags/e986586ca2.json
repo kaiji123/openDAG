@@ -1,0 +1,473 @@
+{
+  "id": "e986586ca2",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:14:13Z",
+  "approved_at": "2026-10-28T21:25:37Z",
+  "paper": {
+    "title": "Use of sugar in coffee and tea and long-term risk of mortality in older adult Danish men: 32 years of follow-up from a prospective cohort study",
+    "authors": "Treskes RW, Clausen J, Marott JL, Jensen GB, Holtermann A, Gyntelberg F, Jensen MT.",
+    "year": "2023",
+    "journal": "PloS one",
+    "doi": "10.1371/journal.pone.0292882",
+    "pmcid": "PMC10584177",
+    "pmid": "37851689",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Danish men aged 63\u00b15 years from the Copenhagen Male Study cohort, followed from 1985 to 2017",
+    "sample_size": "2923 (1007 exposed)",
+    "follow_up": "32 years",
+    "exposure": {
+      "name": "Sugar addition to tea or coffee",
+      "definition": "Self-reported addition of sugar to coffee or tea (yes/no)"
+    },
+    "outcome": {
+      "name": "All-cause mortality",
+      "definition": "Death from any cause identified via Danish national registries"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.06",
+      "ci": "0.98-1.16",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "Sugar addition",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "adding sugar to coffee or tea (yes/no)",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "All-cause mortality",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "all-cause mortality assessed through national registries",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age, smoking status, daily alcohol intake, systolic blood pressure, body mass index, number of cups of coffee and/or tea consumed \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking_status",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age, smoking status, daily alcohol intake, systolic blood pressure, body mass index, number of cups of coffee and/or tea consumed \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_intake",
+        "label": "Daily alcohol intake",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age, smoking status, daily alcohol intake, systolic blood pressure, body mass index, number of cups of coffee and/or tea consumed \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "bmi",
+        "label": "Body mass index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age, smoking status, daily alcohol intake, systolic blood pressure, body mass index, number of cups of coffee and/or tea consumed \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "systolic_bp",
+        "label": "Systolic blood pressure",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age, smoking status, daily alcohol intake, systolic blood pressure, body mass index, number of cups of coffee and/or tea consumed \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "socioeconomic_status",
+        "label": "Socioeconomic status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age, smoking status, daily alcohol intake, systolic blood pressure, body mass index, number of cups of coffee and/or tea consumed \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "cups_per_day",
+        "label": "Cups of coffee/tea per day",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "number of cups of coffee and/or tea consumed per day",
+        "ai_suggested": false
+      },
+      {
+        "id": "physical_activity",
+        "label": "Physical activity",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "self_rated_health",
+        "label": "Self-rated health",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "medication_use",
+        "label": "Medication use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "depressive_symptoms",
+        "label": "Depressive symptoms",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_intake",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_intake",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "systolic_bp",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "systolic_bp",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "cups_per_day",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "cups_per_day",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "physical_activity",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "self_rated_health",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "self_rated_health",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "medication_use",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "medication_use",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "depressive_symptoms",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "depressive_symptoms",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsmoking_status [adjusted]\nalcohol_intake [adjusted]\nbmi [adjusted]\nsystolic_bp [adjusted]\nsocioeconomic_status [adjusted]\ncups_per_day [adjusted]\nphysical_activity\nself_rated_health\nmedication_use\ndepressive_symptoms\nexposure -> outcome\nage -> exposure\nage -> outcome\nsmoking_status -> exposure\nsmoking_status -> outcome\nalcohol_intake -> exposure\nalcohol_intake -> outcome\nbmi -> exposure\nbmi -> outcome\nsystolic_bp -> exposure\nsystolic_bp -> outcome\nsocioeconomic_status -> exposure\nsocioeconomic_status -> outcome\ncups_per_day -> exposure\ncups_per_day -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\nself_rated_health -> exposure\nself_rated_health -> outcome\nmedication_use -> exposure\nmedication_use -> outcome\ndepressive_symptoms -> exposure\ndepressive_symptoms -> outcome\n}",
+  "open_backdoors": [
+    "Physical activity",
+    "Self-rated health",
+    "Medication use",
+    "Depressive symptoms"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Physical activity",
+        "rationale": "Less active men may prefer sweeter beverages and also have higher mortality risk.",
+        "edges_to_add": [
+          {
+            "source": "Physical activity",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Physical activity",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Physical activity combined with tea consumption could further reduce all-cause and cancer-specific mortality | Scientific Reports",
+            "url": "https://www.nature.com/articles/s41598-024-73962-z"
+          },
+          {
+            "title": "Consumption of coffee and tea with all-cause and cause-specific mortality: a prospective cohort study | BMC Medicine | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12916-022-02636-2"
+          },
+          {
+            "title": "Coffee, Green Tea, and Type 2 Diabetes Mortality Rates | Cardiometabolic Health Congress",
+            "url": "https://www.cardiometabolichealth.org/coffee-green-tea-and-type-2-diabetes-mortality-rates"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Physical activity influences both the likelihood of adding sugar to beverages (via taste or lifestyle habits) and all-cause mortality risk, and it is not adjusted for nor caused by the exposure."
+      },
+      {
+        "label": "Total dietary sugar",
+        "rationale": "Higher overall sugar intake from foods correlates with adding sugar to drinks and independently increases mortality risk.",
+        "edges_to_add": [
+          {
+            "source": "Total dietary sugar",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Total dietary sugar",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Frontiers | The associations of unsweetened, sugar-sweetened, and artificially sweetened tea consumption with all-cause and cause-specific mortality in 195,361 UK Biobank participants: a large prospec",
+            "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2025.1649279/full"
+          },
+          {
+            "title": "Adding sugar to coffee, tea may not significantly impact health",
+            "url": "https://resources.healthgrades.com/pro/adding-sugar-to-coffee-tea-may-not-significantly-impact-health"
+          },
+          {
+            "title": "Consumption of coffee and tea with all-cause and cause-specific mortality: a prospective cohort study | BMC Medicine | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12916-022-02636-2"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Total dietary sugar includes the sugar added to tea/coffee itself, making it downstream of the exposure; adjusting would constitute overadjustment bias."
+      },
+      {
+        "label": "Self-rated health",
+        "rationale": "Poor self-rated health may lead individuals to avoid sugar (or seek comfort via sweetened drinks) and predicts mortality.",
+        "edges_to_add": [
+          {
+            "source": "Self-rated health",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Self-rated health",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Frontiers | Coffee and tea consumption and cardiovascular disease and all-cause and cause-specific mortality in individuals with diabetes mellitus: a meta-analysis of prospective observational studies",
+            "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2025.1570644/full"
+          },
+          {
+            "title": "Coffee Consumption and Mortality among United States Adults: A Prospective Cohort Study",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12308089"
+          },
+          {
+            "title": "Coffee, Green Tea, and Type 2 Diabetes Mortality Rates | Cardiometabolic Health Congress",
+            "url": "https://www.cardiometabolichealth.org/coffee-green-tea-and-type-2-diabetes-mortality-rates"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Poor self-rated health can affect both the decision to add sugar (e.g., avoidance or comfort-seeking) and mortality risk, and it is not already accounted for in the adjustment set."
+      },
+      {
+        "label": "Medication use",
+        "rationale": "Use of medications for chronic conditions may influence dietary habits (including sugar addition) and is associated with mortality.",
+        "edges_to_add": [
+          {
+            "source": "Medication use",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Medication use",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Consumption of coffee and tea with all-cause and cause-specific mortality: a prospective cohort study | BMC Medicine | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12916-022-02636-2"
+          },
+          {
+            "title": "sweetened-and-unsweetened-coffee.pdf",
+            "url": "https://md.teyit.org/file/sweetened-and-unsweetened-coffee.pdf"
+          },
+          {
+            "title": "Coffee, Green Tea, and Type 2 Diabetes Mortality Rates | Cardiometabolic Health Congress",
+            "url": "https://www.cardiometabolichealth.org/coffee-green-tea-and-type-2-diabetes-mortality-rates"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Medication use reflects underlying chronic conditions that may shape dietary habits (including sugar addition) and predict mortality, and it is not adjusted for nor caused by the exposure."
+      },
+      {
+        "label": "Depressive symptoms",
+        "rationale": "Depression can increase preference for sweet tastes and is linked to higher mortality.",
+        "edges_to_add": [
+          {
+            "source": "Depressive symptoms",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Depressive symptoms",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Consumption of coffee and tea with all-cause and cause-specific mortality: a prospective cohort study",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9673438"
+          },
+          {
+            "title": "Does adding sugar to coffee and tea impact your lifespan? 32-year ...",
+            "url": "https://www.news-medical.net/news/20231022/Does-adding-sugar-to-coffee-and-tea-impact-your-lifespan-32-year-study-reveals-surprising-results.aspx"
+          },
+          {
+            "title": "sweetened-and-unsweetened-coffee.pdf - Teyit",
+            "url": "https://md.teyit.org/file/sweetened-and-unsweetened-coffee.pdf"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Depressive symptoms can increase preference for sweetened drinks and independently raise mortality risk, satisfying the confounder criteria and not being adjusted for."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "measurement error",
+        "explanation": "Sugar addition was self\u2011reported once at baseline, likely subject to recall and social desirability bias, leading to non\u2011differential misclassification of exposure.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "The cohort excluded men with prevalent cardiovascular disease, cancer, or diabetes at enrollment, creating a healthier volunteer sample that may limit generalizability and induce bias if the exposure\u2011outcome relation differs in the excluded group.",
+        "severity": "medium"
+      },
+      {
+        "type": "healthy user effect",
+        "explanation": "Men who add sugar may be less health\u2011conscious overall, and this unmeasured health\u2011consciousness could confound the observed null association.",
+        "severity": "low"
+      },
+      {
+        "type": "residual confounding",
+        "explanation": "Important lifestyle factors such as physical activity, total dietary sugar intake, and mental health were not measured, leaving open paths for confounding despite adjustment for the listed covariates.",
+        "severity": "medium"
+      },
+      {
+        "type": "loss to follow-up",
+        "explanation": "Although vital status was ascertained via national registries, a small proportion of participants may have emigrated or had incomplete registry linkage, potentially biasing results if related to both sugar use and mortality.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study\u2019s hazard ratio is close to null with a confidence interval that includes no effect, and while several key confounders were controlled, important lifestyle and health\u2011related variables were not measured. Measurement error in exposure assessment and selection of a relatively healthy volunteer sample further weaken causal inference. Consequently, the evidence for a causal effect of adding sugar to tea or coffee on mortality is weak and should be interpreted cautiously.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

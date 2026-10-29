@@ -1,0 +1,53 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age [adjusted]
+sex [adjusted]
+race_ethnicity [adjusted]
+bmi [adjusted]
+smoking [adjusted]
+employment [adjusted]
+self_reported_health [adjusted]
+grip_strength [adjusted]
+gait_speed [adjusted]
+comorbidities [adjusted]
+device_wear_time [adjusted]
+short_bouts
+frailty_index
+cognitive_function
+depressive_symptoms
+education_level
+exposure -> outcome
+age -> exposure
+age -> outcome
+sex -> exposure
+sex -> outcome
+race_ethnicity -> exposure
+race_ethnicity -> outcome
+bmi -> exposure
+bmi -> outcome
+smoking -> exposure
+smoking -> outcome
+employment -> exposure
+employment -> outcome
+self_reported_health -> exposure
+self_reported_health -> outcome
+grip_strength -> exposure
+grip_strength -> outcome
+gait_speed -> exposure
+gait_speed -> outcome
+comorbidities -> exposure
+comorbidities -> outcome
+device_wear_time -> exposure
+device_wear_time -> outcome
+exposure -> short_bouts
+short_bouts -> outcome
+frailty_index -> exposure
+frailty_index -> outcome
+cognitive_function -> exposure
+cognitive_function -> outcome
+depressive_symptoms -> exposure
+depressive_symptoms -> outcome
+education_level -> exposure
+education_level -> outcome
+}

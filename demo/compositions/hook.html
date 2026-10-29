@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #f7f7f4; font-family: "Inter", sans-serif; }
+    #hk-title { position: absolute; left: 210px; top: 330px; width: 1500px; font-size: 76px; font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.08; color: #c9ccc8; }
+    #hk-src { position: absolute; left: 212px; top: 272px; font-size: 30px; font-weight: 700; color: #5f6b73; opacity: 0; }
+    #hk-q { position: absolute; left: 210px; top: 660px; font-size: 54px; font-weight: 700; color: #1d2327; opacity: 0; }
+    #hk-q span { color: #9a6400; }
+  </style>
+  <div data-hf-id="hf-ktv8" id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-e8on" id="hk-src">BMC Medicine, 2022</div>
+    <h1 data-hf-id="hf-mmsl" id="hk-title"><span data-hf-id="hf-p4zv">Regular</span> <span data-hf-id="hf-r7ix">proton</span> <span data-hf-id="hf-ngtz">pump</span> <span data-hf-id="hf-5i3h">inhibitor</span> <span data-hf-id="hf-i1wo">use</span> <span data-hf-id="hf-kyh6">and</span> <span data-hf-id="hf-udwr">incident</span> <span data-hf-id="hf-6u7g">dementia</span></h1>
+    <div data-hf-id="hf-q4q2" id="hk-q">Should you <span data-hf-id="hf-344x">trust</span> it?</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // the paper's own title builds word by word, grey to ink, with no movement
+      tl.fromTo("#hk-src", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, 0.05);
+      document.querySelectorAll("#hk-title span").forEach((w, i) =>
+        tl.fromTo(w, { color: "#c9ccc8" }, { color: "#1d2327", duration: 0.12, ease: "none" }, 0.2 + i * 0.09));
+      // the viewer's question lands as one line
+      tl.fromTo("#hk-q", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 2.1);
+      // leave: blur-swap into the paper's page (the ground never cuts)
+      tl.to(["#hk-title", "#hk-src", "#hk-q"], { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power3.in" }, 3.38);
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

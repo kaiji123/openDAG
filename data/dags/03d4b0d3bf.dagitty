@@ -1,0 +1,56 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+age [adjusted]
+sex [adjusted]
+history_self_harm [adjusted]
+psychotropic_meds [adjusted]
+alcohol_abuse [adjusted]
+mental_health_admission [adjusted]
+ses [adjusted]
+charlson_comorbidity [adjusted]
+physician_visits [adjusted]
+ed_visits [adjusted]
+psychiatrist_visits [adjusted]
+past_psychotropic_use [adjusted]
+psychiatric_comorbidities [adjusted]
+total_drugs_dispensed [adjusted]
+prior_quit_attempts
+recent_life_stressors
+illicit_substance_use
+exposure -> outcome
+age -> exposure
+age -> outcome
+sex -> exposure
+sex -> outcome
+history_self_harm -> exposure
+history_self_harm -> outcome
+psychotropic_meds -> exposure
+psychotropic_meds -> outcome
+alcohol_abuse -> exposure
+alcohol_abuse -> outcome
+mental_health_admission -> exposure
+mental_health_admission -> outcome
+ses -> exposure
+ses -> outcome
+charlson_comorbidity -> exposure
+charlson_comorbidity -> outcome
+physician_visits -> exposure
+physician_visits -> outcome
+ed_visits -> exposure
+ed_visits -> outcome
+psychiatrist_visits -> exposure
+psychiatrist_visits -> outcome
+past_psychotropic_use -> exposure
+past_psychotropic_use -> outcome
+psychiatric_comorbidities -> exposure
+psychiatric_comorbidities -> outcome
+total_drugs_dispensed -> exposure
+total_drugs_dispensed -> outcome
+prior_quit_attempts -> exposure
+prior_quit_attempts -> outcome
+recent_life_stressors -> exposure
+recent_life_stressors -> outcome
+illicit_substance_use -> exposure
+illicit_substance_use -> outcome
+}

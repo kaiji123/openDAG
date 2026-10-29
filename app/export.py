@@ -6,7 +6,7 @@ from pathlib import Path
 
 PUBLIC_KEYS = [
     "id", "schema_version", "status", "created_at", "approved_at", "paper", "study",
-    "dag", "dagitty", "open_backdoors", "critique", "models",
+    "dag", "dagitty", "open_backdoors", "critique", "models", "review",
 ]
 
 
@@ -31,6 +31,7 @@ def summary(rec: dict) -> dict:
         "n_nodes": len(rec["dag"]["nodes"]),
         "n_missing": len(rec["critique"].get("missing_confounders", [])),
         "approved_at": rec.get("approved_at"),
+        "reviewed_by": (rec.get("review") or {}).get("by", "human" if rec["status"] == "approved" else None),
     }
 
 

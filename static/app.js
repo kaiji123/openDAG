@@ -121,7 +121,7 @@ function card(r) {
     <div class="eo">${esc(r.exposure)}<span class="arrow">→</span>${esc(r.outcome)}</div>
     <div class="small muted">${esc(r.design)} · ${esc(r.journal || "")} ${esc(r.year || "")}</div>
     <div class="small">${esc((r.title || "").slice(0, 110))}</div>
-    <div class="small muted">${r.n_nodes} variables · ${r.n_missing} AI-suggested · <span class="badge ${esc(r.status)}">${esc(r.status)}</span></div>
+    <div class="small muted">${r.n_nodes} variables · ${r.n_missing} AI-suggested · ${statusBadge(r.status, r.reviewed_by)}</div>
   </a>`;
 }
 
@@ -132,6 +132,14 @@ async function loadRecent() {
 }
 
 // ---------- record view ----------
+// Human-approved records are locked; AI-reviewed ones can still be re-reviewed by a person.
+const reviewedBy = (r) => (r.review && r.review.by) || (r.status === "approved" ? "human" : null);
+const isEditable = (r) => r.status !== "approved" || reviewedBy(r) === "ai";
+function statusBadge(status, by) {
+  if (status !== "approved") return `<span class="badge draft">draft</span>`;
+  return by === "ai" ? `<span class="badge approved ai-rev" title="Accept/reject decisions made by Nemotron Super, not yet checked by a person">approved · AI-reviewed</span>`
+                     : `<span class="badge approved" title="Reviewed and approved by a person">approved · human-reviewed</span>`;
+}
 function suggestionFor(nodeId) {
   return (state.rec.critique.missing_confounders || []).find((m) => slug(m.label) === nodeId);
 }
@@ -158,6 +166,44 @@ function visibleDag() {
   return { nodes, edges };
 }
 
+// The classic epidemiology drawing: exposure left, outcome right, the paper's confounders in rows above,
+// mediators on the line between, AI-suggested confounders in their own row underneath, anything else below.
+// Rows are sized so the whole graph fits the box at a readable scale, however many covariates a paper has.
+function epiLayout(nodes, box) {
+  const E = nodes.find((n) => n.role === "exposure"), O = nodes.find((n) => n.role === "outcome");
+  if (!E || !O) return null;
+  const isAi = (n) => n.ai_suggested;
+  const top = nodes.filter((n) => !isAi(n) && n !== E && n !== O && !["mediator", "collider"].includes(n.role));
+  const mid = nodes.filter((n) => !isAi(n) && n.role === "mediator");
+  const ai = nodes.filter(isAi);
+  const low = nodes.filter((n) => !isAi(n) && n.role === "collider");
+  const COL = 150, ROW = 62, aspect = Math.max(1.1, (box.clientWidth || 800) / (box.clientHeight || 520));
+  let best = 4, bestErr = Infinity;
+  for (let c = 3; c <= 12; c++) {   // columns that best match the box's shape
+    const rows = Math.ceil(top.length / c) + 2 + Math.ceil(ai.length / c) + Math.ceil(low.length / c);
+    const err = Math.abs(Math.log((c * COL) / (rows * ROW) / aspect));
+    if (err < bestErr) { best = c; bestErr = err; }
+  }
+  const cols = Math.max(best, Math.min(4, mid.length + 2));
+  const span = (cols - 1) * COL, pos = {};
+  const place = (list, y0) => {
+    list.forEach((n, i) => {
+      const row = Math.floor(i / cols), inRow = Math.min(cols, list.length - row * cols), k = i % cols;
+      const step = inRow > 1 ? span / (inRow - 1) : 0;
+      pos[n.id] = { x: inRow > 1 ? k * step : span / 2, y: y0 + row * ROW };
+    });
+    return y0 + Math.ceil(list.length / cols) * ROW;
+  };
+  let y = place(top, 0) + ROW * 0.6;
+  pos[E.id] = { x: 0, y };
+  pos[O.id] = { x: span, y };
+  mid.forEach((n, i) => (pos[n.id] = { x: (span * (i + 1)) / (mid.length + 1), y }));
+  y += ROW * 1.4;
+  y = place(ai, y);
+  place(low, y + ROW * 0.4);
+  return { name: "preset", positions: (n) => pos[n.id()] || { x: span / 2, y: y + ROW }, fit: true, padding: 18 };
+}
+
 function drawGraph() {
   const { nodes, edges } = visibleDag();
   const exp = nodes.find((n) => n.role === "exposure");
@@ -166,7 +212,8 @@ function drawGraph() {
     ...edges.map((e, i) => {
       const main = exp && e.source === exp.id && nodes.find((n) => n.id === e.target)?.role === "outcome";
       return { data: { id: `e${i}_${e.source}_${e.target}`, source: e.source, target: e.target },
-               classes: [e.ai_suggested ? "ai" : "", main ? "main" : ""].join(" ") };
+               classes: [e.ai_suggested ? "ai" : "", main ? "main" : "",
+                         !main && !e.ai_suggested && nodes.find((n) => n.id === e.source)?.role === "confounder" ? "conf" : ""].join(" ") };
     }),
   ];
   if (state.cy) state.cy.destroy();
@@ -189,13 +236,14 @@ function drawGraph() {
       { selector: "edge", style: {
           width: 1.6, "line-color": "#a6b0b7", "target-arrow-color": "#a6b0b7",
           "target-arrow-shape": "triangle", "curve-style": "bezier", "arrow-scale": 1.1 } },
+      { selector: "edge.conf", style: { width: 1, opacity: 0.4 } },
       { selector: "edge.main", style: { width: 3, "line-color": "#5d6970", "target-arrow-color": "#5d6970" } },
       { selector: "edge.ai", style: { "line-style": "dashed", "line-color": "#e0b04a", "target-arrow-color": "#e0b04a" } },
       { selector: ":selected", style: { "overlay-color": "#2f5d8a", "overlay-opacity": 0.18, "overlay-padding": 6 } },
     ],
-    layout: window.cytoscapeDagre
+    layout: epiLayout(nodes, $("#cy")) || (window.cytoscapeDagre
       ? { name: "dagre", rankDir: "LR", nodeSep: 25, rankSep: 90, padding: 20 }
-      : { name: "breadthfirst", directed: true, padding: 20 },
+      : { name: "breadthfirst", directed: true, padding: 20 }),
   });
   state.cy.on("tap", "node", (ev) => selectNode(ev.target.id()));
   state.cy.on("tap", "edge", (ev) => select({ type: "edge", source: ev.target.data("source"), target: ev.target.data("target") }));
@@ -205,7 +253,7 @@ function drawGraph() {
 
 function select(sel) {
   state.selected = sel;
-  const editable = state.rec.status !== "approved";
+  const editable = isEditable(state.rec);
   $("#delete-selected").disabled = !sel || !editable;
   $("#toggle-adjusted").disabled = !sel || sel.type !== "node" || !editable;
   if (!sel || sel.type !== "node") $("#node-detail").hidden = true;
@@ -238,7 +286,7 @@ function fillEdgeSelects(nodes) {
 
 function renderSuggestions() {
   const list = state.rec.critique.missing_confounders || [];
-  const editable = state.rec.status !== "approved";
+  const editable = isEditable(state.rec);
   $("#suggestions").innerHTML = list.length ? list.map((m, i) => {
     const st = state.status[m.label] || "suggested";
     return `<div class="sugg ${st}" data-i="${i}">
@@ -246,6 +294,7 @@ function renderSuggestions() {
         ${editable ? `<span><button class="mini secondary" data-acc="${i}">Accept</button>
         <button class="mini secondary danger" data-rej="${i}">Reject</button></span>` : ""}</div>
       <div class="small">${highlight(m.rationale, [state.rec.study.exposure.name, state.rec.study.outcome.name])}</div>
+      ${m.review_note ? `<div class="small review-note"><b>${st === "accepted" ? "Accepted" : st === "rejected" ? "Rejected" : "Note"} by Nemotron Super:</b> ${esc(m.review_note)}</div>` : ""}
       ${m.evidence?.length ? `<ul>${m.evidence.map((e) => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title || e.url)}</a></li>`).join("")}</ul>` : `<div class="small muted">No evidence links found.</div>`}
     </div>`;
   }).join("") : `<p class="small muted">None suggested.</p>`;
@@ -276,7 +325,9 @@ function dirty() { $("#edit-msg").textContent = "Unsaved changes."; }
 function highlight(text, terms = []) {
   const words = terms.filter((t) => t && t.length > 2).map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
   const num = String.raw`\d(?:[\d,]*\d)?(?:\.\d+)?(?:\s?(?:%|years?|months?|weeks?|days?))?`;
-  const re = new RegExp(`(${words.length ? words.join("|") + "|" : ""}${num})`, "gi");
+  // whole words and stand-alone numbers only: not "PPI use" inside "PPI users", not the "12" of "B12"
+  const wordPart = words.length ? `(?<![A-Za-z])(?:${words.join("|")})(?![A-Za-z])|` : "";
+  const re = new RegExp(`(${wordPart}(?<![A-Za-z0-9])${num})`, "gi");
   return String(text ?? "").split(re).map((part, i) => {
     if (i % 2 === 0) return esc(part);
     return /^\d/.test(part) ? `<mark class="num">${esc(part)}</mark>` : `<mark class="term">${esc(part)}</mark>`;
@@ -318,6 +369,17 @@ function tile(label, value, sub = "", cls = "") {
   return `<div class="tile ${cls}"><div class="t-label">${esc(label)}</div><div class="t-value">${value}</div>${sub ? `<div class="t-sub">${sub}</div>` : ""}</div>`;
 }
 
+function participantsTile(s) {
+  // "501002 (272605 (10.7% exposed))" -> 501,002 large, the detail small underneath
+  const m = String(s.sample_size).match(/\d[\d,]*/);
+  const n = m ? Number(m[0].replace(/,/g, "")) : NaN;
+  const head = isFinite(n) ? n.toLocaleString("en-GB") : esc(s.sample_size);
+  let rest = m ? String(s.sample_size).slice(m.index + m[0].length).trim() : "";
+  if (rest.startsWith("(") && rest.endsWith(")")) rest = rest.slice(1, -1).trim();   // one outer pair only
+  const sub = [rest && esc(rest), s.follow_up && `Follow-up: ${esc(s.follow_up)}`].filter(Boolean).join("<br>");
+  return tile("Participants", head, sub);
+}
+
 function renderKeyFacts(r) {
   const s = r.study, eff = s.reported_effect;
   const nodes = r.dag.nodes;
@@ -339,7 +401,7 @@ function renderKeyFacts(r) {
     : `<div class="tile hero"><div class="t-label">Reported effect</div><div class="t-value muted">Not extracted</div></div>`;
 
   $("#keyfacts").innerHTML = hero + `<div class="tiles">
-    ${s.sample_size ? tile("Participants", esc(s.sample_size), s.follow_up ? `Follow-up: ${esc(s.follow_up)}` : "") : ""}
+    ${s.sample_size ? participantsTile(s) : ""}
     ${tile("Adjusted for", `${adjusted}`, adjusted === 1 ? "variable" : "variables")}
     ${tile("Missing confounders", `${sugg.length}`, sugg.length ? `AI-suggested · ${acc} accepted · ${rej} rejected` : "AI-suggested", "ai")}
     ${tile("Bias risks", `${risks.length}`, high ? `<span class="sev high">▲ ${high} high</span>` : "none rated high", "ai")}
@@ -356,8 +418,7 @@ function renderRecord({ entrance = false } = {}) {
     ${p.doi ? `<a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">doi:${esc(p.doi)}</a> · ` : ""}
     ${p.pmcid ? `<a href="https://europepmc.org/article/PMC/${esc(p.pmcid)}" target="_blank" rel="noopener">${esc(p.pmcid)}</a> · ` : ""}
     licence: ${esc(p.license || "n/a")}`;
-  $("#r-status").textContent = r.status;
-  $("#r-status").className = `badge ${r.status}`;
+  $("#r-status").outerHTML = statusBadge(r.status, reviewedBy(r)).replace("<span ", '<span id="r-status" ');
   renderKeyFacts(r);
   const keyTerms = [s.exposure.name, s.outcome.name];
 
@@ -390,7 +451,8 @@ function renderRecord({ entrance = false } = {}) {
   $("#dl-json").href = `/api/records/${r.id}`;
   $("#dl-json").setAttribute("download", `${r.id}.json`);
 
-  $("#editor").hidden = r.status === "approved";
+  $("#editor").hidden = !isEditable(r);
+  $("#ai-review-note").hidden = reviewedBy(r) !== "ai";
   $("#edit-msg").textContent = "";
   renderSuggestions();
   drawGraph();
@@ -574,22 +636,20 @@ function renderForestChart(data) {
   const rows = data.forest;
   const el = $("#forest-chart");
   if (!rows.length) { el.innerHTML = NO_DATA("No ratio estimates (HR, OR, RR) yet."); return; }
-  const W = 680, L = 250, R = 110, top = 8, rowH = 30, H = top + rows.length * rowH + 30;
+  // Rows scroll inside a fixed-height box; the axis is a separate SVG pinned below so it never scrolls away.
+  const W = 720, L = 250, R = 150, rowH = 30, H = rows.length * rowH + 6;
   const lo = Math.min(0.5, ...rows.map((r) => r.lo)), hi = Math.max(2, ...rows.map((r) => r.hi));
   const a = Math.log(lo) - 0.08, b = Math.log(hi) + 0.08;
   const X = (v) => L + ((Math.log(v) - a) / (b - a)) * (W - L - R);
   const ticks = [0.1, 0.2, 0.25, 0.5, 1, 2, 4, 5, 10, 20].filter((t) => t >= Math.exp(a) && t <= Math.exp(b));
   const trunc = (s, n) => (s && s.length > n ? s.slice(0, n - 1) + "…" : s || "");
-  let svg = `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="Forest plot of effect estimates">`;
-  ticks.forEach((t) => {
-    svg += `<line x1="${X(t)}" x2="${X(t)}" y1="${top}" y2="${H - 24}" class="${t === 1 ? "null" : "grid"}"/>
-            <text x="${X(t)}" y="${H - 8}" class="axis" text-anchor="middle">${t}</text>`;
-  });
+  let body = `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="Forest plot of effect estimates">`;
+  ticks.forEach((t) => (body += `<line x1="${X(t)}" x2="${X(t)}" y1="0" y2="${H}" class="${t === 1 ? "null" : "grid"}"/>`));
   rows.forEach((r, i) => {
-    const y = top + i * rowH + rowH / 2;
+    const y = 3 + i * rowH + rowH / 2;
     const sig = r.lo > 1 || r.hi < 1;
     const tipHtml = `<b>${esc(r.exposure)} → ${esc(r.outcome)}</b><br>${esc(r.measure)} ${r.value} (95% CI ${r.lo}–${r.hi})${r.adjusted ? ", adjusted" : ""}<br><span class="muted">${esc(trunc(r.title, 90))} ${esc(r.year || "")}</span>`;
-    svg += `<g class="frow ${sig ? "sig" : "ns"}" data-id="${esc(r.id)}" data-tip="${esc(tipHtml)}">
+    body += `<g class="frow ${sig ? "sig" : "ns"}" data-id="${esc(r.id)}" data-tip="${esc(tipHtml)}">
       <rect x="0" y="${y - rowH / 2}" width="${W}" height="${rowH}" class="hit"/>
       <text x="0" y="${y - 2}" class="lbl">${esc(trunc(`${r.exposure} → ${r.outcome}`, 40))}</text>
       <text x="0" y="${y + 10}" class="sub">${esc(r.design || "")} · ${esc(r.year || "")}</text>
@@ -598,8 +658,14 @@ function renderForestChart(data) {
       <text x="${W - R + 12}" y="${y + 4}" class="val">${esc(r.measure)} ${r.value} (${r.lo}–${r.hi})</text>
     </g>`;
   });
-  svg += `</svg>`;
-  el.innerHTML = svg + `<p class="small muted">Black: 95% CI excludes 1. Grey: includes 1.${data.forest_skipped ? ` ${data.forest_skipped} paper(s) with non-ratio estimates not shown.` : ""}</p>`;
+  body += `</svg>`;
+  let axis = `<svg viewBox="0 0 ${W} 22" class="chart forest-axis" aria-hidden="true">`;
+  ticks.forEach((t) => (axis += `<line x1="${X(t)}" x2="${X(t)}" y1="0" y2="5" class="${t === 1 ? "null" : "grid"}"/>
+    <text x="${X(t)}" y="17" class="axis" text-anchor="middle">${t}</text>`));
+  axis += `</svg>`;
+  const scrollHint = rows.length > 13 ? ` Scroll for all ${rows.length} papers.` : "";
+  el.innerHTML = `<div class="forest-rows">${body}</div><div class="forest-axis-wrap">${axis}</div>
+    <p class="small muted">Black: 95% CI excludes 1. Grey: includes 1.${scrollHint}${data.forest_skipped ? ` ${data.forest_skipped} paper(s) with non-ratio estimates not shown.` : ""}</p>`;
   bindTooltips(el);
   el.querySelectorAll(".frow").forEach((g) => (g.onclick = () => (location.hash = `#/record/${g.dataset.id}`)));
 }
@@ -637,21 +703,52 @@ async function loadDataset() {
   enter("#table tbody tr", { y: 8, stagger: 0.03, duration: 0.3 });
 }
 
+const PAGE_SIZE = 10;
+let tablePage = 1;
+
 function renderTable() {
   const q = $("#f-search").value.toLowerCase();
   const d = $("#f-design").value;
   const rows = datasetRows.filter((r) =>
     (!d || r.design === d) &&
     (!q || [r.title, r.exposure, r.outcome, r.journal].join(" ").toLowerCase().includes(q)));
-  $("#table tbody").innerHTML = rows.map((r) => `<tr data-id="${esc(r.id)}">
+  const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  tablePage = Math.min(Math.max(1, tablePage), pages);
+  const start = (tablePage - 1) * PAGE_SIZE;
+  $("#table tbody").innerHTML = rows.slice(start, start + PAGE_SIZE).map((r) => `<tr data-id="${esc(r.id)}">
     <td>${esc(r.exposure)}</td><td>${esc(r.outcome)}</td><td>${esc(r.design)}</td>
-    <td>${esc((r.title || "").slice(0, 90))}</td><td>${esc(r.year || "")}</td><td>${r.n_nodes}</td>
-    <td><span class="badge ${esc(r.status)}">${esc(r.status)}</span></td></tr>`).join("");
+    <td><span class="clamp2" title="${esc(r.title || "")}">${esc(r.title || "")}</span></td><td>${esc(r.year || "")}</td><td>${r.n_nodes}</td>
+    <td>${statusBadge(r.status, r.reviewed_by)}</td></tr>`).join("");
   $("#empty").hidden = rows.length > 0;
   document.querySelectorAll("#table tbody tr").forEach((tr) => tr.onclick = () => (location.hash = `#/record/${tr.dataset.id}`));
+  renderPager(rows.length, pages, start);
 }
-$("#f-search").oninput = renderTable;
-$("#f-design").onchange = renderTable;
+
+// "Showing 11–14 of 14"  ‹ 1 2 ›  (page numbers collapse to 1 … 4 5 6 … 20 when there are many)
+function renderPager(total, pages, start) {
+  const el = $("#pager");
+  el.hidden = total === 0;
+  if (!total) return;
+  const nums = [];
+  for (let p = 1; p <= pages; p++) {
+    if (p === 1 || p === pages || Math.abs(p - tablePage) <= 1) nums.push(p);
+    else if (nums[nums.length - 1] !== "…") nums.push("…");
+  }
+  el.innerHTML = `<span class="small muted">Showing ${start + 1}–${Math.min(start + PAGE_SIZE, total)} of ${total}</span>
+    ${pages > 1 ? `<div class="pages">
+      <button class="mini secondary" data-page="${tablePage - 1}" ${tablePage === 1 ? "disabled" : ""} aria-label="Previous page">‹ Prev</button>
+      ${nums.map((p) => p === "…" ? `<span class="muted">…</span>` :
+        `<button class="mini ${p === tablePage ? "" : "secondary"}" data-page="${p}" ${p === tablePage ? 'aria-current="page"' : ""}>${p}</button>`).join("")}
+      <button class="mini secondary" data-page="${tablePage + 1}" ${tablePage === pages ? "disabled" : ""} aria-label="Next page">Next ›</button>
+    </div>` : ""}`;
+  el.querySelectorAll("[data-page]").forEach((b) => (b.onclick = () => {
+    tablePage = Number(b.dataset.page);
+    renderTable();
+    $("#table").scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }));
+}
+$("#f-search").oninput = () => { tablePage = 1; renderTable(); };
+$("#f-design").onchange = () => { tablePage = 1; renderTable(); };
 $("#f-drafts").onchange = loadDataset;
 
 // ---------- network (3D view of all papers) ----------
@@ -752,14 +849,15 @@ async function loadNetwork() {
       .linkDirectionalArrowColor((l) => (l.ai ? "#f0b946" : "#c8d4df"))
       .linkDirectionalArrowRelPos(1)
       .onNodeClick(selectNetNode)
-      .onBackgroundClick(() => { net.selected = null; net.neighbours.clear(); refreshNetStyles(); showNetOverview(); });
+      .onBackgroundClick(() => { net.selected = null; net.neighbours.clear(); refreshNetStyles(); showNetOverview(); })
+      .cooldownTime(4000);   // settle within 4 s, then frame it (an unbounded settle took 20 s+ on slow machines)
     const controls = net.graph.controls();
     controls.autoRotate = true;              // slow spin until the viewer takes over
     controls.autoRotateSpeed = 0.6;
     controls.mouseButtons.MIDDLE = 0;        // middle button rotates too (0 = ROTATE; scroll wheel still zooms)
     controls.addEventListener("start", () => (controls.autoRotate = false));
     new ResizeObserver(() => net.graph && net.graph.width(el.clientWidth).height(el.clientHeight)).observe(el);
-    net.graph.onEngineStop(() => { if (net.needsFit) { net.needsFit = false; net.graph.zoomToFit(700, 60); } });
+    net.graph.onEngineStop(() => { if (net.needsFit) { net.needsFit = false; fitCore(700); } });
   }
   net.selected = null; net.neighbours.clear();
   net.needsFit = true;
@@ -767,6 +865,17 @@ async function loadNetwork() {
   buildNetLabels(graphData.nodes);
   stopNetLabels();
   drawNetLabels();
+}
+
+// Frame the core of the web: a few loosely linked variables drift far out, and fitting them too
+// shrinks the main cloud to a speck. Fit the 90% of nodes nearest the centre instead.
+function fitCore(ms) {
+  const nodes = net.graph.graphData().nodes.filter((n) => n.x !== undefined);
+  if (!nodes.length) return;
+  const c = ["x", "y", "z"].map((k) => nodes.reduce((a, n) => a + n[k], 0) / nodes.length);
+  const d = nodes.map((n) => Math.hypot(n.x - c[0], n.y - c[1], n.z - c[2])).sort((a, b) => a - b);
+  const cut = d[Math.floor(d.length * 0.9)];
+  net.graph.zoomToFit(ms, 40, (n) => Math.hypot(n.x - c[0], n.y - c[1], n.z - c[2]) <= cut);
 }
 
 function refreshNetStyles() {
@@ -782,7 +891,7 @@ function selectNetNode(node) {
     if (l.target.id === node.id) net.neighbours.add(l.source.id);
   });
   refreshNetStyles();
-  const dist = 90, r = 1 + dist / Math.hypot(node.x || 1, node.y || 1, node.z || 1);
+  const dist = 170, r = 1 + dist / Math.hypot(node.x || 1, node.y || 1, node.z || 1);   // far enough to see its links
   net.graph.cameraPosition({ x: node.x * r, y: node.y * r, z: node.z * r }, node, 900);
   const roleLabel = { exposure: "exposure", outcome: "outcome", confounder: "confounder", mediator: "mediator", ai: "AI-suggested", other: "other", collider: "collider", effect_modifier: "effect modifier" };
   $("#net-detail").innerHTML = `<h3>${esc(node.label)}</h3>
@@ -793,7 +902,7 @@ function selectNetNode(node) {
     <ul class="net-papers">${node.papers.map((p) => `<li><a href="#/record/${esc(p.id)}">${esc(p.title.length > 80 ? p.title.slice(0, 79) + "…" : p.title)}</a>
       <span class="net-role ${esc(p.role)}">${esc(roleLabel[p.role] || p.role)}${p.adjusted ? ", adjusted" : ""}</span></li>`).join("")}</ul>
     <button class="mini secondary" id="net-back">← All variables</button>`;
-  $("#net-back").onclick = () => { net.selected = null; net.neighbours.clear(); refreshNetStyles(); showNetOverview(); net.graph.zoomToFit(800); };
+  $("#net-back").onclick = () => { net.selected = null; net.neighbours.clear(); refreshNetStyles(); showNetOverview(); fitCore(800); };
 }
 
 function showNetOverview() {

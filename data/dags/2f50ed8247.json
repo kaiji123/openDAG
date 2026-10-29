@@ -1,0 +1,590 @@
+{
+  "id": "2f50ed8247",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:10:09Z",
+  "approved_at": "2026-10-28T21:25:58Z",
+  "paper": {
+    "title": "Prospective association between ultra-processed food consumption and incident depressive symptoms in the French NutriNet-Sant\u00e9 cohort",
+    "authors": "Adjibade M, Julia C, All\u00e8s B, Touvier M, Lemogne C, Srour B, Hercberg S, Galan P, Assmann KE, Kesse-Guyot E.",
+    "year": "2019",
+    "journal": "BMC medicine",
+    "doi": "10.1186/s12916-019-1312-y",
+    "pmcid": "PMC6463641",
+    "pmid": "30982472",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Adults aged 18\u201386 years from the NutriNet-Sant\u00e9 cohort in France, followed prospectively",
+    "sample_size": "26,730",
+    "follow_up": "mean 5.4 years",
+    "exposure": {
+      "name": "UPF proportion",
+      "definition": "Proportion of ultra-processed foods (%UPF) in the diet, calculated from 24-h dietary records and classified using the NOVA system"
+    },
+    "outcome": {
+      "name": "Incident depressive symptoms",
+      "definition": "New onset of depressive symptoms identified by CES-D score \u2265 17 in men and \u2265 23 in women at any follow-up assessment"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.21",
+      "ci": "1.15-1.27",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "Ultra-processed food proportion (%UPF)",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "proportion of ultra-processed foods (%UPF) in the diet",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "Incident depressive symptoms",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "incident cases of depressive symptoms",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Age was used as the primary time scale variable",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "The first model was adjusted for age, sex, and BMI",
+        "ai_suggested": false
+      },
+      {
+        "id": "bmi",
+        "label": "Body mass index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for sociodemographic characteristics, body mass index, and lifestyle factors",
+        "ai_suggested": false
+      },
+      {
+        "id": "marital_status",
+        "label": "Marital status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "education",
+        "label": "Educational level",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "occupation",
+        "label": "Occupational category",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "income",
+        "label": "Monthly household income",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "physical_activity",
+        "label": "Physical activity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "dietary_patterns",
+        "label": "Dietary pattern scores",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Five additional models were also performed to account for (a) PCA-extracted dietary patterns and intake of carbohydrates, lipids, and salt",
+        "ai_suggested": false
+      },
+      {
+        "id": "energy_intake",
+        "label": "Energy intake without alcohol",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_consumption",
+        "label": "Alcohol consumption",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "number_of_records",
+        "label": "Number of 24-h dietary records",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for marital status, educational level, occupational categories, monthly household income per consumption unit, residential area, energy intake without alcohol, \u2026",
+        "ai_suggested": false
+      },
+      {
+        "id": "baseline_cesd_score",
+        "label": "Baseline CES-D score",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for baseline CES-D score (continuous variable), and use of antidepressants during the follow-up",
+        "ai_suggested": false
+      },
+      {
+        "id": "use_of_antidepressants",
+        "label": "Use of antidepressants",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for baseline CES-D score (continuous variable), and use of antidepressants during the follow-up",
+        "ai_suggested": false
+      },
+      {
+        "id": "cds_score",
+        "label": "Cognitive Difficulties Scale score",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for baseline CES-D score (continuous variable), and use of antidepressants during the follow-up and CDS score (continuous variable)",
+        "ai_suggested": false
+      },
+      {
+        "id": "social_isolation",
+        "label": "Social isolation",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "family_depression",
+        "label": "Family depression",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "neuroticism",
+        "label": "Neuroticism",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "marital_status",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "marital_status",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "education",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "education",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "occupation",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "occupation",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "income",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "income",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "physical_activity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "dietary_patterns",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "dietary_patterns",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "energy_intake",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "energy_intake",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_consumption",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_consumption",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "number_of_records",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "number_of_records",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "baseline_cesd_score",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "baseline_cesd_score",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_antidepressants",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_antidepressants",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "cds_score",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "cds_score",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "social_isolation",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "social_isolation",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "family_depression",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "family_depression",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "neuroticism",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "neuroticism",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\nbmi [adjusted]\nmarital_status [adjusted]\neducation [adjusted]\noccupation [adjusted]\nincome [adjusted]\nsmoking [adjusted]\nphysical_activity [adjusted]\ndietary_patterns [adjusted]\nenergy_intake [adjusted]\nalcohol_consumption [adjusted]\nnumber_of_records [adjusted]\nbaseline_cesd_score [adjusted]\nuse_of_antidepressants [adjusted]\ncds_score [adjusted]\nsocial_isolation\nfamily_depression\nneuroticism\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\nbmi -> exposure\nbmi -> outcome\nmarital_status -> exposure\nmarital_status -> outcome\neducation -> exposure\neducation -> outcome\noccupation -> exposure\noccupation -> outcome\nincome -> exposure\nincome -> outcome\nsmoking -> exposure\nsmoking -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\ndietary_patterns -> exposure\ndietary_patterns -> outcome\nenergy_intake -> exposure\nenergy_intake -> outcome\nalcohol_consumption -> exposure\nalcohol_consumption -> outcome\nnumber_of_records -> exposure\nnumber_of_records -> outcome\nbaseline_cesd_score -> exposure\nbaseline_cesd_score -> outcome\nuse_of_antidepressants -> exposure\nuse_of_antidepressants -> outcome\ncds_score -> exposure\ncds_score -> outcome\nsocial_isolation -> exposure\nsocial_isolation -> outcome\nfamily_depression -> exposure\nfamily_depression -> outcome\nneuroticism -> exposure\nneuroticism -> outcome\n}",
+  "open_backdoors": [
+    "Social isolation",
+    "Family depression",
+    "Neuroticism"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Sleep deprivation",
+        "rationale": "Poor sleep increases the risk of developing depressive symptoms and may lead individuals to choose convenient, ultra\u2011processed foods due to fatigue and altered appetite regulation.",
+        "edges_to_add": [
+          {
+            "source": "Sleep deprivation",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Sleep deprivation",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Sleep deprivation makes us less happy, more anxious",
+            "url": "https://www.apa.org/news/press/releases/2023/12/sleep-deprivation-anxious"
+          },
+          {
+            "title": "Effect of Inadequate Sleep on Frequent Mental Distress",
+            "url": "https://www.cdc.gov/pcd/issues/2021/20_0573.htm"
+          },
+          {
+            "title": "How sleep deprivation can harm your health - Harvard Health",
+            "url": "https://www.health.harvard.edu/sleep/how-sleep-deprivation-can-harm-your-health"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Sleep deprivation may be a consequence of high UPF intake (diet affects sleep quality) and thus adjusting for it could block a mediating pathway rather than control confounding."
+      },
+      {
+        "label": "Social isolation",
+        "rationale": "Loneliness and lack of social support are strong predictors of depression and can increase reliance on ready\u2011to\u2011eat ultra\u2011processed meals when cooking for others is less frequent.",
+        "edges_to_add": [
+          {
+            "source": "Social isolation",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Social isolation",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Ultra-Processed Food Is Positively Associated With Depressive ...",
+            "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2020.600449/full"
+          },
+          {
+            "title": "Relationship between 39 dietary markers of ultra-processed food ...",
+            "url": "https://link.springer.com/article/10.1007/s00394-026-04084-7"
+          },
+          {
+            "title": "CE corner: The risks of social isolation",
+            "url": "https://www.apa.org/monitor/2019/05/ce-corner-isolation"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Social isolation predicts both greater reliance on ultra\u2011processed foods and incident depressive symptoms and is not captured by the adjusted covariates (marital status alone does not measure broader loneliness)."
+      },
+      {
+        "label": "Chronic illness",
+        "rationale": "Conditions such as cardiovascular disease or diabetes raise depression risk and often necessitate diets higher in processed foods due to physical limitations or dietary recommendations.",
+        "edges_to_add": [
+          {
+            "source": "Chronic illness",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Chronic illness",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "The risk associated with ultra-processed food intake on depressive symptoms and mental health in older adults: a target trial emulation | BMC Medicine | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12916-025-04002-4"
+          },
+          {
+            "title": "The Science of Ultra-Processed Foods and Mental Health",
+            "url": "https://www.news-medical.net/health/The-Science-of-Ultra-Processed-Foods-and-Mental-Health.aspx"
+          },
+          {
+            "title": "Ultra-processed foods: increased risk of depression and anxiety",
+            "url": "https://usrtk.org/ultra-processed-foods/depression-anxiety"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Chronic illnesses such as cardiovascular disease or diabetes are likely downstream effects of high UPF consumption, so adjusting for them would introduce bias by controlling for a mediator."
+      },
+      {
+        "label": "Family depression",
+        "rationale": "A family history of depression reflects genetic and shared environmental susceptibility to depression and may correlate with familial dietary patterns that include higher ultra\u2011processed food intake.",
+        "edges_to_add": [
+          {
+            "source": "Family depression",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Family depression",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "The risk associated with ultra-processed food intake on depressive symptoms and mental health in older adults: a target trial emulation | BMC Medicine | Springer Nature Link",
+            "url": "https://link.springer.com/article/10.1186/s12916-025-04002-4"
+          },
+          {
+            "title": "Frontiers | Ultra-Processed Food Is Positively Associated With Depressive Symptoms Among United States Adults",
+            "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2020.600449/full"
+          },
+          {
+            "title": "The Science of Ultra-Processed Foods and Mental Health",
+            "url": "https://www.news-medical.net/health/The-Science-of-Ultra-Processed-Foods-and-Mental-Health.aspx"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Family history of depression is a pre\u2011existing common cause of both depressive symptoms and familial dietary patterns (including UPF) and is not already adjusted for."
+      },
+      {
+        "label": "Neuroticism",
+        "rationale": "High neuroticism predisposes individuals to depressive symptoms and is associated with emotional eating of ultra\u2011processed foods as a coping mechanism.",
+        "edges_to_add": [
+          {
+            "source": "Neuroticism",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Neuroticism",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Frontiers | Ultra-Processed Food Is Positively Associated With Depressive Symptoms Among United States Adults",
+            "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2020.600449/full"
+          },
+          {
+            "title": "The Science of Ultra-Processed Foods and Mental Health",
+            "url": "https://www.news-medical.net/health/The-Science-of-Ultra-Processed-Foods-and-Mental-Health.aspx"
+          },
+          {
+            "title": "Association Between Ultra-Processed Food Consumption and Risk of Developing Depression in Adults: A Systematic Review - European Medical Journal",
+            "url": "https://www.emjreviews.com/gastroenterology/article/association-between-ultra-processed-food-consumption-and-risk-of-developing-depression-in-adults-a-systematic-review-j050123"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Neuroticism is a stable personality trait that elevates depression risk and promotes emotional eating of ultra\u2011processed foods, satisfying confounder criteria and absent from the adjustment set."
+      }
+    ],
+    "bias_risks": [],
+    "overall_assessment": "",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

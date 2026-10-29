@@ -133,14 +133,6 @@
         "ai_suggested": false
       },
       {
-        "id": "baseline_bmi",
-        "label": "Baseline BMI",
-        "role": "confounder",
-        "adjusted": false,
-        "snippet": "",
-        "ai_suggested": true
-      },
-      {
         "id": "household_income",
         "label": "Household income",
         "role": "confounder",
@@ -155,6 +147,14 @@
         "adjusted": false,
         "snippet": "",
         "ai_suggested": true
+      },
+      {
+        "id": "baseline_bmi",
+        "label": "Baseline BMI",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Analyses were tested with and without adjustment for baseline BMI.",
+        "ai_suggested": false
       }
     ],
     "edges": [
@@ -264,16 +264,6 @@
         "ai_suggested": false
       },
       {
-        "source": "baseline_bmi",
-        "target": "exposure",
-        "ai_suggested": true
-      },
-      {
-        "source": "baseline_bmi",
-        "target": "outcome",
-        "ai_suggested": true
-      },
-      {
         "source": "household_income",
         "target": "exposure",
         "ai_suggested": true
@@ -287,47 +277,25 @@
         "source": "sleep_duration",
         "target": "exposure",
         "ai_suggested": true
+      },
+      {
+        "source": "baseline_bmi",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "baseline_bmi",
+        "target": "outcome",
+        "ai_suggested": false
       }
     ]
   },
-  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\neducation [adjusted]\nmarital_status [adjusted]\nsmoking [adjusted]\nphysical_activity [adjusted]\nenergy_intake [adjusted]\nalcohol_intake [adjusted]\ndiet_quality [adjusted]\ndietary_patterns [adjusted]\nbaseline_bmi\nhousehold_income\nsleep_duration\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\neducation -> exposure\neducation -> outcome\nmarital_status -> exposure\nmarital_status -> outcome\nsmoking -> exposure\nsmoking -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\nenergy_intake -> exposure\nenergy_intake -> outcome\nalcohol_intake -> exposure\nalcohol_intake -> outcome\ndiet_quality -> exposure\ndiet_quality -> outcome\ndietary_patterns -> exposure\ndietary_patterns -> outcome\nbaseline_bmi -> exposure\nbaseline_bmi -> outcome\nhousehold_income -> exposure\nhousehold_income -> outcome\nsleep_duration -> exposure\n}",
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage [adjusted]\nsex [adjusted]\neducation [adjusted]\nmarital_status [adjusted]\nsmoking [adjusted]\nphysical_activity [adjusted]\nenergy_intake [adjusted]\nalcohol_intake [adjusted]\ndiet_quality [adjusted]\ndietary_patterns [adjusted]\nhousehold_income\nsleep_duration\nbaseline_bmi [adjusted]\nexposure -> outcome\nage -> exposure\nage -> outcome\nsex -> exposure\nsex -> outcome\neducation -> exposure\neducation -> outcome\nmarital_status -> exposure\nmarital_status -> outcome\nsmoking -> exposure\nsmoking -> outcome\nphysical_activity -> exposure\nphysical_activity -> outcome\nenergy_intake -> exposure\nenergy_intake -> outcome\nalcohol_intake -> exposure\nalcohol_intake -> outcome\ndiet_quality -> exposure\ndiet_quality -> outcome\ndietary_patterns -> exposure\ndietary_patterns -> outcome\nhousehold_income -> exposure\nhousehold_income -> outcome\nsleep_duration -> exposure\nbaseline_bmi -> exposure\nbaseline_bmi -> outcome\n}",
   "open_backdoors": [
-    "Baseline BMI",
     "Household income"
   ],
   "critique": {
     "missing_confounders": [
-      {
-        "label": "Baseline BMI",
-        "rationale": "Participants' starting body mass index influences both their dietary choices (e.g., higher BMI may be associated with greater UPF intake) and the subsequent change in BMI over time.",
-        "edges_to_add": [
-          {
-            "source": "Baseline BMI",
-            "target": "exposure",
-            "ai_suggested": false
-          },
-          {
-            "source": "Baseline BMI",
-            "target": "outcome",
-            "ai_suggested": false
-          }
-        ],
-        "evidence": [
-          {
-            "title": "Ultraprocessed food intake and body mass index change ...",
-            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11473438"
-          },
-          {
-            "title": "A Critical Review of the Science on \u201cHighly\u201d Processed Food Intake and Body Weight",
-            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13356632"
-          },
-          {
-            "title": "Factors correlated with ultra-processed food (UPF) intake in preschool-aged children and association with weight",
-            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10999344"
-          }
-        ],
-        "status": "accepted"
-      },
       {
         "label": "Household income",
         "rationale": "Income affects food purchasing power and thus the proportion of ultra\u2011processed foods consumed, while also being related to BMI change through access to healthier lifestyles and healthcare.",
@@ -357,7 +325,8 @@
             "url": "https://www.globalfoodresearchprogram.org/new-study-reveals-stark-disparities-in-ultra-processed-food-purchases-among-u-s-households"
           }
         ],
-        "status": "accepted"
+        "status": "accepted",
+        "review_note": ""
       },
       {
         "label": "Sleep duration",
@@ -388,7 +357,8 @@
             "url": "https://www.repository.cam.ac.uk/bitstreams/79afda44-6010-436b-be77-bba2d9715ecd/download"
           }
         ],
-        "status": "accepted"
+        "status": "accepted",
+        "review_note": ""
       }
     ],
     "bias_risks": [
@@ -416,6 +386,10 @@
     "critique": "nvidia/nemotron-3-super-120b-a12b",
     "evidence_search": "tavily",
     "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "human",
+    "model": null
   },
   "dataset_license": "CC-BY-4.0"
 }

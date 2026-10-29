@@ -1,0 +1,471 @@
+{
+  "id": "3447637879",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:07:39Z",
+  "approved_at": "2026-10-28T21:26:38Z",
+  "paper": {
+    "title": "Proton pump inhibitor use and risk of hip fracture in patients with type 2 diabetes",
+    "authors": "Chou YS, Jiang HJ, Chen CH, Ho PS, Lee TC.",
+    "year": "2020",
+    "journal": "Scientific reports",
+    "doi": "10.1038/s41598-020-70712-9",
+    "pmcid": "PMC7443131",
+    "pmid": "32826941",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Patients aged \u226518 years with newly diagnosed T2DM in Taiwan between 2000 and 2008",
+    "sample_size": "44,431 (exposed) and 177,364 (unexposed) after matching",
+    "follow_up": "up to 5 years",
+    "exposure": {
+      "name": "PPI use",
+      "definition": "Long-term PPI use defined as DDD \u2265 28 for at least 3 years"
+    },
+    "outcome": {
+      "name": "Hip fracture",
+      "definition": "New diagnosis of HFx (ICD-9-CM codes 820\u2013820.9) with internal fixation or hemiarthroplasty"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.41",
+      "ci": "1.29-1.54",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "ppi",
+        "label": "PPI use",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "PPI user group showed an increased risk of HFx with an adjusted hazard ratio of 1.41",
+        "ai_suggested": false
+      },
+      {
+        "id": "hip_fracture",
+        "label": "Hip fracture",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "Hip fracture risk was evaluated using ICD-9-CM codes 820\u2013820.9",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "propensity score matching was performed to minimize selection bias by balancing baseline characteristics, including age and gender",
+        "ai_suggested": false
+      },
+      {
+        "id": "gender",
+        "label": "Gender",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "propensity score matching was performed to minimize selection bias by balancing baseline characteristics, including age and gender",
+        "ai_suggested": false
+      },
+      {
+        "id": "cci",
+        "label": "Charlson comorbidity index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Charlson comorbidity index (CCI) scores were used to assess the severity of comorbidities",
+        "ai_suggested": false
+      },
+      {
+        "id": "hypertension",
+        "label": "Hypertension",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "All the covariables, including comorbidities and medication listed in Supplementary Table were adjusted for",
+        "ai_suggested": false
+      },
+      {
+        "id": "stroke",
+        "label": "Stroke",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "stroke and chronic renal failure patients with T2DM showed an increased risk of HFx",
+        "ai_suggested": false
+      },
+      {
+        "id": "chronic_renal_failure",
+        "label": "Chronic renal failure",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "stroke and chronic renal failure patients with T2DM showed an increased risk of HFx",
+        "ai_suggested": false
+      },
+      {
+        "id": "use_of_anticoagulants",
+        "label": "Use of anticoagulants",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "use of anticoagulants was associated with an increased risk of HFx after adjustment",
+        "ai_suggested": false
+      },
+      {
+        "id": "use_of_sedatives",
+        "label": "Use of sedatives",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "use of sedatives was associated with an increased risk of HFx after adjustment",
+        "ai_suggested": false
+      },
+      {
+        "id": "use_of_statins",
+        "label": "Use of statins",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "Patients who used statins had a decreased risk of HFx with an adjusted HR of 0.61",
+        "ai_suggested": false
+      },
+      {
+        "id": "glucocorticoid_use",
+        "label": "Glucocorticoid use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "smoking_status",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "ppi",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "gender",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "gender",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "cci",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "cci",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "hypertension",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "hypertension",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "stroke",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "stroke",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "chronic_renal_failure",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "chronic_renal_failure",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_anticoagulants",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_anticoagulants",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_sedatives",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_sedatives",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_statins",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "use_of_statins",
+        "target": "hip_fracture",
+        "ai_suggested": false
+      },
+      {
+        "source": "glucocorticoid_use",
+        "target": "ppi",
+        "ai_suggested": true
+      },
+      {
+        "source": "glucocorticoid_use",
+        "target": "hip_fracture",
+        "ai_suggested": true
+      },
+      {
+        "source": "smoking_status",
+        "target": "ppi",
+        "ai_suggested": true
+      },
+      {
+        "source": "smoking_status",
+        "target": "hip_fracture",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nppi [exposure]\nhip_fracture [outcome]\nage [adjusted]\ngender [adjusted]\ncci [adjusted]\nhypertension [adjusted]\nstroke [adjusted]\nchronic_renal_failure [adjusted]\nuse_of_anticoagulants [adjusted]\nuse_of_sedatives [adjusted]\nuse_of_statins [adjusted]\nglucocorticoid_use\nsmoking_status\nppi -> hip_fracture\nage -> ppi\nage -> hip_fracture\ngender -> ppi\ngender -> hip_fracture\ncci -> ppi\ncci -> hip_fracture\nhypertension -> ppi\nhypertension -> hip_fracture\nstroke -> ppi\nstroke -> hip_fracture\nchronic_renal_failure -> ppi\nchronic_renal_failure -> hip_fracture\nuse_of_anticoagulants -> ppi\nuse_of_anticoagulants -> hip_fracture\nuse_of_sedatives -> ppi\nuse_of_sedatives -> hip_fracture\nuse_of_statins -> ppi\nuse_of_statins -> hip_fracture\nglucocorticoid_use -> ppi\nglucocorticoid_use -> hip_fracture\nsmoking_status -> ppi\nsmoking_status -> hip_fracture\n}",
+  "open_backdoors": [
+    "Glucocorticoid use",
+    "Smoking status"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Glucocorticoid use",
+        "rationale": "Glucocorticoids increase fracture risk and are often co\u2011prescribed with PPIs for gastrointestinal protection, creating a common cause of both exposure and outcome.",
+        "edges_to_add": [
+          {
+            "source": "Glucocorticoid use",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "Glucocorticoid use",
+            "target": "hip_fracture",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Glucocorticoid - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Glucocorticoid"
+          },
+          {
+            "title": "A General Introduction to Glucocorticoid Biology",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6621919"
+          },
+          {
+            "title": "Frontiers | A General Introduction to Glucocorticoid Biology",
+            "url": "https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2019.01545/full"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Glucocorticoids increase fracture risk and are commonly co\u2011prescribed with PPIs for gastrointestinal protection, making them a common cause not adjusted for."
+      },
+      {
+        "label": "Fall history",
+        "rationale": "Prior falls raise hip fracture likelihood and may lead to greater PPI use due to pain\u2011related gastrointestinal symptoms or prophylaxis.",
+        "edges_to_add": [
+          {
+            "source": "Fall history",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "Fall history",
+            "target": "hip_fracture",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "PPI Use Is Linked to a 30% Higher Hip Fracture Risk | The Dr Kumar Discovery",
+            "url": "https://drkumardiscovery.com/posts/proton-pump-inhibitors-risk-fractures-metaanalysis-11-international"
+          },
+          {
+            "title": "Proton pump inhibitor use and risk of hip fractures in ...",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/18657011"
+          },
+          {
+            "title": "Proton Pump Inhibitors and Fractures in Adults: A Critical Appraisal and Review of the Literature",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7822697"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "PPI use may increase fall risk (e.g., via hypomagnesemia or B12 deficiency), so fall history could be downstream of exposure rather than a pure confounder."
+      },
+      {
+        "label": "Body mass index",
+        "rationale": "Low BMI is a risk factor for osteoporosis and fractures, while higher BMI may increase gastro\u2011oesophageal reflux and thus PPI prescribing.",
+        "edges_to_add": [
+          {
+            "source": "Body mass index",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "Body mass index",
+            "target": "hip_fracture",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "PPI Use Is Linked to a 30% Higher Hip Fracture Risk | The Dr Kumar Discovery",
+            "url": "https://drkumardiscovery.com/posts/proton-pump-inhibitors-risk-fractures-metaanalysis-11-international"
+          },
+          {
+            "title": "Proton Pump Inhibitor Use, Hip Fracture, and Change in ...",
+            "url": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/415901"
+          },
+          {
+            "title": "Proton Pump Inhibitor Use, Hip Fracture and Change in Bone ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4240017"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Long\u2011term PPI use can alter body weight (e.g., through symptom relief changing intake), so BMI may be affected by the exposure."
+      },
+      {
+        "label": "Smoking status",
+        "rationale": "Smoking adversely affects bone density and is associated with gastrointestinal conditions that prompt PPI use.",
+        "edges_to_add": [
+          {
+            "source": "Smoking status",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "Smoking status",
+            "target": "hip_fracture",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton pump inhibitor use is associated with hip fracture development: a nationwide population-based cohort study",
+            "url": "https://kjim.org/journal/view.php?number=170256"
+          },
+          {
+            "title": "Smoking, PPI Use, and Hip Fracture: What's the Bottom Line?",
+            "url": "https://www.medscape.com/viewarticle/762478"
+          },
+          {
+            "title": "Hip Fracture Risk May Be Higher With Long-Term PPI Use | MDedge",
+            "url": "https://www.mdedge.com/ehospitalistnews/article/31534/gastroenterology/hip-fracture-risk-may-be-higher-long-term-ppi-use"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Smoking reduces bone density and increases gastrointestinal disease prompting PPI use, acting as a common cause not captured by the adjusted covariates."
+      },
+      {
+        "label": "Vitamin D deficiency",
+        "rationale": "Deficiency impairs bone mineralization and may coexist with conditions prompting PPI therapy (e.g., malabsorption).",
+        "edges_to_add": [
+          {
+            "source": "Vitamin D deficiency",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "Vitamin D deficiency",
+            "target": "hip_fracture",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton Pump Inhibitor Therapy and Hip Fracture Risk",
+            "url": "https://www.jordangeller.com/s/Artice-7.pdf"
+          },
+          {
+            "title": "PPI Use Is Linked to a 30% Higher Hip Fracture Risk | The Dr Kumar Discovery",
+            "url": "https://drkumardiscovery.com/posts/proton-pump-inhibitors-risk-fractures-metaanalysis-11-international"
+          },
+          {
+            "title": "Proton Pump Inhibitors and Fractures in Adults: A Critical Appraisal and Review of the Literature",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7822697"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "PPI therapy can impair vitamin D absorption/metabolism, making deficiency potentially a mediator rather than an independent cause."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "immortal time bias",
+        "explanation": "Exposure required \u22653 years of PPI use; subjects had to survive and remain event\u2011free during this period before being classified as exposed, potentially inflating the hazard ratio.",
+        "severity": "high"
+      },
+      {
+        "type": "confounding by indication",
+        "explanation": "PPIs are prescribed for GERD, peptic ulcer disease, or dyspepsia, conditions that may themselves increase fall risk or be markers of frailty linked to fracture.",
+        "severity": "medium"
+      },
+      {
+        "type": "measurement error",
+        "explanation": "PPI use was derived from pharmacy claims; non\u2011adherence or over\u2011the\u2011counter use leads to misclassification, likely biasing the estimate toward the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "selection bias",
+        "explanation": "Excluding patients with prior PPI use or prior hip fracture creates a collider if those exclusions are related to both exposure propensity and fracture susceptibility.",
+        "severity": "low"
+      },
+      {
+        "type": "residual confounding",
+        "explanation": "Propensity score matching did not capture lifestyle factors such as physical activity, dietary calcium intake, or fall\u2011prevention practices, leaving open paths for confounding.",
+        "severity": "medium"
+      }
+    ],
+    "overall_assessment": "The study\u2019s adjusted HR of 1.41 suggests a modest association, but immortal time bias and unmeasured confounding (e.g., glucocorticoids, fall history) could substantially distort this estimate. While the authors controlled for many comorbidities and used propensity matching, the remaining biases mean the causal claim should be interpreted cautiously.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

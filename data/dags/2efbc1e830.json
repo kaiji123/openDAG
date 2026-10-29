@@ -1,0 +1,471 @@
+{
+  "id": "2efbc1e830",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:10:59Z",
+  "approved_at": "2026-10-28T21:24:16Z",
+  "paper": {
+    "title": "Association of Physical Activity With Risk of Mortality Among Breast Cancer Survivors",
+    "authors": "Chen LH, Irwin MR, Olmstead R, Haque R.",
+    "year": "2022",
+    "journal": "JAMA network open",
+    "doi": "10.1001/jamanetworkopen.2022.42660",
+    "pmcid": "PMC9672970",
+    "pmid": "36394875",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Postmenopausal breast cancer survivors diagnosed 2 or more years prior, enrolled in a California health plan between 1996 and 2012, followed until death or study end.",
+    "sample_size": "315",
+    "follow_up": "median 7.8 years [IQR, 7.3-8.3 years]",
+    "exposure": {
+      "name": "Physical activity level",
+      "definition": "Categorized as active, moderately active, or insufficiently active using the Godin-Shephard Leisure-Time Physical Activity Questionnaire at baseline"
+    },
+    "outcome": {
+      "name": "All-cause mortality",
+      "definition": "Death from any cause ascertained via health plan and state/national death databases"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "0.42",
+      "ci": "0.21-0.85",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "exposure",
+        "label": "Physical activity level",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "active, moderately active, or insufficiently active at baseline",
+        "ai_suggested": false
+      },
+      {
+        "id": "outcome",
+        "label": "All-cause mortality",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "death from any cause ascertained via health plan and state/national death databases",
+        "ai_suggested": false
+      },
+      {
+        "id": "age_baseline",
+        "label": "Age at baseline",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age at baseline",
+        "ai_suggested": false
+      },
+      {
+        "id": "cancer_stage",
+        "label": "Breast cancer stage",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for breast cancer stage",
+        "ai_suggested": false
+      },
+      {
+        "id": "fatigue",
+        "label": "Fatigue severity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for fatigue",
+        "ai_suggested": false
+      },
+      {
+        "id": "charlson_index",
+        "label": "Charlson Comorbidity Index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for Charlson Comorbidity Index",
+        "ai_suggested": false
+      },
+      {
+        "id": "years_since_diagnosis",
+        "label": "Years since cancer diagnosis",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for years since cancer diagnosis",
+        "ai_suggested": false
+      },
+      {
+        "id": "race_ethnicity",
+        "label": "Race and ethnicity",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for self-reported race and ethnicity",
+        "ai_suggested": false
+      },
+      {
+        "id": "insomnia",
+        "label": "Lifetime history of insomnia",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for lifetime history of insomnia",
+        "ai_suggested": false
+      },
+      {
+        "id": "depression",
+        "label": "Lifetime history of depression",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for lifetime history of depression",
+        "ai_suggested": false
+      },
+      {
+        "id": "adjuvant_treatments",
+        "label": "Adjuvant cancer treatments",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for adjuvant cancer treatments (endocrine, chemotherapy and radiation)",
+        "ai_suggested": false
+      },
+      {
+        "id": "socioeconomic_status",
+        "label": "Socioeconomic status",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "smoking_status",
+        "label": "Smoking status",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "exposure",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "age_baseline",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "age_baseline",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "cancer_stage",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "cancer_stage",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "fatigue",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "fatigue",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "charlson_index",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "charlson_index",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "years_since_diagnosis",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "years_since_diagnosis",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "race_ethnicity",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "race_ethnicity",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "insomnia",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "insomnia",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "depression",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "depression",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "adjuvant_treatments",
+        "target": "exposure",
+        "ai_suggested": false
+      },
+      {
+        "source": "adjuvant_treatments",
+        "target": "outcome",
+        "ai_suggested": false
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "socioeconomic_status",
+        "target": "outcome",
+        "ai_suggested": true
+      },
+      {
+        "source": "smoking_status",
+        "target": "exposure",
+        "ai_suggested": true
+      },
+      {
+        "source": "smoking_status",
+        "target": "outcome",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nexposure [exposure]\noutcome [outcome]\nage_baseline [adjusted]\ncancer_stage [adjusted]\nfatigue [adjusted]\ncharlson_index [adjusted]\nyears_since_diagnosis [adjusted]\nrace_ethnicity [adjusted]\ninsomnia [adjusted]\ndepression [adjusted]\nadjuvant_treatments [adjusted]\nsocioeconomic_status\nsmoking_status\nexposure -> outcome\nage_baseline -> exposure\nage_baseline -> outcome\ncancer_stage -> exposure\ncancer_stage -> outcome\nfatigue -> exposure\nfatigue -> outcome\ncharlson_index -> exposure\ncharlson_index -> outcome\nyears_since_diagnosis -> exposure\nyears_since_diagnosis -> outcome\nrace_ethnicity -> exposure\nrace_ethnicity -> outcome\ninsomnia -> exposure\ninsomnia -> outcome\ndepression -> exposure\ndepression -> outcome\nadjuvant_treatments -> exposure\nadjuvant_treatments -> outcome\nsocioeconomic_status -> exposure\nsocioeconomic_status -> outcome\nsmoking_status -> exposure\nsmoking_status -> outcome\n}",
+  "open_backdoors": [
+    "Socioeconomic status",
+    "Smoking status"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "Socioeconomic status",
+        "rationale": "Lower income or education limits opportunities for physical activity and is associated with higher mortality through multiple pathways.",
+        "edges_to_add": [
+          {
+            "source": "Socioeconomic status",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Socioeconomic status",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Changes in physical activity, associated with lower mortality",
+            "url": "https://sciencemediacentre.es/en/small-and-feasible-changes-physical-activity-are-associated-lower-mortality-risk"
+          },
+          {
+            "title": "Socioeconomic status may influence the association ...",
+            "url": "https://www.2minutemedicine.com/socioeconomic-status-may-influence-the-association-between-physical-activity-and-health-outcomes"
+          },
+          {
+            "title": "Association of physical activity and socio-economic status on ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11196573"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Accept: Socioeconomic status influences both opportunities for physical activity and mortality risk, and is not accounted for by the adjusted variables."
+      },
+      {
+        "label": "Body mass index",
+        "rationale": "Higher BMI reduces likelihood of being active and independently increases risk of death from cardiovascular and other causes.",
+        "edges_to_add": [
+          {
+            "source": "Body mass index",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Body mass index",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Physical activity is associated with lower mortality in adults with obesity: a systematic review with meta-analysis",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11245862"
+          },
+          {
+            "title": "Even low levels of physical activity are associated with lower all-cause mortality: A cohort study of 594,000 US adults",
+            "url": "https://www.sciencedirect.com/science/article/pii/S1047279726001481"
+          },
+          {
+            "title": "Percentage of Deaths Associated With Inadequate Physical Activity in the United States",
+            "url": "https://www.cdc.gov/pcd/issues/2018/17_0354.htm"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Reject: Body mass index may be altered by physical activity levels, making it a potential mediator rather than a pure confounder."
+      },
+      {
+        "label": "Smoking status",
+        "rationale": "Smokers tend to be less physically active and have elevated mortality risk, especially from cancer and respiratory diseases.",
+        "edges_to_add": [
+          {
+            "source": "Smoking status",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Smoking status",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Changes in physical activity and all-cause mortality in COPD",
+            "url": "https://publications.ersnet.org/content/erj/44/5/1199"
+          },
+          {
+            "title": "All-Cause Mortality Associated With Physical Activity During Leisure ...",
+            "url": "https://fietsberaad.nl/CROWFietsberaad/media/Kennis/Bestanden/All-cause%20mortality%20associated%20with%20physical%20activity%20during%20leisure%20time,%20work,%20sports%20and%20cycling%20to%20work.pdf?ext=.pdf"
+          },
+          {
+            "title": "Joint association of smoking and physical activity with mortality in ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9558130"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Accept: Smoking status affects both physical activity engagement and mortality, and is not clearly downstream of physical activity in this cohort."
+      },
+      {
+        "label": "Hormone therapy use",
+        "rationale": "Postmenopausal hormone therapy use can affect energy levels and activity patterns and influences long-term mortality outcomes.",
+        "edges_to_add": [
+          {
+            "source": "Hormone therapy use",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Hormone therapy use",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Physical activity reduces all-cause mortality in patients with cancer: a systematic review and meta-analysis of randomized controlled trials",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0305737226000368"
+          },
+          {
+            "title": "Menopausal Hormone Therapy and Long-term All-Cause and Cause-Specific Mortality - Wiki Journal Club",
+            "url": "https://www.wikijournalclub.org/wiki/Menopausal_Hormone_Therapy_and_Long-term_All-Cause_and_Cause-Specific_Mortality"
+          },
+          {
+            "title": "Hormone Replacement Therapy and Cardiovascular Risk | NLA",
+            "url": "https://www.lipid.org/resource/hormone-replacement-therapy-and-cardiovascular-risk"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Reject: Hormone therapy use is likely encompassed by the adjusted 'adjuvant cancer treatments' variable, so it is not an omitted confounder."
+      },
+      {
+        "label": "Cardiovascular disease",
+        "rationale": "Existing heart disease limits physical capacity and predicts higher all-cause mortality, potentially confounding the activity-mortality link.",
+        "edges_to_add": [
+          {
+            "source": "Cardiovascular disease",
+            "target": "exposure",
+            "ai_suggested": false
+          },
+          {
+            "source": "Cardiovascular disease",
+            "target": "outcome",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Frontiers | Effects of physical activity and sedentary behaviors on cardiovascular disease and the risk of all-cause mortality in overweight or obese middle-aged and older adults",
+            "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2024.1302783/full"
+          },
+          {
+            "title": "Physical Activity, All-Cause and Cardiovascular Mortality, and Cardiovascular Disease",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6527136"
+          },
+          {
+            "title": "New study finds lowest risk of death was among adults who exercised 150-600 minutes/week | American Heart Association",
+            "url": "https://newsroom.heart.org/news/new-study-finds-lowest-risk-of-death-was-among-adults-who-exercised-150-600-minutesweek"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "Reject: Cardiovascular disease is already captured within the Charlson Comorbidity Index that was adjusted for, thus not a missing confounder."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "Healthy user effect",
+        "explanation": "Women who report higher activity may also engage in other health-promoting behaviors (e.g., better diet, adherence to medication) that lower mortality independent of activity.",
+        "severity": "medium"
+      },
+      {
+        "type": "Measurement error",
+        "explanation": "Physical activity was assessed once at baseline using a self\u2011report questionnaire, likely leading to non\u2011differential misclassification that biases the hazard ratio toward the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "Residual confounding",
+        "explanation": "Important confounders such as socioeconomic status, BMI, and smoking were not measured, so the observed association may partly reflect these unmeasured factors.",
+        "severity": "high"
+      },
+      {
+        "type": "Selection bias",
+        "explanation": "Loss to follow\u2011up could differ by health status; sicker survivors may be more likely to discontinue plan membership, distorting the activity\u2011mortality relationship.",
+        "severity": "low"
+      },
+      {
+        "type": "Immortal time bias",
+        "explanation": "Exposure was defined at cohort entry (baseline) after a minimum 2\u2011year survival period, so there is no evident period where outcome could not occur before exposure classification.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "The study controlled for a broad set of clinical and psychosocial confounders, which strengthens the causal interpretation. However, the lack of key socioeconomic, behavioral, and cardiovascular variables, combined with potential measurement error in self\u2011reported activity and possible healthy\u2011user bias, means the observed hazard ratio may be inflated. Consequently, the evidence suggests a protective association but should be interpreted cautiously pending further validation.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

@@ -1,0 +1,290 @@
+{
+ "fps": 30,
+ "events": [
+  {
+   "f": 64,
+   "kind": "land.light",
+   "id": "question lands"
+  },
+  {
+   "f": 373,
+   "kind": "click",
+   "id": "screen click"
+  },
+  {
+   "f": 383,
+   "kind": "key",
+   "id": "key 1"
+  },
+  {
+   "f": 384,
+   "kind": "key",
+   "id": "key 0"
+  },
+  {
+   "f": 386,
+   "kind": "key",
+   "id": "key ."
+  },
+  {
+   "f": 388,
+   "kind": "key",
+   "id": "key 1"
+  },
+  {
+   "f": 390,
+   "kind": "key",
+   "id": "key 1"
+  },
+  {
+   "f": 391,
+   "kind": "key",
+   "id": "key 8"
+  },
+  {
+   "f": 393,
+   "kind": "key",
+   "id": "key 6"
+  },
+  {
+   "f": 395,
+   "kind": "key",
+   "id": "key /"
+  },
+  {
+   "f": 397,
+   "kind": "key",
+   "id": "key s"
+  },
+  {
+   "f": 398,
+   "kind": "key",
+   "id": "key 1"
+  },
+  {
+   "f": 400,
+   "kind": "key",
+   "id": "key 2"
+  },
+  {
+   "f": 402,
+   "kind": "key",
+   "id": "key 9"
+  },
+  {
+   "f": 403,
+   "kind": "key",
+   "id": "key 1"
+  },
+  {
+   "f": 405,
+   "kind": "key",
+   "id": "key 6"
+  },
+  {
+   "f": 407,
+   "kind": "key",
+   "id": "key -"
+  },
+  {
+   "f": 409,
+   "kind": "key",
+   "id": "key 0"
+  },
+  {
+   "f": 410,
+   "kind": "key",
+   "id": "key 2"
+  },
+  {
+   "f": 412,
+   "kind": "key",
+   "id": "key 2"
+  },
+  {
+   "f": 414,
+   "kind": "key",
+   "id": "key -"
+  },
+  {
+   "f": 416,
+   "kind": "key",
+   "id": "key 0"
+  },
+  {
+   "f": 417,
+   "kind": "key",
+   "id": "key 2"
+  },
+  {
+   "f": 419,
+   "kind": "key",
+   "id": "key 4"
+  },
+  {
+   "f": 421,
+   "kind": "key",
+   "id": "key 7"
+  },
+  {
+   "f": 422,
+   "kind": "key",
+   "id": "key 8"
+  },
+  {
+   "f": 424,
+   "kind": "key",
+   "id": "key -"
+  },
+  {
+   "f": 426,
+   "kind": "key",
+   "id": "key y"
+  },
+  {
+   "f": 469,
+   "kind": "click",
+   "id": "screen click"
+  },
+  {
+   "f": 845,
+   "kind": "click",
+   "id": "screen click"
+  },
+  {
+   "f": 1040,
+   "kind": "click",
+   "id": "screen click"
+  },
+  {
+   "f": 1170,
+   "kind": "click",
+   "id": "screen click"
+  },
+  {
+   "f": 1295,
+   "kind": "click",
+   "id": "screen click"
+  },
+  {
+   "f": 209,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 326,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 482,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 635,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 746,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 860,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 1358,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 1583,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 140,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 450,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 674,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 720,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 765,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 1005,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 1098,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 1731,
+   "kind": "click",
+   "id": "network click"
+  },
+  {
+   "f": 1815,
+   "kind": "click",
+   "id": "network click"
+  },
+  {
+   "f": 2005,
+   "kind": "click",
+   "id": "network click"
+  },
+  {
+   "f": 1855,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 2020,
+   "kind": "land.light",
+   "id": "caption lands"
+  },
+  {
+   "f": 1750,
+   "kind": "move",
+   "id": "camera move"
+  },
+  {
+   "f": 2136,
+   "kind": "whoosh.long",
+   "id": "colour flood"
+  },
+  {
+   "f": 2206,
+   "kind": "pop",
+   "id": "the diamonds pop in"
+  },
+  {
+   "f": 2238,
+   "kind": "bell",
+   "id": "the wordmark completes"
+  }
+ ]
+}

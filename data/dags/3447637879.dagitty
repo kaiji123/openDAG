@@ -1,0 +1,38 @@
+dag {
+ppi [exposure]
+hip_fracture [outcome]
+age [adjusted]
+gender [adjusted]
+cci [adjusted]
+hypertension [adjusted]
+stroke [adjusted]
+chronic_renal_failure [adjusted]
+use_of_anticoagulants [adjusted]
+use_of_sedatives [adjusted]
+use_of_statins [adjusted]
+glucocorticoid_use
+smoking_status
+ppi -> hip_fracture
+age -> ppi
+age -> hip_fracture
+gender -> ppi
+gender -> hip_fracture
+cci -> ppi
+cci -> hip_fracture
+hypertension -> ppi
+hypertension -> hip_fracture
+stroke -> ppi
+stroke -> hip_fracture
+chronic_renal_failure -> ppi
+chronic_renal_failure -> hip_fracture
+use_of_anticoagulants -> ppi
+use_of_anticoagulants -> hip_fracture
+use_of_sedatives -> ppi
+use_of_sedatives -> hip_fracture
+use_of_statins -> ppi
+use_of_statins -> hip_fracture
+glucocorticoid_use -> ppi
+glucocorticoid_use -> hip_fracture
+smoking_status -> ppi
+smoking_status -> hip_fracture
+}

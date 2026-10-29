@@ -87,6 +87,8 @@
 
         <div id="editor" class="panel">
           <h3>Edit the DAG</h3>
+          <p id="ai-review-note" class="small ai-review-note" hidden>Nemotron Super made the accept/reject decisions on this paper.
+            Check them, change anything you disagree with, and approve to mark it as human-reviewed.</p>
           <div class="row">
             <input id="new-label" placeholder="New variable">
             <select id="new-role">
@@ -169,7 +171,8 @@
       <div>
         <h1>OpenDAG dataset</h1>
         <p class="muted intro">Causal diagrams (DAGs) reconstructed from open-access epidemiology papers by NVIDIA Nemotron,
-          critiqued for missing confounders, and approved by a person. Free to reuse under CC BY 4.0.</p>
+          critiqued for missing confounders, and reviewed before entering the dataset: by a person, or where marked
+          <span class="badge approved ai-rev">AI-reviewed</span>, by Nemotron Super. Free to reuse under CC BY 4.0.</p>
       </div>
       <div class="row">
         <a class="button" href="#/add">+ Add a paper</a>
@@ -217,7 +220,8 @@
         <tbody></tbody>
       </table>
     </div>
-    <p id="empty" class="muted" hidden>No DAGs yet. Add a paper to start the dataset.</p>
+    <div id="pager" class="pager" hidden></div>
+    <p id="empty" class="muted" hidden>No DAGs match. Try another search, or add a paper to grow the dataset.</p>
   </section>
 
   <!-- NETWORK -->

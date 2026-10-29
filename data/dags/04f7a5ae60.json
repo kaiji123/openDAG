@@ -1,0 +1,721 @@
+{
+  "id": "04f7a5ae60",
+  "schema_version": "1.0",
+  "status": "approved",
+  "created_at": "2026-10-28T20:06:57Z",
+  "approved_at": "2026-10-28T21:26:48Z",
+  "paper": {
+    "title": "The association between use of proton-pump inhibitors and excess mortality after kidney transplantation: A cohort study",
+    "authors": "Douwes RM, Gomes-Neto AW, Eisenga MF, Van Loon E, Schutten JC, Gans ROB, Naesens M, van den Berg E, Sprangers B, Berger SP, Navis G, Blokzijl H, Meijers B, Bakker SJL, Kuypers D.",
+    "year": "2020",
+    "journal": "PLoS medicine",
+    "doi": "10.1371/journal.pmed.1003140",
+    "pmcid": "PMC7295199",
+    "pmid": "32542023",
+    "license": "cc by"
+  },
+  "study": {
+    "study_design": "cohort",
+    "population": "Kidney transplant recipients from University Medical Center Groningen and University Hospitals Leuven, November 2008 to March 2011",
+    "sample_size": "703",
+    "follow_up": "median 8.2 years",
+    "exposure": {
+      "name": "PPI use",
+      "definition": "chronic daily PPI use for at least 3 months before and after baseline visit"
+    },
+    "outcome": {
+      "name": "all-cause mortality",
+      "definition": "death from any cause during follow-up"
+    },
+    "reported_effect": {
+      "measure": "HR",
+      "value": "1.68",
+      "ci": "1.21-2.33",
+      "adjusted": true
+    }
+  },
+  "dag": {
+    "nodes": [
+      {
+        "id": "ppi",
+        "label": "PPI use",
+        "role": "exposure",
+        "adjusted": false,
+        "snippet": "chronic PPI users defined as daily use for at least 3 months before and after baseline",
+        "ai_suggested": false
+      },
+      {
+        "id": "mortality",
+        "label": "All-cause mortality",
+        "role": "outcome",
+        "adjusted": false,
+        "snippet": "194 KTRs died during follow-up",
+        "ai_suggested": false
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "sex",
+        "label": "Sex",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "bmi",
+        "label": "Body mass index",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "egfr",
+        "label": "Estimated glomerular filtration rate",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "proteinuria",
+        "label": "Proteinuria",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "time_since_transplant",
+        "label": "Time since transplantation",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "deceased_donor",
+        "label": "Deceased donor transplant",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "primary_renal_disease",
+        "label": "Primary renal disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for age, sex, BMI, eGFR, proteinuria, time since transplantation",
+        "ai_suggested": false
+      },
+      {
+        "id": "donor_age",
+        "label": "Donor age",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for donor age, donor sex, donor height, donor weight, donor serum creatinine, HLA mismatches, induction therapy",
+        "ai_suggested": false
+      },
+      {
+        "id": "hla_mismatches",
+        "label": "HLA mismatches",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for donor age, donor sex, donor height, donor weight, donor serum creatinine, HLA mismatches, induction therapy",
+        "ai_suggested": false
+      },
+      {
+        "id": "induction_therapy",
+        "label": "Induction therapy",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for donor age, donor sex, donor height, donor weight, donor serum creatinine, HLA mismatches, induction therapy",
+        "ai_suggested": false
+      },
+      {
+        "id": "alcohol_use",
+        "label": "Alcohol use",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for lifestyle parameters (alcohol use and smoking behavior)",
+        "ai_suggested": false
+      },
+      {
+        "id": "smoking",
+        "label": "Smoking",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for lifestyle parameters (alcohol use and smoking behavior)",
+        "ai_suggested": false
+      },
+      {
+        "id": "antihypertensive",
+        "label": "Antihypertensive drugs",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for medication use (antihypertensive drugs, platelet inhibitors, vitamin K antagonists, proliferation inhibitors, and calcineurin inhibitors)",
+        "ai_suggested": false
+      },
+      {
+        "id": "platelet_inhibitors",
+        "label": "Platelet inhibitors",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for medication use (antihypertensive drugs, platelet inhibitors, vitamin K antagonists, proliferation inhibitors, and calcineurin inhibitors)",
+        "ai_suggested": false
+      },
+      {
+        "id": "vitamin_k_antagonists",
+        "label": "Vitamin K antagonists",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for medication use (antihypertensive drugs, platelet inhibitors, vitamin K antagonists, proliferation inhibitors, and calcineurin inhibitors)",
+        "ai_suggested": false
+      },
+      {
+        "id": "cnis",
+        "label": "Calcineurin inhibitors",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for medication use (antihypertensive drugs, platelet inhibitors, vitamin K antagonists, proliferation inhibitors, and calcineurin inhibitors)",
+        "ai_suggested": false
+      },
+      {
+        "id": "diabetes",
+        "label": "Diabetes",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for comorbidities (diabetes and history of cardiovascular disease)",
+        "ai_suggested": false
+      },
+      {
+        "id": "cardiovascular_disease",
+        "label": "Cardiovascular disease",
+        "role": "confounder",
+        "adjusted": true,
+        "snippet": "adjusted for comorbidities (diabetes and history of cardiovascular disease)",
+        "ai_suggested": false
+      },
+      {
+        "id": "plasma_magnesium",
+        "label": "Plasma magnesium",
+        "role": "mediator",
+        "adjusted": true,
+        "snippet": "adjusted for plasma magnesium and serum iron as potential mediators",
+        "ai_suggested": false
+      },
+      {
+        "id": "serum_iron",
+        "label": "Serum iron",
+        "role": "mediator",
+        "adjusted": true,
+        "snippet": "adjusted for plasma magnesium and serum iron as potential mediators",
+        "ai_suggested": false
+      },
+      {
+        "id": "peptic_ulcer",
+        "label": "peptic ulcer",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "frailty",
+        "label": "frailty",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "nsaid_use",
+        "label": "nsaid_use",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      },
+      {
+        "id": "albumin",
+        "label": "albumin",
+        "role": "confounder",
+        "adjusted": false,
+        "snippet": "",
+        "ai_suggested": true
+      }
+    ],
+    "edges": [
+      {
+        "source": "ppi",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "age",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "sex",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "bmi",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "egfr",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "egfr",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "proteinuria",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "proteinuria",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "time_since_transplant",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "time_since_transplant",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "deceased_donor",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "deceased_donor",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "primary_renal_disease",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "primary_renal_disease",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "donor_age",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "donor_age",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "hla_mismatches",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "hla_mismatches",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "induction_therapy",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "induction_therapy",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_use",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "alcohol_use",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "smoking",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "antihypertensive",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "antihypertensive",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "platelet_inhibitors",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "platelet_inhibitors",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "vitamin_k_antagonists",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "vitamin_k_antagonists",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "cnis",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "cnis",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "diabetes",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "cardiovascular_disease",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "cardiovascular_disease",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "plasma_magnesium",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "plasma_magnesium",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "serum_iron",
+        "target": "ppi",
+        "ai_suggested": false
+      },
+      {
+        "source": "serum_iron",
+        "target": "mortality",
+        "ai_suggested": false
+      },
+      {
+        "source": "peptic_ulcer",
+        "target": "ppi",
+        "ai_suggested": true
+      },
+      {
+        "source": "peptic_ulcer",
+        "target": "mortality",
+        "ai_suggested": true
+      },
+      {
+        "source": "frailty",
+        "target": "ppi",
+        "ai_suggested": true
+      },
+      {
+        "source": "frailty",
+        "target": "mortality",
+        "ai_suggested": true
+      },
+      {
+        "source": "nsaid_use",
+        "target": "ppi",
+        "ai_suggested": true
+      },
+      {
+        "source": "nsaid_use",
+        "target": "mortality",
+        "ai_suggested": true
+      },
+      {
+        "source": "albumin",
+        "target": "ppi",
+        "ai_suggested": true
+      },
+      {
+        "source": "albumin",
+        "target": "mortality",
+        "ai_suggested": true
+      }
+    ]
+  },
+  "dagitty": "dag {\nppi [exposure]\nmortality [outcome]\nage [adjusted]\nsex [adjusted]\nbmi [adjusted]\negfr [adjusted]\nproteinuria [adjusted]\ntime_since_transplant [adjusted]\ndeceased_donor [adjusted]\nprimary_renal_disease [adjusted]\ndonor_age [adjusted]\nhla_mismatches [adjusted]\ninduction_therapy [adjusted]\nalcohol_use [adjusted]\nsmoking [adjusted]\nantihypertensive [adjusted]\nplatelet_inhibitors [adjusted]\nvitamin_k_antagonists [adjusted]\ncnis [adjusted]\ndiabetes [adjusted]\ncardiovascular_disease [adjusted]\nplasma_magnesium [adjusted]\nserum_iron [adjusted]\npeptic_ulcer\nfrailty\nnsaid_use\nalbumin\nppi -> mortality\nage -> ppi\nage -> mortality\nsex -> ppi\nsex -> mortality\nbmi -> ppi\nbmi -> mortality\negfr -> ppi\negfr -> mortality\nproteinuria -> ppi\nproteinuria -> mortality\ntime_since_transplant -> ppi\ntime_since_transplant -> mortality\ndeceased_donor -> ppi\ndeceased_donor -> mortality\nprimary_renal_disease -> ppi\nprimary_renal_disease -> mortality\ndonor_age -> ppi\ndonor_age -> mortality\nhla_mismatches -> ppi\nhla_mismatches -> mortality\ninduction_therapy -> ppi\ninduction_therapy -> mortality\nalcohol_use -> ppi\nalcohol_use -> mortality\nsmoking -> ppi\nsmoking -> mortality\nantihypertensive -> ppi\nantihypertensive -> mortality\nplatelet_inhibitors -> ppi\nplatelet_inhibitors -> mortality\nvitamin_k_antagonists -> ppi\nvitamin_k_antagonists -> mortality\ncnis -> ppi\ncnis -> mortality\ndiabetes -> ppi\ndiabetes -> mortality\ncardiovascular_disease -> ppi\ncardiovascular_disease -> mortality\nplasma_magnesium -> ppi\nplasma_magnesium -> mortality\nserum_iron -> ppi\nserum_iron -> mortality\npeptic_ulcer -> ppi\npeptic_ulcer -> mortality\nfrailty -> ppi\nfrailty -> mortality\nnsaid_use -> ppi\nnsaid_use -> mortality\nalbumin -> ppi\nalbumin -> mortality\n}",
+  "open_backdoors": [
+    "peptic ulcer",
+    "frailty",
+    "nsaid_use",
+    "albumin"
+  ],
+  "critique": {
+    "missing_confounders": [
+      {
+        "label": "peptic ulcer",
+        "rationale": "Patients with a prior peptic ulcer are more likely to be prescribed PPIs for ulcer prevention and also have higher mortality due to ulcer complications or comorbid conditions.",
+        "edges_to_add": [
+          {
+            "source": "peptic ulcer",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "peptic ulcer",
+            "target": "mortality",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-Cause ...",
+            "url": "https://www.gastrojournal.org/article/S0016-5085(22)00729-6/fulltext"
+          },
+          {
+            "title": "Proton Pump Inhibitors Not Linked to Increased All-Cause, ...",
+            "url": "https://www.gastroenterologyadvisor.com/news/proton-pump-inhibitors-not-linked-to-increased-all-cause-major-cause-mortality-risk"
+          },
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-cause and ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9509450"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Prior peptic ulcer increases the likelihood of chronic PPI use and mortality, is not adjusted for, and is not caused by PPI use (it generally precedes exposure)."
+      },
+      {
+        "label": "charlson",
+        "rationale": "A higher Charlson comorbidity index indicates greater overall disease burden, leading to both increased PPI prescribing (for GI protection) and elevated mortality risk.",
+        "edges_to_add": [
+          {
+            "source": "charlson",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "charlson",
+            "target": "mortality",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-cause and ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9509450"
+          },
+          {
+            "title": "Study: 4 causes of mortality were associated with PPI use",
+            "url": "https://www.facebook.com/medscape/posts/study-4-causes-of-mortality-were-associated-with-ppi-use-circulatory-system-geni/10157940769169189"
+          }
+        ],
+        "status": "rejected",
+        "review_note": "The Charlson comorbidity index is a composite of comorbidities already adjusted for individually (e.g., diabetes, cardiovascular disease), thus serving as a close proxy."
+      },
+      {
+        "label": "frailty",
+        "rationale": "Frailer transplant recipients often receive more medications, including PPIs, and have reduced physiological reserve, increasing mortality risk.",
+        "edges_to_add": [
+          {
+            "source": "frailty",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "frailty",
+            "target": "mortality",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Proton Pump Inhibitors Not Linked to Increased All-Cause, ...",
+            "url": "https://www.gastroenterologyadvisor.com/news/proton-pump-inhibitors-not-linked-to-increased-all-cause-major-cause-mortality-risk"
+          },
+          {
+            "title": "Use of Proton Pump Inhibitors and Mortality Among ...",
+            "url": "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/486915"
+          },
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-cause and ...",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9509450"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Frailty raises both PPI prescribing and mortality risk, is not captured by the adjusted covariates, and is not induced by PPI use."
+      },
+      {
+        "label": "nsaid_use",
+        "rationale": "NSAID use prompts prophylactic PPI prescribing to prevent gastrointestinal injury, while NSAIDs themselves increase mortality risk via bleeding, cardiovascular, or renal events.",
+        "edges_to_add": [
+          {
+            "source": "nsaid_use",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "nsaid_use",
+            "target": "mortality",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-cause and Cause-specific Mortality",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9509450"
+          },
+          {
+            "title": "Proton pump inhibitors and risk of all\u2010cause and ...",
+            "url": "https://researchonline.lshtm.ac.uk/id/eprint/4659251/1/bcp.14728.pdf"
+          },
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-Cause ...",
+            "url": "https://www.gastrojournal.org/article/S0016-5085(22)00729-6/fulltext"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "NSAID use leads to prophylactic PPI prescribing and higher mortality, is not adjusted for, and is not caused by PPI use."
+      },
+      {
+        "label": "albumin",
+        "rationale": "Low serum albumin reflects malnutrition/inflammation, which is associated with both higher likelihood of PPI use (due to illness) and higher mortality.",
+        "edges_to_add": [
+          {
+            "source": "albumin",
+            "target": "ppi",
+            "ai_suggested": false
+          },
+          {
+            "source": "albumin",
+            "target": "mortality",
+            "ai_suggested": false
+          }
+        ],
+        "evidence": [
+          {
+            "title": "Association of Proton Pump Inhibitor Use With All-cause and Cause-specific Mortality",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9509450"
+          },
+          {
+            "title": "Proton Pump Inhibitors Not Linked to Increased All-Cause, ...",
+            "url": "https://www.gastroenterologyadvisor.com/news/proton-pump-inhibitors-not-linked-to-increased-all-cause-major-cause-mortality-risk"
+          },
+          {
+            "title": "Proton Pump Inhibitor Usage and the Risk of Mortality in ...",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2468024917304369"
+          }
+        ],
+        "status": "accepted",
+        "review_note": "Low serum albumin reflects malnutrition/inflammation that increases PPI use and mortality, is not adjusted for, and is not caused by PPI use."
+      }
+    ],
+    "bias_risks": [
+      {
+        "type": "confounding by indication",
+        "explanation": "Patients with gastrointestinal symptoms or ulcer history are more likely to receive PPIs and also have higher mortality, creating confounding if not fully captured.",
+        "severity": "high"
+      },
+      {
+        "type": "immortal time bias",
+        "explanation": "Exposure required PPI use for at least 3 months before and after baseline; person-time before meeting this criterion was misclassified as exposed, potentially biasing the HR away from the null.",
+        "severity": "medium"
+      },
+      {
+        "type": "measurement error",
+        "explanation": "PPI use was ascertained from self\u2011report or pharmacy records, which may not reflect actual ingestion, leading to nondifferential misclassification that could attenuate or exaggerate the association.",
+        "severity": "medium"
+      },
+      {
+        "type": "confounding by indication",
+        "explanation": "Unmeasured intensity of immunosuppression (e.g., mycophenolate dose, corticosteroid dose) may influence both PPI prescribing (for GI protection) and mortality.",
+        "severity": "medium"
+      },
+      {
+        "type": "loss to follow-up",
+        "explanation": "If sicker participants dropped out differentially, the observed association could be biased, although follow\u2011up was relatively complete in this cohort.",
+        "severity": "low"
+      }
+    ],
+    "overall_assessment": "While the authors adjusted for a broad set of demographic, clinical, and treatment variables, important confounders such as ulcer history, comorbidity burden, frailty, NSAID use, and nutritional status were not accounted for. Additionally, the exposure definition may introduce immortal time bias, and PPI measurement could be imperfect. Consequently, the observed association should be interpreted cautiously; it suggests a correlation but does not firmly establish a causal effect of PPIs on mortality in kidney transplant recipients.",
+    "label": "AI-suggested"
+  },
+  "models": {
+    "extraction": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "critique": "nvidia/nemotron-3-super-120b-a12b",
+    "evidence_search": "tavily",
+    "provider": "Nebius Token Factory"
+  },
+  "review": {
+    "by": "ai",
+    "model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "dataset_license": "CC-BY-4.0"
+}

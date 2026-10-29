@@ -5,9 +5,11 @@ import json
 import re
 from typing import Optional, Tuple
 
-from openai import BadRequestError, OpenAI
+import time
 
-from . import config
+from openai import APIConnectionError, APITimeoutError, BadRequestError, InternalServerError, OpenAI, RateLimitError
+
+from . import budget, config
 
 _client: Optional[OpenAI] = None
 
@@ -21,7 +23,8 @@ def client() -> OpenAI:
     if _client is None:
         if not config.NEBIUS_API_KEY:
             raise LLMError("NEBIUS_API_KEY is not set.")
-        _client = OpenAI(api_key=config.NEBIUS_API_KEY, base_url=config.NEBIUS_BASE_URL, timeout=180)
+        # A hung request must not block a paper for minutes: 90 s per attempt, one retry.
+        _client = OpenAI(api_key=config.NEBIUS_API_KEY, base_url=config.NEBIUS_BASE_URL, timeout=90, max_retries=0)
     return _client
 
 
@@ -39,13 +42,34 @@ def parse_json(text: str) -> dict:
     return json.loads(text[start : end + 1])
 
 
+RETRY_WAITS = (2, 6)  # seconds before the 2nd and 3rd attempt
+
+
+def _create(**kwargs):
+    """Every paid request goes through here: budget check first, real cost recorded after.
+
+    Busy or flaky upstream answers (overloaded 529, rate limit 429, 5xx, timeouts) get up to 3 attempts.
+    """
+    for attempt in range(len(RETRY_WAITS) + 1):
+        budget.guard_llm(kwargs["model"], kwargs["messages"], kwargs["max_tokens"])
+        try:
+            resp = client().chat.completions.create(**kwargs)
+        except (InternalServerError, RateLimitError, APITimeoutError, APIConnectionError):
+            if attempt == len(RETRY_WAITS):
+                raise
+            time.sleep(RETRY_WAITS[attempt])
+            continue
+        budget.record_llm(kwargs["model"], getattr(resp, "usage", None), kwargs["max_tokens"], kwargs["messages"])
+        return resp
+
+
 def _call(model: str, messages: list, max_tokens: int, thinking: bool, json_mode: bool):
     kwargs = dict(model=model, messages=messages, max_tokens=max_tokens, temperature=0.2)
     if json_mode:
         kwargs["response_format"] = {"type": "json_object"}
     # Nemotron 3 models can reason before answering; we switch it on only for critique.
     kwargs["extra_body"] = {"chat_template_kwargs": {"enable_thinking": thinking}}
-    return client().chat.completions.create(**kwargs)
+    return _create(**kwargs)
 
 
 def chat_json(model: str, system: str, user: str, max_tokens: int, thinking: bool = False) -> Tuple[dict, dict]:
@@ -64,11 +88,11 @@ def chat_json(model: str, system: str, user: str, max_tokens: int, thinking: boo
             # Some deployments reject response_format or chat_template_kwargs; drop them and retry.
             if json_mode:
                 json_mode = False
-                resp = client().chat.completions.create(
-                    model=model, messages=messages, max_tokens=max_tokens, temperature=0.2
-                )
+                resp = _create(model=model, messages=messages, max_tokens=max_tokens, temperature=0.2)
             else:
                 raise LLMError(f"Model request failed: {e}") from e
+        except budget.BudgetExceeded:
+            raise
         except Exception as e:
             raise LLMError(f"Model request failed: {e}") from e
 

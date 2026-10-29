@@ -1,0 +1,35 @@
+dag {
+exposure [exposure]
+outcome [outcome]
+sex [adjusted]
+calendar_year [adjusted]
+smoking_status [adjusted]
+alcohol_consumption [adjusted]
+physical_activity [adjusted]
+marital_status [adjusted]
+socioeconomic_index [adjusted]
+education_level [adjusted]
+area_socioeconomic_status [adjusted]
+bmi
+exposure -> outcome
+sex -> exposure
+sex -> outcome
+calendar_year -> exposure
+calendar_year -> outcome
+smoking_status -> exposure
+smoking_status -> outcome
+alcohol_consumption -> exposure
+alcohol_consumption -> outcome
+physical_activity -> exposure
+physical_activity -> outcome
+marital_status -> exposure
+marital_status -> outcome
+socioeconomic_index -> exposure
+socioeconomic_index -> outcome
+education_level -> exposure
+education_level -> outcome
+area_socioeconomic_status -> exposure
+area_socioeconomic_status -> outcome
+bmi -> exposure
+bmi -> outcome
+}
