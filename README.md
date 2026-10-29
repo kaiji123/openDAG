@@ -2,6 +2,9 @@
 
 **An open, growing dataset of causal diagrams (DAGs) extracted from epidemiology and clinical papers.**
 
+**Live demo: https://opendag.onrender.com** · Demo film: [`demo/renders/opendag-demo.mp4`](demo/renders/opendag-demo.mp4)
+(the free server may take up to a minute to wake on the first visit)
+
 Most observational studies never publish their causal assumptions. OpenDAG reads an open-access paper,
 reconstructs its DAG (exposure, outcome, what the authors adjusted for), asks a reasoning model what they
 probably *missed*, finds evidence for each suggestion, and lets a person review the result before it joins a
