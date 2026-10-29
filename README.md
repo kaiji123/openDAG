@@ -81,6 +81,25 @@ truth. Every answer shows how it was computed ("Filtered 14 papers: did not adju
 match"). Citations to papers that aren't in the dataset are stripped. Rate-limited per IP and cached
 (`app/ask.py`).
 
+## How Token Factory accelerated the build
+
+- **One OpenAI-compatible endpoint for every model.** The app uses the standard `openai` SDK with Token Factory's
+  base URL, so there was no inference stack to deploy and no GPU to manage. Swapping a model is one environment
+  variable (`MODEL_FAST`, `MODEL_REASON`).
+- **Fast model comparisons.** Because switching is a config change, we could test Nano and Super on the same task in
+  minutes and pick by evidence: on a real paper, Super found "education" in a 30-item covariate footnote that Nano
+  missed, so verification uses Super, while extraction and name-merging stay on Nano.
+  `python -m scripts.check_setup` lists the Nemotron models your account can use and test-calls both.
+- **Reasoning on demand.** Nemotron 3's `enable_thinking` switch let us keep reasoning off for fast, structured steps
+  and on for the critique, on the same API.
+- **Token counts in every response** made the spending cap possible: each call's real cost is computed from the
+  usage Token Factory returns (there is no spend API).
+- **Low cost.** Building and testing the whole project, including the live demo recordings, used about $0.15 of
+  Nemotron tokens.
+
+**Nebius services used:** Nebius Token Factory (all model inference). We considered Nebius Serverless Endpoints for
+hosting (see Deployment) but deployed on Render for the hackathon.
+
 ## Why Tavily
 
 The critique model's suggestions are only useful if a reviewer can check them quickly. For every
