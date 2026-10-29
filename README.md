@@ -203,6 +203,19 @@ Every paid call (Nemotron on Token Factory, Tavily) passes through `app/budget.p
 Token Factory has no spend API we could find, and Nebius budgets only send e-mail alerts (hours late) without
 stopping usage, so set one in the Nebius console as a second layer, not instead of this cap.
 
+## Alerts
+
+`app/monitor.py` e-mails the owner (via [Resend](https://resend.com); set `RESEND_API_KEY` and `ALERT_EMAIL`):
+
+- **At once, for serious problems**, each kind at most once per cooldown: 25 / 50 / 80 / 100% of the AI budget
+  used; the spending ledger unreachable; Token Factory rejecting the API key or calls failing repeatedly; Tavily's
+  quota reached; any unexpected server error (users get a plain "reported" message, never a stack trace).
+- **Once a day, only on a real jump**: papers, questions or spend at 3x the 7-day average (with a floor).
+
+Counters and "already sent" markers live in Upstash, so restarts neither lose counts nor repeat e-mails. Checks run on
+incoming requests (at most every 10 minutes); a sleeping server has no traffic to report on. For "the site is down"
+alerts, which an app can't send about itself, add a free uptime monitor such as UptimeRobot on `/api/health`.
+
 ## Deployment
 
 **Docker (anywhere)**

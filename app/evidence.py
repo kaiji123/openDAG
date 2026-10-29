@@ -66,8 +66,13 @@ def evidence_for(label: str, exposure: str, outcome: str, paper: Optional[dict] 
     try:
         # ask for a couple of extra results so filtering still leaves up to 3
         return clean(search(f"{label} {exposure} {outcome} confounding", max_results=5), paper)[:3]
-    except (httpx.HTTPError, budget.BudgetExceeded):
+    except httpx.HTTPStatusError as e:
+        if e.response.status_code in (429, 432, 433):
+            from . import monitor
+            monitor.tavily_limit(e.response.status_code)
         return []  # evidence is a bonus; never fail the pipeline on it
+    except (httpx.HTTPError, budget.BudgetExceeded):
+        return []
 
 
 def attach_evidence(crit: Critique, exposure: str, outcome: str, paper: Optional[dict] = None) -> Critique:

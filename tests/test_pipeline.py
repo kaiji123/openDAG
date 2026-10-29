@@ -51,6 +51,9 @@ def tmp_db(tmp_path, monkeypatch):
     monkeypatch.setattr("app.budget.BUDGET_USD", 100.0)
     monkeypatch.setattr("app.budget.REDIS_URL", "")       # tests use the local ledger, never a real one
     monkeypatch.setattr("app.budget.REQUIRE_DURABLE", False)
+    from app import monitor   # alerts: memory store, no real e-mail, fresh throttles
+    monitor._mem.clear(); monitor._mem_exp.clear(); monitor._last_check["t"] = 0.0
+    monkeypatch.setattr(monitor, "RESEND_API_KEY", "")
     yield
 
 
@@ -343,16 +346,18 @@ def test_budget_fails_closed(monkeypatch):
 
 def test_durable_ledger_and_real_tavily_spend(monkeypatch):
     from app import budget, config
-    store = {"v": 0.0}
-    def fake_redis(cmd):
+    keys = {}
+    def fake_redis(cmd):   # a tiny Redis: separate keys, INCRBYFLOAT / GET / anything else is a no-op
         if cmd[0] == "INCRBYFLOAT":
-            store["v"] += float(cmd[2]); return str(store["v"])
-        return str(store["v"])
+            keys[cmd[1]] = keys.get(cmd[1], 0.0) + float(cmd[2]); return str(keys[cmd[1]])
+        if cmd[0] == "GET":
+            return str(keys.get(cmd[1], 0.0))
+        return "OK"
     monkeypatch.setattr(budget, "REDIS_URL", "https://example.invalid")
     monkeypatch.setattr(budget, "REDIS_TOKEN", "t")
     monkeypatch.setattr(budget, "_redis", fake_redis)
     budget.record_llm("nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", _usage(1_000_000, 1_000_000), 10, [])
-    assert abs(store["v"] - 0.30) < 1e-9                   # 0.06 + 0.24 went to the durable ledger
+    assert abs(keys[budget.REDIS_KEY] - 0.30) < 1e-9       # 0.06 + 0.24 went to the durable ledger
     monkeypatch.setattr(config, "TAVILY_API_KEY", "k")
     class R:
         status_code = 200
@@ -449,3 +454,55 @@ def test_verify_falls_back_to_the_papers_own_sentence(monkeypatch):
     assert {f["label"] for f in found} == {"Education level", "NSAID use"}
     assert all(f["quote"].startswith("Model 2 was adjusted") for f in found)
     assert [m.label for m in kept.missing_confounders] == ["Renal function"]
+
+
+def _mailbox(monkeypatch):
+    from app import monitor
+    box = []
+    monkeypatch.setattr(monitor, "send", lambda subject, text: box.append(subject) or True)
+    return monitor, box
+
+
+def test_alerts_have_cooldowns_and_budget_steps(monkeypatch):
+    from app import budget
+    monitor, box = _mailbox(monkeypatch)
+    monkeypatch.setattr(budget, "status", lambda: {"budget_usd": 100.0, "spent_usd": 55.0, "ledger": "durable"})
+    monitor.check_budget(); monitor.check_budget()
+    assert box == ["25% of the AI budget used", "50% of the AI budget used"]       # each step once
+    monkeypatch.setattr(budget, "status", lambda: {"budget_usd": 100.0, "spent_usd": 100.0, "ledger": "durable"})
+    monitor.check_budget()
+    assert box[-2:] == ["80% of the AI budget used", "100% of the AI budget used"]
+
+
+def test_rejected_api_key_and_tavily_quota_alert(monkeypatch):
+    monitor, box = _mailbox(monkeypatch)
+    monitor.model_error(Exception("Error code: 401 - Unauthorized"))
+    monitor.model_error(Exception("Error code: 401 - Unauthorized"))       # cooldown: no second e-mail
+    monitor.tavily_limit(432)
+    assert box == ["Nemotron is rejecting the API key", "Tavily's search limit is reached"]
+    for _ in range(5):
+        monitor.model_error(Exception("529 worker overloaded"))
+    assert box[-1] == "Nemotron calls are failing repeatedly"
+
+
+def test_traffic_spike_only_on_a_real_jump(monkeypatch):
+    monitor, box = _mailbox(monkeypatch)
+    for d in range(2, 9):
+        monitor._mem[f"opendag:m:{monitor._day(d)}:asks"] = 20
+    monitor._mem[f"opendag:m:{monitor._day(1)}:asks"] = 45      # 2.25x: not a spike
+    assert monitor.check_spike() is None and box == []
+    monitor._mem_exp.clear()
+    monitor._mem[f"opendag:m:{monitor._day(1)}:asks"] = 200     # 10x and over the floor
+    assert monitor.check_spike() == "asks" and box == ["Traffic spike: asks"]
+
+
+def test_unhandled_error_is_reported_not_leaked(monkeypatch):
+    from fastapi.testclient import TestClient
+    from app import main
+    monitor, box = _mailbox(monkeypatch)
+    def boom():
+        raise RuntimeError("database exploded")
+    monkeypatch.setattr(main.db, "list_records", lambda status=None: boom())
+    r = TestClient(main.app, raise_server_exceptions=False).get("/api/dataset")
+    assert r.status_code == 500 and "exploded" not in r.text
+    assert box == ["Unexpected error in GET /api/dataset"]

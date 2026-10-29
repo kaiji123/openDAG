@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse, PlainTextResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import ask, budget, canonical, config, db, export, pipeline
+from . import ask, budget, canonical, config, db, export, monitor, pipeline
 from .fetch import FetchError
 
 @asynccontextmanager
@@ -30,6 +30,18 @@ async def lifespan(_app):
 
 
 app = FastAPI(title="OpenDAG", version=config.SCHEMA_VERSION, lifespan=lifespan)
+
+
+@app.middleware("http")
+async def observe(request: Request, call_next):
+    """Every request runs the throttled checks; an unhandled error e-mails the owner and returns a plain 500."""
+    monitor.tick()
+    try:
+        return await call_next(request)
+    except Exception as e:
+        monitor.server_error(f"{request.method} {request.url.path}", e)
+        from fastapi.responses import JSONResponse
+        return JSONResponse({"detail": "Something went wrong on our side. It has been reported."}, status_code=500)
 STATIC = Path(__file__).resolve().parent.parent / "static"
 
 JOBS: Dict[str, dict] = {}
@@ -74,9 +86,14 @@ def _worker(job_id: str, identifier: str) -> None:
         try:
             rec = pipeline.run(identifier, progress=lambda s: job.update(step=s))
             job.update(status="done", step="done", record_id=rec["id"])
-        except (FetchError, budget.BudgetExceeded) as e:
+            monitor.count("papers")
+        except FetchError as e:
+            job.update(status="error", error=str(e))
+        except budget.BudgetExceeded as e:
+            monitor.budget_paused(str(e))
             job.update(status="error", error=str(e))
         except Exception as e:  # surface a readable message, keep the server alive
+            monitor.server_error("paper processing", e)
             job.update(status="error", error=f"Pipeline failed: {e}")
 
 
@@ -101,6 +118,7 @@ def submit(body: Submit, request: Request):
     try:
         budget.check(0.10)  # a paper's worst case is a few cents; stop well before the budget runs out
     except budget.BudgetExceeded as e:
+        monitor.budget_paused(str(e))
         raise HTTPException(503, str(e))
     db.log_run(client_ip(request))
     job_id = uuid.uuid4().hex[:12]
@@ -198,11 +216,14 @@ def ask_dataset(body: Question, request: Request):
     try:
         result, cached = ask.answer(q, records)
     except budget.BudgetExceeded as e:
+        monitor.budget_paused(str(e))
         raise HTTPException(503, str(e))
     except Exception as e:
+        monitor.server_error("ask the dataset", e)
         raise HTTPException(502, f"The model couldn't answer right now ({e}). Please try again.")
     if not cached:
         db.log_run(ip, kind="ask")
+        monitor.count("asks")
     result.pop("usage", None)
     return result
 

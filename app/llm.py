@@ -90,10 +90,14 @@ def chat_json(model: str, system: str, user: str, max_tokens: int, thinking: boo
                 json_mode = False
                 resp = _create(model=model, messages=messages, max_tokens=max_tokens, temperature=0.2)
             else:
+                from . import monitor
+                monitor.model_error(e)
                 raise LLMError(f"Model request failed: {e}") from e
         except budget.BudgetExceeded:
             raise
         except Exception as e:
+            from . import monitor
+            monitor.model_error(e)
             raise LLMError(f"Model request failed: {e}") from e
 
         if resp.usage:

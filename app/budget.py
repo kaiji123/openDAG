@@ -121,6 +121,9 @@ def _add(kind: str, usd: float) -> None:
         return
     if durable() and kind == "llm":  # Tavily keeps its own durable count (/usage)
         _redis(["INCRBYFLOAT", REDIS_KEY, f"{usd:.8f}"])
+    if kind == "llm":
+        from . import monitor
+        monitor.count("spend_usd", usd)
     with db._lock:
         db.conn().execute("CREATE TABLE IF NOT EXISTS spend (ts REAL, kind TEXT, usd REAL)")
         db.conn().execute("INSERT INTO spend (ts, kind, usd) VALUES (?, ?, ?)", (time.time(), kind, usd))
